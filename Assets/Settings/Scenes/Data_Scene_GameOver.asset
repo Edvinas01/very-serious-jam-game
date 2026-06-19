@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ada33694af4a7ba7346460a43ab54b, type: 3}
+  m_Name: Data_Scene_GameOver
+  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Scenes.SimpleSceneData
+  sceneAsset: {fileID: 102900000, guid: 351eefb6e1537c34ca5f6f9bd930b897, type: 3}
+  scenePath: Assets/Scenes/Scene_GameOver.unity
+  sceneGuid: 351eefb6e1537c34ca5f6f9bd930b897
+  loadingScene: {fileID: 0}
+  prettyName: Game Over
+  icon: {fileID: 0}
+  isUnloadUnusedAssets: 0
+  isFadingEnabled: 0
+  showFadeDuration: 0.5
+  hideFadeDuration: 1
+  isPauseBeforeLoad: 0
+  loadPauseDuration: 0.3

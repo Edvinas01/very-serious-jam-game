@@ -1,0 +1,13 @@
+{
+  "name": "com.insun.game-core",
+  "displayName": "Game Core",
+  "author": {
+    "name": "Indoor Sunglasses",
+    "url": "https://indoor-sunglasses.com"
+  },
+  "version": "0.0.1",
+  "unity": "6000.3",
+  "description": "Common utilities for Indoor Sunglasses games",
+  "keywords": [],
+  "samples": []
+}

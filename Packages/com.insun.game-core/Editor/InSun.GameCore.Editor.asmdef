@@ -1,0 +1,19 @@
+{
+    "name": "InSun.GameCore.Editor",
+    "rootNamespace": "InSun.GameCore",
+    "references": [
+        "GUID:03e5df88ead74bdaa2b8ce9d42f1293f",
+        "GUID:ac58572da1c1a694f8db611039c21662"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

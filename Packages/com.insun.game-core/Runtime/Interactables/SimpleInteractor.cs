@@ -1,0 +1,157 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+namespace InSun.GameCore.Interactables
+{
+    public sealed class SimpleInteractor : MonoBehaviour, IInteractor
+    {
+        private readonly List<IInteractable> hoveredInteractables = new();
+        private IInteractable selectedInteractable;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            var interactable = other.GetComponentInParent<IInteractable>();
+            if (interactable == null)
+            {
+                return;
+            }
+
+            if (hoveredInteractables.Contains(interactable))
+            {
+                return;
+            }
+
+            hoveredInteractables.Add(interactable);
+            interactable.OnDestroyed += OnHoveredInteractableDestroyed;
+            interactable.Hover(this);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            var interactable = other.GetComponentInParent<IInteractable>();
+            if (interactable == null)
+            {
+                return;
+            }
+
+            if (hoveredInteractables.Remove(interactable) == false)
+            {
+                return;
+            }
+
+            interactable.Unhover();
+        }
+
+        public bool IsInteractableHovered => hoveredInteractables.Count > 0;
+
+        public bool IsInteracting => selectedInteractable != null;
+
+        public event Action<IInteractable> OnInteractionEntered;
+        public event Action<IInteractable> OnInteractionExited;
+
+        public void StartInteraction()
+        {
+            var hoveredInteractable = hoveredInteractables.FirstOrDefault();
+            if (hoveredInteractable == null)
+            {
+                return;
+            }
+
+            if (hoveredInteractable is SimpleInteractable simpleInteractable)
+            {
+                switch (simpleInteractable.InteractionType)
+                {
+                    case SimpleInteractable.SimpleInteractionType.None:
+                    {
+                        break;
+                    }
+                    case SimpleInteractable.SimpleInteractionType.Select:
+                    {
+                        if (selectedInteractable != null)
+                        {
+                            Debug.LogWarning("Interactable already selected");
+                            return;
+                        }
+
+                        Select(hoveredInteractable);
+
+                        break;
+                    }
+                    case SimpleInteractable.SimpleInteractionType.Activate:
+                    {
+                        Activate(hoveredInteractable);
+                        break;
+                    }
+                    default:
+                    {
+                        Debug.LogWarning($"{simpleInteractable.InteractionType} type not supported", this);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                if (selectedInteractable != null)
+                {
+                    Debug.LogWarning("Interactable already selected");
+                    return;
+                }
+
+                Select(hoveredInteractable);
+            }
+        }
+
+        public void StopInteraction()
+        {
+            if (selectedInteractable == null)
+            {
+                return;
+            }
+
+            var interactablePrev = selectedInteractable;
+            selectedInteractable = null;
+
+            if (interactablePrev != null)
+            {
+                interactablePrev.StopInteraction();
+                OnInteractionExited?.Invoke(interactablePrev);
+            }
+        }
+
+        private void OnHoveredInteractableDestroyed(InteractableDestroyedArgs args)
+        {
+            args.Interactable.OnDestroyed -= OnHoveredInteractableDestroyed;
+            if (!hoveredInteractables.Remove(args.Interactable))
+            {
+                return;
+            }
+
+            args.Interactable.Unhover();
+        }
+
+        private void Select(IInteractable interactable)
+        {
+            selectedInteractable = interactable;
+            selectedInteractable?.StartInteraction(this);
+
+            var isSelecting = IsInteracting;
+            if (isSelecting)
+            {
+                OnInteractionEntered?.Invoke(selectedInteractable);
+            }
+        }
+
+        private void Activate(IInteractable interactable)
+        {
+            interactable?.StartInteraction(this);
+
+            if (interactable != null)
+            {
+                OnInteractionEntered?.Invoke(interactable);
+                OnInteractionExited?.Invoke(interactable);
+            }
+        }
+    }
+}

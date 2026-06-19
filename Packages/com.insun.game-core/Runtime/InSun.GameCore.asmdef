@@ -1,0 +1,38 @@
+{
+    "name": "InSun.GameCore",
+    "rootNamespace": "InSun.GameCore",
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:029c1c1b674aaae47a6841a0b89ad80e",
+        "GUID:5a9b44809255e2940af989dfb192e898",
+        "GUID:80ecb87cae9c44d19824e70ea7229748",
+        "GUID:0c752da273b17c547ae705acf0f2adf2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.modules.audio",
+            "expression": "1.0.0",
+            "define": "UNITY_AUDIO_INSTALLED"
+        },
+        {
+            "name": "com.unity.modules.video",
+            "expression": "1.0.0",
+            "define": "UNITY_VIDEO_INSTALLED"
+        },
+        {
+            "name": "com.kyrylokuzyk.primetween",
+            "expression": "1.0.0",
+            "define": "PRIMETWEEN_INSTALLED"
+        }
+    ],
+    "noEngineReferences": false
+}

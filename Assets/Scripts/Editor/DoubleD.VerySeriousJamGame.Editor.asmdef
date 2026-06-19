@@ -1,0 +1,19 @@
+{
+    "name": "DoubleD.VerySeriousJamGame.Editor",
+    "rootNamespace": "DoubleD.VerySeriousJamGame",
+    "references": [
+        "GUID:43b166730a62e4e48bb725ef6e857757",
+        "GUID:3e81533b576da454e97839625e95d356"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

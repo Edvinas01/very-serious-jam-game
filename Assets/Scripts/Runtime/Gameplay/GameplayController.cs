@@ -1,0 +1,65 @@
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
+using DoubleD.VerySeriousJamGame.Runtime.Utilities;
+using InSun.GameCore;
+using InSun.GameCore.Scenes;
+using Unity.Cinemachine;
+using UnityEngine;
+using UnityEngine.Playables;
+
+namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
+{
+    internal sealed class GameplayController : MonoBehaviour
+    {
+        [SerializeField]
+        private CinemachineCamera introCamera;
+
+        [SerializeField]
+        private PlayableDirector introPlayable;
+
+        [SerializeField]
+        private SceneData victoryScene;
+
+        [SerializeField]
+        private SceneData gameOverScene;
+
+        private GameplaySystem gameplaySystem;
+        private ISceneSystem sceneSystem;
+
+        private void Awake()
+        {
+            gameplaySystem = Game.GetObject<GameplaySystem>();
+            sceneSystem = Game.GetObject<ISceneSystem>();
+        }
+
+        private void Start()
+        {
+            gameplaySystem.StartGame(this);
+        }
+
+        private void OnDestroy()
+        {
+            gameplaySystem.StopGame();
+        }
+
+        public void LoadVictoryScene()
+        {
+            sceneSystem.LoadScene(new SceneLoadArgs(victoryScene));
+        }
+
+        public void LoadGameOverScene()
+        {
+            sceneSystem.LoadScene(new SceneLoadArgs(gameOverScene));
+        }
+
+        public async UniTask PlayIntroAsync(CancellationToken cancellationToken)
+        {
+            if (introPlayable)
+            {
+                introCamera.enabled = true;
+                await introPlayable.PlayAsync(cancellationToken);
+                introCamera.enabled = false;
+            }
+        }
+    }
+}
