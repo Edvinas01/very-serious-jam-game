@@ -164,6 +164,7 @@ Transform:
   - {fileID: 6819516294681437947}
   - {fileID: 5260542944803187166}
   - {fileID: 3867306494848057198}
+  - {fileID: 456168241625349740}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7890855968258767485
@@ -184,6 +185,7 @@ MonoBehaviour:
   poolingSystem: {fileID: 5832643935830126389}
   audioSystem: {fileID: 1848652159962909175}
   cursorSystem: {fileID: 1483871291896452157}
+  gameplaySystem: {fileID: 6243802159766902131}
 --- !u!1 &3908922543281924742
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +235,6 @@ MonoBehaviour:
   scenes:
   - {fileID: 11400000, guid: 27eb7705de30c50459a2ebab173e0252, type: 2}
   - {fileID: 11400000, guid: 927b88a37c74b9244a75b91e74fc00c9, type: 2}
-  - {fileID: 11400000, guid: de5b94a6039e18648819379299e47c9e, type: 2}
   - {fileID: 11400000, guid: 848106c1d3df82142b22a5fca8da4cb6, type: 2}
   loadingSceneViewController: {fileID: 728608030804219172}
   onSceneLoadStarted:
@@ -473,6 +474,51 @@ MonoBehaviour:
   onCanceled:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &8627533217449667707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 456168241625349740}
+  - component: {fileID: 6243802159766902131}
+  m_Layer: 0
+  m_Name: System_Gameplay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &456168241625349740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8627533217449667707}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4341681663575495334}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6243802159766902131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8627533217449667707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd0fb23996e74a138fa58064e9f80382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.GameplaySystem
+  fullyPaintedObjectTransform: {fileID: 456168241625349740}
 --- !u!1 &8903952689145618098
 GameObject:
   m_ObjectHideFlags: 0

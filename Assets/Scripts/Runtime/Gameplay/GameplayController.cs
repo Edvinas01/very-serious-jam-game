@@ -22,10 +22,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private PlayableDirector introPlayable;
 
-        [Header("Scenes")]
+        [Header("Gameplay")]
         [SerializeField]
-        private SceneData victoryScene;
+        private float gameplayDuration = 60f;
 
+        [Min(0)]
+        [SerializeField]
+        private int maxScore = 1000;
+
+        [Header("Scenes")]
         [SerializeField]
         private SceneData gameOverScene;
 
@@ -35,6 +40,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private GameplaySystem gameplaySystem;
         private ISceneSystem sceneSystem;
+
+        public float GameplayDuration => gameplayDuration;
+
+        public int MaxScore => maxScore;
 
         private void Awake()
         {
@@ -67,11 +76,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
 
             throw new Exception("No pedestal object found");
-        }
-
-        public void LoadVictoryScene()
-        {
-            sceneSystem.LoadScene(new SceneLoadArgs(victoryScene));
         }
 
         public void LoadGameOverScene()

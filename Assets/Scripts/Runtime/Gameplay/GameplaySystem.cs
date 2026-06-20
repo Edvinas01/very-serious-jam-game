@@ -8,8 +8,11 @@ using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
-    internal sealed class GameplaySystem : ILifecycleListener
+    internal sealed class GameplaySystem : MonoBehaviour, ILifecycleListener
     {
+        [SerializeField]
+        private Transform fullyPaintedObjectTransform;
+
         private readonly List<PedestalObjectActor> fullyPaintedObjects = new();
 
         private IObjectGroup<PlayerActor> players;
@@ -18,6 +21,71 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private CancellationTokenSource gameplayCancellation;
         private GameplayController context;
+
+        private GameplayState currentState = GameplayState.None;
+        private float currentRemainingTime;
+        private int currentScore;
+
+        public IReadOnlyList<PedestalObjectActor> FullyPaintedObjects => fullyPaintedObjects;
+
+        public float PaintAmount
+        {
+            get
+            {
+                if (TryGetPedestalObject(out var pedestalObject))
+                {
+                    return pedestalObject.PaintAmount;
+                }
+
+                return 0f;
+            }
+        }
+
+        public float RemainingTime
+        {
+            get => currentRemainingTime;
+            private set => currentRemainingTime = Mathf.Clamp(value, 0f, context.GameplayDuration);
+        }
+
+        public int Score
+        {
+            get => currentScore;
+            private set
+            {
+                var valuePrev = currentScore;
+                var valueNext = Mathf.Clamp(value, 0, context.MaxScore);
+
+                if (valuePrev == valueNext)
+                {
+                    return;
+                }
+
+                Debug.Log($"Score changed {valuePrev}->{valueNext}", this);
+                currentScore = value;
+
+                Game.PublishMessage(new ScoreChangedMessage(valuePrev, valueNext));
+            }
+        }
+
+        public GameplayState State
+        {
+            get => currentState;
+            private set
+            {
+                var valuePrev = currentState;
+                var valueNext = value;
+
+                if (valuePrev == valueNext)
+                {
+                    return;
+                }
+
+                Debug.Log($"State changed {valuePrev}->{valueNext}", this);
+                currentState = value;
+
+                Game.PublishMessage(new GameplayStateChangedMessage(valuePrev, valueNext));
+            }
+        }
 
         public void OnInitialized()
         {
@@ -45,7 +113,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             if (context != null)
             {
-                Debug.LogWarning("Game is already started");
+                Debug.LogWarning("Game is already started", this);
                 return;
             }
 
@@ -62,7 +130,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             if (context == null)
             {
-                Debug.LogWarning("Game is not started");
+                Debug.LogWarning("Game is not started", this);
                 return;
             }
 
@@ -77,18 +145,27 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             if (TryGetPlayer(out var player) == false)
             {
-                Debug.LogError("Cannot start game, no players found");
+                Debug.LogError("Cannot start game, no players found", this);
                 return;
             }
 
             if (TryGetPedestal(out var pedestal) == false)
             {
-                Debug.LogError("Cannot start game, no pedestals found");
+                Debug.LogError("Cannot start game, no pedestals found", this);
                 return;
             }
 
-            // Cleanup
+            State = GameplayState.Introduction;
+
+            // Init game
+            foreach (var paintedObject in fullyPaintedObjects)
+            {
+                Destroy(paintedObject.gameObject);
+            }
+
             fullyPaintedObjects.Clear();
+            RemainingTime = context.GameplayDuration;
+            Score = 0;
 
             // // disable player so no movement during intro
             // player.DisableInteraction();
@@ -98,53 +175,63 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // await context.PlayIntroAsync(cancellationToken);
 
             //
-            // enable player
+            // Enable player
             player.EnableInteraction();
             player.EnableCamera();
 
-            // TODO: slide in animation
-            // spawn pedestal object
+            // Spaw pedestal object
+            State = GameplayState.SpawningObject;
             var pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
+            pedestalObject.OnPainted += OnObjectPainted;
+            await pedestalObject.SlideInAsync(cancellationToken);
+            State = GameplayState.PaintingObject;
 
-            // wait for GG
-            PlayerState playerState;
+            // Game loop
             do
             {
-                playerState = GetPlayerState(player);
+                RemainingTime -= Time.deltaTime;
 
+                // GG: out of time
+                if (RemainingTime <= 0f)
+                {
+                    State = GameplayState.GameOver;
+                    break;
+                }
+
+                // GG: reached max score
+                if (Score > context.MaxScore)
+                {
+                    State = GameplayState.GameOver;
+                    break;
+                }
+
+                // Switch painted object
                 if (pedestalObject.PaintAmount >= 1f)
                 {
-                    // TODO: slide out animation
-                    fullyPaintedObjects.Add(pedestalObject);
-                    pedestalObject.transform.parent = null;
-                    pedestalObject.gameObject.SetActive(false);
+                    Score += pedestalObject.Data.Score;
 
-                    // TODO: slide in animation
+                    // Slide out old object
+                    State = GameplayState.SpawningObject;
+                    await pedestalObject.SlideOutAsync(cancellationToken);
+                    fullyPaintedObjects.Add(pedestalObject);
+
+                    pedestalObject.transform.position = fullyPaintedObjectTransform.transform.position;
+                    pedestalObject.transform.parent = fullyPaintedObjectTransform;
+                    pedestalObject.gameObject.SetActive(false);
+                    pedestalObject.OnPainted -= OnObjectPainted;
+
+                    // Slide in new object
                     pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
+                    pedestalObject.OnPainted += OnObjectPainted;
+                    await pedestalObject.SlideInAsync(cancellationToken);
+                    State = GameplayState.PaintingObject;
                 }
 
                 await UniTask.Yield(cancellationToken);
-            } while (playerState == PlayerState.Playing);
+            } while (State != GameplayState.GameOver);
 
-            // check result
-            switch (playerState)
-            {
-                case PlayerState.Won:
-                {
-                    context.LoadVictoryScene();
-                    break;
-                }
-                case PlayerState.Lost:
-                {
-                    context.LoadGameOverScene();
-                    break;
-                }
-                default:
-                {
-                    Debug.LogError($"Unsupported player state {playerState}");
-                    break;
-                }
-            }
+            context.LoadGameOverScene();
+            State = GameplayState.GameOver;
         }
 
         private bool TryGetPlayer(out PlayerActor player)
@@ -165,29 +252,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             return pedestalObject;
         }
 
-        private static PlayerState GetPlayerState(PlayerActor player)
+        private void OnObjectPainted(float paintAmount)
         {
-            if (player.Score >= player.MaxScore)
-            {
-                return PlayerState.Won;
-            }
-
-            if (player.Score <= 0)
-            {
-                return PlayerState.Lost;
-            }
-
-            return PlayerState.Playing;
+            Game.PublishMessage(new PaintAmountChangedMessage(paintAmount));
         }
 
-        private enum PlayerState
-        {
-            Playing,
-            Won,
-            Lost,
-        }
-
-        // Logging
         private void OnPedestalAdded(PedestalActor pedestal)
         {
             Debug.Log($"Added Pedestal '{pedestal.name}'", pedestal);

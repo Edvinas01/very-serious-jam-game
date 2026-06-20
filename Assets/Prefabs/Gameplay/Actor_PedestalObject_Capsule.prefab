@@ -27,12 +27,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4086264327120873668}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3618850175161475177}
+  m_Father: {fileID: 2534847321163480806}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &662546330058963530
 MeshFilter:
@@ -137,6 +137,10 @@ PrefabInstance:
       propertyPath: targetMesh
       value: 
       objectReference: {fileID: 4798252410330677265}
+    - target: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
+      propertyPath: objectRenderer
+      value: 
+      objectReference: {fileID: 4798252410330677265}
     - target: {fileID: 6214568628275996102, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
       propertyPath: m_Name
       value: Actor_PedestalObject_Capsule
@@ -144,13 +148,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3914124873431411438, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 2829642580557755489, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1631954044556195211}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
---- !u!4 &3618850175161475177 stripped
+--- !u!4 &2534847321163480806 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3914124873431411438, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2829642580557755489, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
   m_PrefabInstance: {fileID: 317924723721390727}
   m_PrefabAsset: {fileID: 0}
