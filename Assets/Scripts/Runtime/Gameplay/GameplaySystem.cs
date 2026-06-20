@@ -179,11 +179,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             player.EnableInteraction();
             player.EnableCamera();
 
-            // TODO: slide in animation
             // Spaw pedestal object
             State = GameplayState.SpawningObject;
             var pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
             pedestalObject.OnPainted += OnObjectPainted;
+            await pedestalObject.SlideInAsync(cancellationToken);
             State = GameplayState.PaintingObject;
 
             // Game loop
@@ -210,17 +210,20 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 {
                     Score += pedestalObject.Data.Score;
 
-                    // TODO: slide out animation
+                    // Slide out old object
+                    State = GameplayState.SpawningObject;
+                    await pedestalObject.SlideOutAsync(cancellationToken);
                     fullyPaintedObjects.Add(pedestalObject);
+
                     pedestalObject.transform.position = fullyPaintedObjectTransform.transform.position;
                     pedestalObject.transform.parent = fullyPaintedObjectTransform;
                     pedestalObject.gameObject.SetActive(false);
                     pedestalObject.OnPainted -= OnObjectPainted;
 
-                    // TODO: slide in animation
-                    State = GameplayState.SpawningObject;
+                    // Slide in new object
                     pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
                     pedestalObject.OnPainted += OnObjectPainted;
+                    await pedestalObject.SlideInAsync(cancellationToken);
                     State = GameplayState.PaintingObject;
                 }
 

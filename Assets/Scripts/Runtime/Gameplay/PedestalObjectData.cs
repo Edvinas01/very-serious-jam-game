@@ -10,14 +10,32 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
     )]
     internal sealed class PedestalObjectData : ScriptableObject
     {
+        [Header("Instantiation")]
         [SerializeField]
         private PedestalObjectActor pedestalObjectPrefab;
 
+        [Header("Scoring")]
         [Min(0)]
         [SerializeField]
         private int score = 150;
 
+        [SerializeField]
+        private Vector2 fullyPaintedRange = new(0f, 0.8f);
+
+        [Header("Animations")]
+        [SerializeField]
+        private AnimationClip slideInClip;
+
+        [SerializeField]
+        private AnimationClip slideOutClip;
+
         public int Score => score;
+
+        public Vector2 FullyPaintedRange => fullyPaintedRange;
+
+        public AnimationClip SlideInClip => slideInClip;
+
+        public AnimationClip SlideOutClip => slideOutClip;
 
         public PedestalObjectActor CreatePedestalObject(Vector3 position, Quaternion rotation, Transform parent)
         {
