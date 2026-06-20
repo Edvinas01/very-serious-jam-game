@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
+    [SelectionBase]
     internal sealed class PlayerActor : MonoBehaviour
     {
         [Header("Scoring")]

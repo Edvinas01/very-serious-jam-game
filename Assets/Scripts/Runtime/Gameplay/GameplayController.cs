@@ -12,6 +12,7 @@ using UnityEngine.Playables;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
+    [SelectionBase]
     internal sealed class GameplayController : MonoBehaviour
     {
         [Header("Intro")]

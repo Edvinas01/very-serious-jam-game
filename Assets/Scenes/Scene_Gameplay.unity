@@ -489,7 +489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3185940483046597163, guid: aa619a76aead9b448aea1ac9cc136b7e, type: 3}
       propertyPath: m_Name
-      value: Actor_Brush
+      value: Actor_PaintBrush
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

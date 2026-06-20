@@ -2,17 +2,25 @@
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
-    internal sealed class BrushActor : MonoBehaviour
+    [SelectionBase]
+    internal sealed class PaintBrushActor : MonoBehaviour
     {
         [SerializeField]
         private Transform paintPoint;
 
         [Min(0f)]
         [SerializeField]
-        private float paintRadius = 0.1f;
+        private float paintTriggerRadius = 0.1f;
+
+        [Min(1)]
+        [SerializeField]
+        private int paintTexelRadius = 20;
 
         [SerializeField]
-        private LayerMask layerMask;
+        private LayerMask paintLayerMask;
+
+        [SerializeField]
+        private Color paintColor = Color.crimson;
 
         private static readonly RaycastHit[] HitBuffer = new RaycastHit[10];
 
@@ -24,18 +32,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
 
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(paintPoint.position, paintRadius);
+            Gizmos.DrawWireSphere(paintPoint.position, paintTriggerRadius);
         }
 
         private void FixedUpdate()
         {
-            var count = Physics.SphereCastNonAlloc(
+            var count = Physics.RaycastNonAlloc(
                 origin: paintPoint.position,
-                radius: paintRadius,
                 direction: paintPoint.forward,
-                layerMask: layerMask,
                 results: HitBuffer,
-                maxDistance: 0f,
+                maxDistance: paintTriggerRadius,
+                layerMask: paintLayerMask,
                 queryTriggerInteraction: QueryTriggerInteraction.Ignore
             );
 
@@ -48,13 +55,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     continue;
                 }
 
-                Paint(pedestalObject, hit);
+                pedestalObject.Paint(
+                    uv: hit.textureCoord,
+                    radius: paintTexelRadius,
+                    color: paintColor
+                );
             }
-        }
-
-        private void Paint(PedestalObjectActor pedestalObject, RaycastHit hit)
-        {
-            Debug.Log($"Paint at {hit.point}", pedestalObject);
         }
     }
 }

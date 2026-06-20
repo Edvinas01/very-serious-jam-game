@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
+    [SelectionBase]
     internal sealed class PedestalActor : MonoBehaviour
     {
         [SerializeField]
