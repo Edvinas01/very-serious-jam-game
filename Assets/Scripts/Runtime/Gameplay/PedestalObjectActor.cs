@@ -17,6 +17,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private AnimancerComponent animancer;
 
+        [SerializeField]
+        private Rigidbody rigidBody;
+
         [Header("Mask")]
         [Min(0)]
         [SerializeField]
@@ -41,6 +44,22 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public PedestalObjectData Data { get; set; }
 
         public float PaintAmount { get; private set; }
+
+        public bool IsKinematic
+        {
+            set
+            {
+                if (value == false)
+                {
+                    foreach (var meshCollider in GetComponentsInChildren<MeshCollider>())
+                    {
+                        meshCollider.convex = true;
+                    }
+                }
+
+                rigidBody.isKinematic = value;
+            }
+        }
 
         public event Action<float> OnPainted;
 

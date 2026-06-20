@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3914124873431411438}
   - component: {fileID: 1345680050911884038}
+  - component: {fileID: 7724232707726890045}
   - component: {fileID: 4419037573582373499}
   - component: {fileID: 3927680282487132847}
   - component: {fileID: 6507820498644437029}
@@ -90,6 +91,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &7724232707726890045
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214568628275996102}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &4419037573582373499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectActor
   objectRenderer: {fileID: 0}
   animancer: {fileID: 6507820498644437029}
+  rigidBody: {fileID: 7724232707726890045}
   painMaskDefaultWidth: 256
   painMaskDefaultHeight: 256
   slidedInTween: {fileID: 3927680282487132847}
