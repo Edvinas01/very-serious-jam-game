@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using InSun.GameCore.Interactables;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
@@ -6,6 +7,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
     [SelectionBase]
     internal sealed class PaintBrushActor : MonoBehaviour
     {
+        [Header("Interaction")]
+        [SerializeField]
+        private SimpleInteractable interactable;
+
         [Header("Paint Tip")]
         [SerializeField]
         private Renderer paintTipRenderer;
@@ -13,6 +18,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [FormerlySerializedAs("paintPoint")]
         [SerializeField]
         private Transform paintTip;
+
+
+        [Header("Painting")]
+        [SerializeField]
+        private Color paintColor = Color.crimson;
 
         [Header("Raycasts")]
         [Min(0f)]
@@ -25,10 +35,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [SerializeField]
         private LayerMask paintLayerMask;
-
-        [Header("Painting")]
-        [SerializeField]
-        private Color paintColor = Color.crimson;
 
         private static readonly RaycastHit[] HitBuffer = new RaycastHit[10];
         private MaterialPropertyBlock paintTipPropertyBlock;
@@ -59,6 +65,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             gizmoColor.a = 0.4f;
             Gizmos.color = gizmoColor;
             Gizmos.DrawSphere(paintTip.position, paintTriggerRadius);
+        }
+
+        private void OnEnable()
+        {
+            interactable.OnHoverEntered += OnHoverEntered;
+            interactable.OnHoverExited += OnHoverExited;
+
+            interactable.OnInteractionEntered += OnInteractionEntered;
+            interactable.OnInteractionExited += OnInteractionExited;
         }
 
         private void Awake()
@@ -98,6 +113,22 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     color: paintColor
                 );
             }
+        }
+
+        private void OnHoverEntered(InteractableHoverEnteredArgs args)
+        {
+        }
+
+        private void OnHoverExited(InteractableHoverExitedArgs args)
+        {
+        }
+
+        private void OnInteractionEntered(InteractableInteractionEnteredArgs args)
+        {
+        }
+
+        private void OnInteractionExited(InteractableInteractionExitedArgs args)
+        {
         }
 
         private void SetColor(Color color)
