@@ -10,11 +10,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Min(0)]
         [SerializeField]
-        private int painMaskWidth = 1024;
+        private int painMaskDefaultWidth = 256;
 
         [Min(0)]
         [SerializeField]
-        private int painMaskHeight = 1024;
+        private int painMaskDefaultHeight = 256;
 
         private int paintMaskPropertyId;
         private MaterialPropertyBlock propertyBlock;
@@ -29,14 +29,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             propertyBlock = new MaterialPropertyBlock();
 
             // Create mask texture
-            // var meshMaterial = targetMesh.sharedMaterial;
-            // var originalTex = meshMaterial.mainTexture as Texture2D;
-            // var width = originalTex ? originalTex.width : 1024;
-            // var height = originalTex ? originalTex.height : 1024;
+            var meshMaterial = targetMesh.sharedMaterial;
+            var meshTexture = meshMaterial.mainTexture as Texture2D;
+            var width = meshTexture ? meshTexture.width : painMaskDefaultWidth;
+            var height = meshTexture ? meshTexture.height : painMaskDefaultHeight;
 
             paintMaskTexture = new Texture2D(
-                width: painMaskWidth,
-                height: painMaskHeight,
+                width: width,
+                height: height,
                 textureFormat: TextureFormat.RGBA32,
                 mipChain: false
             );

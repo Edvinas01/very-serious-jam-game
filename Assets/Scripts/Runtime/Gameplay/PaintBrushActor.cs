@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     [SelectionBase]
     internal sealed class PaintBrushActor : MonoBehaviour
     {
+        [Header("Paint Tip")]
         [SerializeField]
-        private Transform paintPoint;
+        private Renderer paintTipRenderer;
 
+        [FormerlySerializedAs("paintPoint")]
+        [SerializeField]
+        private Transform paintTip;
+
+        [Header("Raycasts")]
         [Min(0f)]
         [SerializeField]
         private float paintTriggerRadius = 0.1f;
@@ -19,27 +26,57 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private LayerMask paintLayerMask;
 
+        [Header("Painting")]
         [SerializeField]
         private Color paintColor = Color.crimson;
 
         private static readonly RaycastHit[] HitBuffer = new RaycastHit[10];
+        private MaterialPropertyBlock paintTipPropertyBlock;
 
-        private void OnDrawGizmos()
+#if UNITY_EDITOR
+        private void OnValidate()
         {
-            if (paintPoint == false)
+            if (paintTipRenderer == false)
             {
                 return;
             }
 
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(paintPoint.position, paintTriggerRadius);
+            SetColor(paintColor);
+        }
+#endif
+
+        private void OnDrawGizmos()
+        {
+            if (paintTip == false)
+            {
+                return;
+            }
+
+            var gizmoColor = paintColor;
+            Gizmos.color = gizmoColor;
+            Gizmos.DrawWireSphere(paintTip.position, paintTriggerRadius);
+
+            gizmoColor.a = 0.4f;
+            Gizmos.color = gizmoColor;
+            Gizmos.DrawSphere(paintTip.position, paintTriggerRadius);
+        }
+
+        private void Awake()
+        {
+            paintTipPropertyBlock = new MaterialPropertyBlock();
+            paintTipRenderer.GetPropertyBlock(paintTipPropertyBlock);
+        }
+
+        private void Start()
+        {
+            SetColor(paintColor);
         }
 
         private void FixedUpdate()
         {
             var count = Physics.RaycastNonAlloc(
-                origin: paintPoint.position,
-                direction: paintPoint.forward,
+                origin: paintTip.position,
+                direction: paintTip.forward,
                 results: HitBuffer,
                 maxDistance: paintTriggerRadius,
                 layerMask: paintLayerMask,
@@ -61,6 +98,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     color: paintColor
                 );
             }
+        }
+
+        private void SetColor(Color color)
+        {
+            paintTipPropertyBlock ??= new MaterialPropertyBlock();
+
+            // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
+            paintTipPropertyBlock.SetColor("_BaseColor", color);
+            paintTipRenderer.SetPropertyBlock(paintTipPropertyBlock);
         }
     }
 }

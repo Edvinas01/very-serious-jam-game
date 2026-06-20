@@ -271,7 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120c86a9fb304f2bb0afb7ae7c98c751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.BrushActor
-  paintPoint: {fileID: 3825078504042644143}
+  paintTipRenderer: {fileID: 404400593156606594}
+  paintTip: {fileID: 3825078504042644143}
   paintTriggerRadius: 0.1
   paintTexelRadius: 4
   paintLayerMask:
@@ -290,7 +291,7 @@ GameObject:
   m_Layer: 9
   m_Name: Tip
   m_TagString: Untagged
-  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
