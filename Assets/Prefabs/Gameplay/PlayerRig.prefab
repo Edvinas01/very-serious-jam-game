@@ -227,8 +227,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6087873359602385502}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.267, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.2023647e-10, y: 1.2669978, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -494,7 +494,6 @@ GameObject:
   - component: {fileID: 8695071730729413775}
   - component: {fileID: 4004601985390170330}
   - component: {fileID: 8522901697640540451}
-  - component: {fileID: 2409256445740869263}
   m_Layer: 6
   m_Name: Actor_Player
   m_TagString: Untagged
@@ -562,23 +561,9 @@ MonoBehaviour:
   startingScore: 50
   maxScore: 100
   moveInputAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  movementController: {fileID: 2409256445740869263}
+  movementController: {fileID: 0}
   playerCamera: {fileID: 2423186951633129722}
   forwardTransform: {fileID: 7240733415801242291}
---- !u!114 &2409256445740869263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7047884920864932320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 471bb844c86dd224ea096543369e531f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Movement.PhysicalMovementController
-  maxSpeed: 5
-  acceleration: 20
 --- !u!1 &8100905921308907247
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +609,6 @@ GameObject:
   - component: {fileID: 540174121747730641}
   - component: {fileID: 2423186951633129722}
   - component: {fileID: 6582154758918960643}
-  - component: {fileID: 7076566474180448}
   - component: {fileID: 1818489798055152924}
   m_Layer: 0
   m_Name: Actor_Camera_Gameplay
@@ -711,40 +695,6 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 0, z: 0}
---- !u!114 &7076566474180448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8296825657189547529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62d54399b04b4fa48a73e121d4937dd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachinePanTilt
-  ReferenceFrame: 0
-  RecenterTarget: 0
-  PanAxis:
-    Value: 0
-    Center: 0
-    Range: {x: -180, y: 180}
-    Wrap: 1
-    Recentering:
-      Enabled: 0
-      Wait: 1
-      Time: 2
-    Restrictions: 0
-  TiltAxis:
-    Value: 0
-    Center: 0
-    Range: {x: -70, y: 70}
-    Wrap: 0
-    Recentering:
-      Enabled: 0
-      Wait: 1
-      Time: 2
-    Restrictions: 0
 --- !u!114 &1818489798055152924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,29 +711,7 @@ MonoBehaviour:
   SuppressInputWhileBlending: 1
   IgnoreTimeScale: 0
   m_ControllerManager:
-    Controllers:
-    - Name: Look X (Pan)
-      Owner: {fileID: 7076566474180448}
-      Enabled: 1
-      Input:
-        InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
-        Gain: 1
-        CancelDeltaTime: 0
-      InputValue: 0
-      Driver:
-        AccelTime: 0.2
-        DecelTime: 0.2
-    - Name: Look Y (Tilt)
-      Owner: {fileID: 7076566474180448}
-      Enabled: 1
-      Input:
-        InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
-        Gain: -1
-        CancelDeltaTime: 0
-      InputValue: 0
-      Driver:
-        AccelTime: 0.2
-        DecelTime: 0.2
+    Controllers: []
   PlayerIndex: -1
   AutoEnableInputs: 1
 --- !u!1001 &4150178146223034020
@@ -794,9 +722,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 540174121747730641}
     m_Modifications:
+    - target: {fileID: 903834376351855763, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
+      propertyPath: pushDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 903834376351855763, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 5969246603443390174}
     - target: {fileID: 907271507499519247, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.227
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 907271507499519247, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -833,6 +769,10 @@ PrefabInstance:
     - target: {fileID: 907271507499519247, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081058924629547402, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 3784971153794966932, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
       propertyPath: m_Name
