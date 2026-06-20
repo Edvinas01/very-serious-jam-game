@@ -28,10 +28,23 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public IReadOnlyList<PedestalObjectActor> FullyPaintedObjects => fullyPaintedObjects;
 
+        public float PaintAmount
+        {
+            get
+            {
+                if (TryGetPedestalObject(out var pedestalObject))
+                {
+                    return pedestalObject.PaintAmount;
+                }
+
+                return 0f;
+            }
+        }
+
         public float RemainingTime
         {
             get => currentRemainingTime;
-            private set => currentRemainingTime = Mathf.Max(value, 0f);
+            private set => currentRemainingTime = Mathf.Clamp(value, 0f, context.GameplayDuration);
         }
 
         public int Score
@@ -40,7 +53,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             private set
             {
                 var valuePrev = currentScore;
-                var valueNext = value;
+                var valueNext = Mathf.Clamp(value, 0, context.MaxScore);
 
                 if (valuePrev == valueNext)
                 {
@@ -170,6 +183,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // Spaw pedestal object
             State = GameplayState.SpawningObject;
             var pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
+            pedestalObject.OnPainted += OnObjectPainted;
             State = GameplayState.PaintingObject;
 
             // Game loop
@@ -201,10 +215,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     pedestalObject.transform.position = fullyPaintedObjectTransform.transform.position;
                     pedestalObject.transform.parent = fullyPaintedObjectTransform;
                     pedestalObject.gameObject.SetActive(false);
+                    pedestalObject.OnPainted -= OnObjectPainted;
 
                     // TODO: slide in animation
                     State = GameplayState.SpawningObject;
                     pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
+                    pedestalObject.OnPainted += OnObjectPainted;
                     State = GameplayState.PaintingObject;
                 }
 
@@ -233,7 +249,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             return pedestalObject;
         }
 
-        // Logging
+        private void OnObjectPainted(float paintAmount)
+        {
+            Game.PublishMessage(new PaintAmountChangedMessage(paintAmount));
+        }
+
         private void OnPedestalAdded(PedestalActor pedestal)
         {
             Debug.Log($"Added Pedestal '{pedestal.name}'", pedestal);

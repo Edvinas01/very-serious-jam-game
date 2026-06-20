@@ -27,4 +27,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             ScoreNext = scoreNext;
         }
     }
+
+    internal readonly struct PaintAmountChangedMessage : IMessage
+    {
+        public float PaintAmount { get; }
+
+        public PaintAmountChangedMessage(float paintAmount)
+        {
+            PaintAmount = paintAmount;
+        }
+    }
 }

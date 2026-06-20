@@ -15,11 +15,22 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         [SerializeField]
         private TMP_Text scoreText;
 
+        [SerializeField]
+        private TMP_Text paintPercentageText;
+
         [Header("Events")]
         [SerializeField]
         private UnityEvent onRemainingTimeChanged;
 
+        [SerializeField]
+        private UnityEvent onScoreChanged;
+
+        [SerializeField]
+        private UnityEvent onPaintAmountChanged;
+
         private int remainingTimePrev;
+        private int scorePrev;
+        private int paintAmountPrev;
 
         public float RemainingTime
         {
@@ -40,7 +51,32 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
         public int Score
         {
-            set => scoreText.text = value.ToString();
+            set
+            {
+                var scoreNext = value;
+                if (scorePrev != scoreNext)
+                {
+                    onScoreChanged.Invoke();
+                }
+
+                scoreText.text = value.ToString();
+                scorePrev = scoreNext;
+            }
+        }
+
+        public float PaintAmount
+        {
+            set
+            {
+                var paintPercentageNext = Mathf.RoundToInt(value * 100f);
+                if (paintPercentageNext != paintAmountPrev)
+                {
+                    onPaintAmountChanged.Invoke();
+                }
+
+                paintPercentageText.text = $"{paintPercentageNext}%";
+                paintAmountPrev = paintPercentageNext;
+            }
         }
     }
 }

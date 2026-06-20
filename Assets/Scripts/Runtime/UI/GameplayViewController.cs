@@ -15,6 +15,26 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             gameplaySystem = Game.GetObject<GameplaySystem>();
         }
 
+        protected override void OnViewShowEntered()
+        {
+            base.OnViewShowEntered();
+
+            Game.AddListener<ScoreChangedMessage>(OnScoreChanged);
+            Game.AddListener<PaintAmountChangedMessage>(OnPaintAmountChanged);
+
+            View.RemainingTime = gameplaySystem.RemainingTime;
+            View.Score = gameplaySystem.Score;
+            View.PaintAmount = gameplaySystem.PaintAmount;
+        }
+
+        protected override void OnViewHideEntered()
+        {
+            base.OnViewHideEntered();
+
+            Game.RemoveListener<ScoreChangedMessage>(OnScoreChanged);
+            Game.RemoveListener<PaintAmountChangedMessage>(OnPaintAmountChanged);
+        }
+
         protected override void Update()
         {
             base.Update();
@@ -27,26 +47,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             View.RemainingTime = gameplaySystem.RemainingTime;
         }
 
-        protected override void OnViewShowEntered()
-        {
-            base.OnViewShowEntered();
-
-            Game.AddListener<ScoreChangedMessage>(OnScoreChanged);
-
-            View.RemainingTime = gameplaySystem.RemainingTime;
-            View.Score = gameplaySystem.Score;
-        }
-
-        protected override void OnViewHideEntered()
-        {
-            base.OnViewHideEntered();
-
-            Game.RemoveListener<ScoreChangedMessage>(OnScoreChanged);
-        }
-
         private void OnScoreChanged(ScoreChangedMessage message)
         {
             View.Score = message.ScoreNext;
+        }
+
+        private void OnPaintAmountChanged(PaintAmountChangedMessage message)
+        {
+            View.PaintAmount = message.PaintAmount;
         }
     }
 }
