@@ -228,7 +228,7 @@ Transform:
   m_GameObject: {fileID: 6087873359602385502}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.8297532e-11, y: 1.266998, z: 0}
+  m_LocalPosition: {x: -1.2023647e-10, y: 1.2669978, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -494,7 +494,6 @@ GameObject:
   - component: {fileID: 8695071730729413775}
   - component: {fileID: 4004601985390170330}
   - component: {fileID: 8522901697640540451}
-  - component: {fileID: 2409256445740869263}
   m_Layer: 6
   m_Name: Actor_Player
   m_TagString: Untagged
@@ -562,23 +561,9 @@ MonoBehaviour:
   startingScore: 50
   maxScore: 100
   moveInputAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  movementController: {fileID: 2409256445740869263}
+  movementController: {fileID: 0}
   playerCamera: {fileID: 2423186951633129722}
   forwardTransform: {fileID: 7240733415801242291}
---- !u!114 &2409256445740869263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7047884920864932320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 471bb844c86dd224ea096543369e531f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Movement.PhysicalMovementController
-  maxSpeed: 5
-  acceleration: 20
 --- !u!1 &8100905921308907247
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +722,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 540174121747730641}
     m_Modifications:
+    - target: {fileID: 903834376351855763, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
+      propertyPath: pushDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 903834376351855763, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 5969246603443390174}
     - target: {fileID: 907271507499519247, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -776,6 +769,10 @@ PrefabInstance:
     - target: {fileID: 907271507499519247, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081058924629547402, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 3784971153794966932, guid: 310d6027ef8b95746981e1d88ca0eac9, type: 3}
       propertyPath: m_Name

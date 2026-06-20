@@ -21,13 +21,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private int maxScore = 100;
 
-        [Header("Movement")]
-        [SerializeField]
-        private InputActionReference moveInputAction;
-
-        [SerializeField]
-        private PhysicalMovementController movementController;
-
         [SerializeField]
         private CinemachineCamera playerCamera;
 
@@ -70,8 +63,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             cursorSystem = Game.GetObject<CursorSystem>();
 
             currentScore = startingScore;
-
-            movementController.ForwardTransform = forwardTransform;
         }
 
         private void OnEnable()
@@ -91,7 +82,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private void Start()
         {
             cursor = cursorSystem.PushCursor((Sprite)null);
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Confined;
         }
 
         private void OnDestroy()
@@ -109,7 +100,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 return;
             }
 
-            movementController.MoveAxis = moveInputAction.action.ReadValue<Vector2>();
             forwardTransform.rotation = playerCamera.transform.rotation;
         }
 
@@ -126,13 +116,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public void EnableInteraction()
         {
             isInteractionEnabled = true;
-            movementController.enabled = true;
         }
 
         public void DisableInteraction()
         {
             isInteractionEnabled = false;
-            movementController.enabled = false;
         }
 
         private void OnPauseStateChanged(PauseStateChangedMessage message)
@@ -146,7 +134,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             else
             {
                 cursor = cursorSystem.PushCursor((Sprite)null);
-                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.lockState = CursorLockMode.Confined;
             }
         }
     }
