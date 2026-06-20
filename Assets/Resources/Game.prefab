@@ -235,7 +235,6 @@ MonoBehaviour:
   scenes:
   - {fileID: 11400000, guid: 27eb7705de30c50459a2ebab173e0252, type: 2}
   - {fileID: 11400000, guid: 927b88a37c74b9244a75b91e74fc00c9, type: 2}
-  - {fileID: 11400000, guid: de5b94a6039e18648819379299e47c9e, type: 2}
   - {fileID: 11400000, guid: 848106c1d3df82142b22a5fca8da4cb6, type: 2}
   loadingSceneViewController: {fileID: 728608030804219172}
   onSceneLoadStarted:
