@@ -1,4 +1,5 @@
-﻿using InSun.GameCore;
+﻿using System;
+using InSun.GameCore;
 using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
@@ -16,11 +17,20 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private int painMaskDefaultHeight = 256;
 
+        [SerializeField]
+        private Vector2 fullyPaintedRange = new(0f, 0.8f);
+
         private int paintMaskPropertyId;
         private MaterialPropertyBlock propertyBlock;
 
         private Texture2D paintMaskTexture;
+        private bool[] paintedMask;
+        private int paintedPixelCount;
         private bool isPaintedThisFrame;
+
+        public float PaintAmount { get; private set; }
+
+        public event Action<float> OnPainted;
 
         private void Awake()
         {
@@ -52,6 +62,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             paintMaskTexture.Apply();
 
+            paintedMask = new bool[width * height];
+
             // Apply mask to renderer
             propertyBlock.SetTexture(paintMaskPropertyId, paintMaskTexture);
             targetMesh.SetPropertyBlock(propertyBlock);
@@ -77,6 +89,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             paintMaskTexture.Apply();
             isPaintedThisFrame = false;
+
+            var rawPercent = (float)paintedPixelCount / paintedMask.Length;
+            var percent = Mathf.InverseLerp(fullyPaintedRange.x, fullyPaintedRange.y, rawPercent);
+
+            PaintAmount = percent;
+
+            OnPainted?.Invoke(percent);
         }
 
         public void Paint(Vector2 uv, int radius, Color color)
@@ -110,6 +129,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     }
 
                     var pixelIndex = pixelY * textureW + pixelX;
+
+                    if (paintedMask[pixelIndex] == false)
+                    {
+                        paintedMask[pixelIndex] = true;
+                        paintedPixelCount++;
+                    }
 
                     // Apply some fade on edges
                     var currentColor = pixelData[pixelIndex];

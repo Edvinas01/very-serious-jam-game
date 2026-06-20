@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using InSun.GameCore;
@@ -9,6 +10,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class GameplaySystem : ILifecycleListener
     {
+        private readonly List<PedestalObjectActor> fullyPaintedObjects = new();
+
         private IObjectGroup<PlayerActor> players;
         private IObjectGroup<PedestalActor> pedestals;
         private IObjectGroup<PedestalObjectActor> pedestalObjects;
@@ -84,6 +87,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 return;
             }
 
+            // Cleanup
+            fullyPaintedObjects.Clear();
+
             // // disable player so no movement during intro
             // player.DisableInteraction();
             // player.DisableCamera();
@@ -91,10 +97,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // // intro anim
             // await context.PlayIntroAsync(cancellationToken);
 
+            //
             // enable player
             player.EnableInteraction();
             player.EnableCamera();
 
+            // TODO: slide in animation
             // spawn pedestal object
             var pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
 
@@ -103,6 +111,18 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             do
             {
                 playerState = GetPlayerState(player);
+
+                if (pedestalObject.PaintAmount >= 1f)
+                {
+                    // TODO: slide out animation
+                    fullyPaintedObjects.Add(pedestalObject);
+                    pedestalObject.transform.parent = null;
+                    pedestalObject.gameObject.SetActive(false);
+
+                    // TODO: slide in animation
+                    pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
+                }
+
                 await UniTask.Yield(cancellationToken);
             } while (playerState == PlayerState.Playing);
 

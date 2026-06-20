@@ -19,7 +19,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private Transform paintTip;
 
-
         [Header("Painting")]
         [SerializeField]
         private Color paintColor = Color.crimson;
