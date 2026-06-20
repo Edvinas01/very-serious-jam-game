@@ -32,9 +32,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Header("Scenes")]
         [SerializeField]
-        private SceneData victoryScene;
-
-        [SerializeField]
         private SceneData gameOverScene;
 
         [Header("Pedestal Objects")]
@@ -79,11 +76,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
 
             throw new Exception("No pedestal object found");
-        }
-
-        public void LoadVictoryScene()
-        {
-            sceneSystem.LoadScene(new SceneLoadArgs(victoryScene));
         }
 
         public void LoadGameOverScene()
