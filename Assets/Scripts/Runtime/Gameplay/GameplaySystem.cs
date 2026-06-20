@@ -84,12 +84,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 return;
             }
 
-            // disable player so no movement during intro
-            player.DisableInteraction();
-            player.DisableCamera();
-
-            // intro anim
-            await context.PlayIntroAsync(cancellationToken);
+            // // disable player so no movement during intro
+            // player.DisableInteraction();
+            // player.DisableCamera();
+            //
+            // // intro anim
+            // await context.PlayIntroAsync(cancellationToken);
 
             // enable player
             player.EnableInteraction();
