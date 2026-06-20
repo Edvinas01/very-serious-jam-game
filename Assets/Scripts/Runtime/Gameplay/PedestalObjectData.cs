@@ -10,6 +10,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
     )]
     internal sealed class PedestalObjectData : ScriptableObject
     {
+        [Header("Info")]
+        [SerializeField]
+        private string objectName;
+
         [Header("Instantiation")]
         [SerializeField]
         private PedestalObjectActor pedestalObjectPrefab;
@@ -29,6 +33,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private AnimationClip slideOutClip;
 
+        public string Name => objectName;
+
         public int Score => score;
 
         public Vector2 FullyPaintedRange => fullyPaintedRange;
@@ -40,6 +46,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public PedestalObjectActor CreatePedestalObject(Vector3 position, Quaternion rotation, Transform parent)
         {
             var instance = Instantiate(pedestalObjectPrefab, position, rotation, parent);
+            instance.name = $"{nameof(PedestalObjectActor)} ({Name})";
             instance.Data = this;
 
             return instance;

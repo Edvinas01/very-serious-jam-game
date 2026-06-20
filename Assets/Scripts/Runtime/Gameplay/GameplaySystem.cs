@@ -25,19 +25,26 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private GameplayState currentState = GameplayState.None;
         private float currentRemainingTime;
         private int currentScore;
+        private float currentPaintAmount;
 
         public IReadOnlyList<PedestalObjectActor> FullyPaintedObjects => fullyPaintedObjects;
 
         public float PaintAmount
         {
-            get
+            get => currentPaintAmount;
+            private set
             {
-                if (TryGetPedestalObject(out var pedestalObject))
+                var valuePrev = currentPaintAmount;
+                var valueNext = value;
+
+                if (Mathf.Approximately(valuePrev, valueNext))
                 {
-                    return pedestalObject.PaintAmount;
+                    return;
                 }
 
-                return 0f;
+                currentPaintAmount = valueNext;
+
+                Game.PublishMessage(new PaintAmountChangedMessage(valueNext));
             }
         }
 
@@ -140,6 +147,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             context = null;
         }
+        public void Return(PedestalObjectActor pedestal)
+        {
+            pedestal.transform.parent = fullyPaintedObjectTransform;
+            pedestal.gameObject.SetActive(true);
+        }
 
         private async UniTaskVoid StartGameAsync(CancellationToken cancellationToken)
         {
@@ -198,13 +210,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     break;
                 }
 
-                // GG: reached max score
-                if (Score > context.MaxScore)
-                {
-                    State = GameplayState.GameOver;
-                    break;
-                }
-
                 // Switch painted object
                 if (pedestalObject.PaintAmount >= 1f)
                 {
@@ -219,6 +224,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     pedestalObject.transform.parent = fullyPaintedObjectTransform;
                     pedestalObject.gameObject.SetActive(false);
                     pedestalObject.OnPainted -= OnObjectPainted;
+
+                    // GG: reached max score
+                    if (Score >= context.MaxScore)
+                    {
+                        State = GameplayState.GameOver;
+                        break;
+                    }
 
                     // Slide in new object
                     pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
@@ -254,7 +266,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void OnObjectPainted(float paintAmount)
         {
-            Game.PublishMessage(new PaintAmountChangedMessage(paintAmount));
+            PaintAmount = paintAmount;
         }
 
         private void OnPedestalAdded(PedestalActor pedestal)
