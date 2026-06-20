@@ -13,9 +13,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private PedestalObjectActor pedestalObjectPrefab;
 
+        [Min(0)]
+        [SerializeField]
+        private int score = 150;
+
+        public int Score => score;
+
         public PedestalObjectActor CreatePedestalObject(Vector3 position, Quaternion rotation, Transform parent)
         {
             var instance = Instantiate(pedestalObjectPrefab, position, rotation, parent);
+            instance.Data = this;
 
             return instance;
         }

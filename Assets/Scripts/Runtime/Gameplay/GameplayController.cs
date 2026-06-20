@@ -22,6 +22,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private PlayableDirector introPlayable;
 
+        [Header("Gameplay")]
+        [SerializeField]
+        private float gameplayDuration = 60f;
+
+        [Min(0)]
+        [SerializeField]
+        private int maxScore = 1000;
+
         [Header("Scenes")]
         [SerializeField]
         private SceneData victoryScene;
@@ -35,6 +43,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private GameplaySystem gameplaySystem;
         private ISceneSystem sceneSystem;
+
+        public float GameplayDuration => gameplayDuration;
+
+        public int MaxScore => maxScore;
 
         private void Awake()
         {

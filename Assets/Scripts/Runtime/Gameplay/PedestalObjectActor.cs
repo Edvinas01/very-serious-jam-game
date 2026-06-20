@@ -28,6 +28,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private int paintedPixelCount;
         private bool isPaintedThisFrame;
 
+        public PedestalObjectData Data { get; set; }
+
         public float PaintAmount { get; private set; }
 
         public event Action<float> OnPainted;

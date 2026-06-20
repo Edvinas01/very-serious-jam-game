@@ -47,7 +47,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime
 
         [Header("Gameplay")]
         [SerializeField]
-        private PauseSystem pauseSystem;
+        private GameplaySystem gameplaySystem;
 
         private static SceneData firstSceneOverrideEditor;
 
@@ -81,7 +81,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime
 
             // Gameplay (aka very game specific)
             AddObject(new PauseSystem());
-            AddObject(new GameplaySystem());
+            AddObject(gameplaySystem);
 
             AddListener<PauseStateChangedMessage>(OnPauseStateChanged);
         }
