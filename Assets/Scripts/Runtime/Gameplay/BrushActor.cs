@@ -42,7 +42,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             for (var index = 0; index < count; index++)
             {
                 var hit = HitBuffer[index];
-                if (hit.collider.TryGetComponent<PedestalObjectActor>(out var pedestalObject) == false)
+                var pedestalObject = hit.collider.GetComponentInParent<PedestalObjectActor>();
+                if (pedestalObject == false)
                 {
                     continue;
                 }
