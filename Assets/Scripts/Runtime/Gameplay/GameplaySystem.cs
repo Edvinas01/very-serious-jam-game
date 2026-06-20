@@ -20,15 +20,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             players = Game.GetObjectGroup<PlayerActor>();
             players.OnObjectAdded += OnPlayerAdded;
-            players.OnObjectAdded += OnPlayerRemoved;
+            players.OnObjectRemoved += OnPlayerRemoved;
 
             pedestals = Game.GetObjectGroup<PedestalActor>();
             pedestals.OnObjectAdded += OnPedestalAdded;
-            pedestals.OnObjectAdded += OnPedestalRemoved;
+            pedestals.OnObjectRemoved += OnPedestalRemoved;
 
             pedestalObjects = Game.GetObjectGroup<PedestalObjectActor>();
             pedestalObjects.OnObjectAdded += OnPedestalObjectAdded;
-            pedestalObjects.OnObjectAdded += OnPedestalObjectRemoved;
+            pedestalObjects.OnObjectRemoved += OnPedestalObjectRemoved;
         }
 
         public void OnDisposed()
@@ -84,12 +84,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 return;
             }
 
-            // disable player so no movement during intro
-            player.DisableInteraction();
-            player.DisableCamera();
-
-            // intro anim
-            await context.PlayIntroAsync(cancellationToken);
+            // // disable player so no movement during intro
+            // player.DisableInteraction();
+            // player.DisableCamera();
+            //
+            // // intro anim
+            // await context.PlayIntroAsync(cancellationToken);
 
             // enable player
             player.EnableInteraction();
@@ -170,32 +170,32 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         // Logging
         private void OnPedestalAdded(PedestalActor pedestal)
         {
-            Debug.Log($"Added Pedestal {pedestal.name}", pedestal);
+            Debug.Log($"Added Pedestal '{pedestal.name}'", pedestal);
         }
 
         private void OnPedestalRemoved(PedestalActor pedestal)
         {
-            Debug.Log($"Removed Pedestal {pedestal.name}", pedestal);
+            Debug.Log($"Removed Pedestal '{pedestal.name}'", pedestal);
         }
 
         private void OnPedestalObjectAdded(PedestalObjectActor pedestalObject)
         {
-            Debug.Log($"Added PedestalObject {pedestalObject.name}", pedestalObject);
+            Debug.Log($"Added PedestalObject '{pedestalObject.name}'", pedestalObject);
         }
 
         private void OnPedestalObjectRemoved(PedestalObjectActor pedestalObject)
         {
-            Debug.Log($"Removed PedestalObject {pedestalObject.name}", pedestalObject);
+            Debug.Log($"Removed PedestalObject '{pedestalObject.name}'", pedestalObject);
         }
 
         private void OnPlayerAdded(PlayerActor player)
         {
-            Debug.Log($"Added Player {player.name}", player);
+            Debug.Log($"Added Player '{player.name}'", player);
         }
 
         private void OnPlayerRemoved(PlayerActor player)
         {
-            Debug.Log($"Removed Player {player.name}", player);
+            Debug.Log($"Removed Player '{player.name}'", player);
         }
     }
 }

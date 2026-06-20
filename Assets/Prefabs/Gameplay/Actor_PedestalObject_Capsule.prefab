@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 662546330058963530}
   - component: {fileID: 4798252410330677265}
   - component: {fileID: 1975205753113254759}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
+      propertyPath: targetMesh
+      value: 
+      objectReference: {fileID: 4798252410330677265}
     - target: {fileID: 6214568628275996102, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
       propertyPath: m_Name
       value: Actor_PedestalObject_Capsule

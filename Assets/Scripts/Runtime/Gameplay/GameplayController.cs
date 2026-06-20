@@ -55,11 +55,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             if (pedestalObjects.TryGetRandom(out var pedestalObject))
             {
-                return pedestalObject.CreatePedestalObject(
+                var instance = pedestalObject.CreatePedestalObject(
                     parent.position,
                     Quaternion.identity,
                     parent
                 );
+
+                instance.name = $"{nameof(PedestalObjectActor)}_{pedestalObjects.Count}";
+                return instance;
             }
 
             throw new Exception("No pedestal object found");

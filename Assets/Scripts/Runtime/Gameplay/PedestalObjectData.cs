@@ -15,7 +15,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public PedestalObjectActor CreatePedestalObject(Vector3 position, Quaternion rotation, Transform parent)
         {
-            return Instantiate(pedestalObjectPrefab, position, rotation, parent);
+            var instance = Instantiate(pedestalObjectPrefab, position, rotation, parent);
+
+            return instance;
         }
     }
 }

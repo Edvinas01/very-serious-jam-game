@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3914124873431411438}
   - component: {fileID: 4419037573582373499}
   - component: {fileID: 3927680282487132847}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Actor_PedestalObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2e3101a3cb44328d2ca22d89c52480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectActor
+  targetMesh: {fileID: 0}
 --- !u!114 &3927680282487132847
 MonoBehaviour:
   m_ObjectHideFlags: 0

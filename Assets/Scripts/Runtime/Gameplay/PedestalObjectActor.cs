@@ -5,6 +5,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class PedestalObjectActor : MonoBehaviour
     {
+        [SerializeField]
+        private MeshRenderer targetMesh;
+
         private void OnEnable()
         {
             Game.AddObject<int, PedestalObjectActor>(GetInstanceID(), this);
