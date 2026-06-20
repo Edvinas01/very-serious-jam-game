@@ -1,5 +1,4 @@
 ﻿using System;
-using DoubleD.VerySeriousJamGame.Runtime.Gameplay;
 using DoubleD.VerySeriousJamGame.Runtime.Movement;
 using DoubleD.VerySeriousJamGame.Runtime.Pausing;
 using InSun.GameCore;
@@ -8,7 +7,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace DoubleD.VerySeriousJamGame.Runtime.Player
+namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class PlayerActor : MonoBehaviour
     {
@@ -76,14 +75,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Player
 
         private void OnEnable()
         {
-            gameplaySystem.AddPlayer(this);
+            Game.AddObject<int, PlayerActor>(GetInstanceID(), this);
 
             Game.AddListener<PauseStateChangedMessage>(OnPauseStateChanged);
         }
 
         private void OnDisable()
         {
-            gameplaySystem.RemovePlayer(this);
+            Game.RemoveObject<int, PlayerActor>(GetInstanceID());
 
             Game.RemoveListener<PauseStateChangedMessage>(OnPauseStateChanged);
         }

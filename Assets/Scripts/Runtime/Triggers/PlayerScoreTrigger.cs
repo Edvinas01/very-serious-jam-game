@@ -1,4 +1,4 @@
-﻿using DoubleD.VerySeriousJamGame.Runtime.Player;
+﻿using DoubleD.VerySeriousJamGame.Runtime.Gameplay;
 using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Triggers

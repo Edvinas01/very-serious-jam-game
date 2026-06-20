@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using DoubleD.VerySeriousJamGame.Runtime.Player;
+using InSun.GameCore;
 using InSun.GameCore.Objects;
 using UnityEngine;
 
@@ -10,13 +9,26 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class GameplaySystem : ILifecycleListener
     {
-        private readonly List<PlayerActor> players = new();
+        private IObjectGroup<PlayerActor> players;
+        private IObjectGroup<PedestalActor> pedestals;
+        private IObjectGroup<PedestalObjectActor> pedestalObjects;
 
         private CancellationTokenSource gameplayCancellation;
         private GameplayController context;
 
         public void OnInitialized()
         {
+            players = Game.GetObjectGroup<PlayerActor>();
+            players.OnObjectAdded += OnPlayerAdded;
+            players.OnObjectAdded += OnPlayerRemoved;
+
+            pedestals = Game.GetObjectGroup<PedestalActor>();
+            pedestals.OnObjectAdded += OnPedestalAdded;
+            pedestals.OnObjectAdded += OnPedestalRemoved;
+
+            pedestalObjects = Game.GetObjectGroup<PedestalObjectActor>();
+            pedestalObjects.OnObjectAdded += OnPedestalObjectAdded;
+            pedestalObjects.OnObjectAdded += OnPedestalObjectRemoved;
         }
 
         public void OnDisposed()
@@ -58,21 +70,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             context = null;
         }
 
-        public void AddPlayer(PlayerActor player)
-        {
-            players.Add(player);
-        }
-
-        public void RemovePlayer(PlayerActor player)
-        {
-            players.Remove(player);
-        }
-
         private async UniTaskVoid StartGameAsync(CancellationToken cancellationToken)
         {
             if (TryGetPlayer(out var player) == false)
             {
                 Debug.LogError("Cannot start game, no players found");
+                return;
+            }
+
+            if (TryGetPedestal(out var pedestal) == false)
+            {
+                Debug.LogError("Cannot start game, no pedestals found");
                 return;
             }
 
@@ -86,6 +94,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // enable player
             player.EnableInteraction();
             player.EnableCamera();
+
+            // spawn pedestal object
+            var pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
 
             // wait for GG
             PlayerState playerState;
@@ -122,6 +133,18 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             return player;
         }
 
+        private bool TryGetPedestal(out PedestalActor pedestal)
+        {
+            pedestal = pedestals.FirstOrDefault();
+            return pedestal;
+        }
+
+        private bool TryGetPedestalObject(out PedestalObjectActor pedestalObject)
+        {
+            pedestalObject = pedestalObjects.FirstOrDefault();
+            return pedestalObject;
+        }
+
         private static PlayerState GetPlayerState(PlayerActor player)
         {
             if (player.Score >= player.MaxScore)
@@ -142,6 +165,37 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             Playing,
             Won,
             Lost,
+        }
+
+        // Logging
+        private void OnPedestalAdded(PedestalActor pedestal)
+        {
+            Debug.Log($"Added Pedestal {pedestal.name}", pedestal);
+        }
+
+        private void OnPedestalRemoved(PedestalActor pedestal)
+        {
+            Debug.Log($"Removed Pedestal {pedestal.name}", pedestal);
+        }
+
+        private void OnPedestalObjectAdded(PedestalObjectActor pedestalObject)
+        {
+            Debug.Log($"Added PedestalObject {pedestalObject.name}", pedestalObject);
+        }
+
+        private void OnPedestalObjectRemoved(PedestalObjectActor pedestalObject)
+        {
+            Debug.Log($"Removed PedestalObject {pedestalObject.name}", pedestalObject);
+        }
+
+        private void OnPlayerAdded(PlayerActor player)
+        {
+            Debug.Log($"Added Player {player.name}", player);
+        }
+
+        private void OnPlayerRemoved(PlayerActor player)
+        {
+            Debug.Log($"Removed Player {player.name}", player);
         }
     }
 }

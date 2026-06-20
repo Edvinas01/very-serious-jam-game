@@ -1,8 +1,11 @@
-﻿using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DoubleD.VerySeriousJamGame.Runtime.Utilities;
 using InSun.GameCore;
 using InSun.GameCore.Scenes;
+using InSun.GameCore.Utilities;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -11,17 +14,23 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class GameplayController : MonoBehaviour
     {
+        [Header("Intro")]
         [SerializeField]
         private CinemachineCamera introCamera;
 
         [SerializeField]
         private PlayableDirector introPlayable;
 
+        [Header("Scenes")]
         [SerializeField]
         private SceneData victoryScene;
 
         [SerializeField]
         private SceneData gameOverScene;
+
+        [Header("Pedestal Objects")]
+        [SerializeField]
+        private List<PedestalObjectData> pedestalObjects;
 
         private GameplaySystem gameplaySystem;
         private ISceneSystem sceneSystem;
@@ -40,6 +49,20 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private void OnDestroy()
         {
             gameplaySystem.StopGame();
+        }
+
+        public PedestalObjectActor CreatePedestalObject(Transform parent)
+        {
+            if (pedestalObjects.TryGetRandom(out var pedestalObject))
+            {
+                return pedestalObject.CreatePedestalObject(
+                    parent.position,
+                    Quaternion.identity,
+                    parent
+                );
+            }
+
+            throw new Exception("No pedestal object found");
         }
 
         public void LoadVictoryScene()
