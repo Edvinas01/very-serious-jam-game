@@ -27,9 +27,9 @@ Transform:
   m_GameObject: {fileID: 3182298068655866948}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2588186, y: -0, z: -0, w: 0.96592593}
-  m_LocalPosition: {x: 0, y: 0, z: -0.000000059604645}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.07, y: -0.08, z: -0.132}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 907271507499519247}
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
@@ -138,5 +138,7 @@ MonoBehaviour:
   quadRenderer: {fileID: 5941037513804927845}
   openHandTexture: {fileID: 2800000, guid: 00567b7b8da3f4e4a827d3f04c48ef1d, type: 3}
   closedHandTexture: {fileID: 2800000, guid: d79ff9d43fe316d44823ad3d1d464011, type: 3}
+  moveSpeed: 0.05
+  maxMoveDistance: {x: 0.4, y: 0.4}
   handMoveAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   handPickUpAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
