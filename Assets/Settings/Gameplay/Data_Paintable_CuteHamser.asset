@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
+  m_Name: Data_Paintable_CuteHamser
+  m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
+  objectName: Cute Hamser
+  icon: {fileID: 21300000, guid: b1f54161a12644648a5fbcc5a2798a2f, type: 3}
+  paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
+  sharedMesh: {fileID: 9204514418414261446, guid: 2510dcf19bea4804cb7a39cd7a96ebb3, type: 3}
+  texture: {fileID: 2800000, guid: 413056d8ede7b0348b613c179b049a91, type: 3}
+  material: {fileID: 2100000, guid: 5a2b4ef330deb6f4393e20fbd7984b3f, type: 2}
+  scale: {x: 0.7, y: 0.7, z: 0.7}
+  rotation: {x: 0, y: 180, z: 0}
+  offset: {x: 0, y: 0, z: 0}
+  score: 30
+  fullyPaintedRange: {x: 0, y: 0.1}
+  slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
+  slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}

@@ -47,6 +47,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private TweenAnimation slidedInTween;
 
+        private int baseMapPropertyId;
         private int paintMaskPropertyId;
         private MaterialPropertyBlock propertyBlock;
 
@@ -126,6 +127,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             name = $"{nameof(PaintableActor)} ({data.Name})";
 
+            baseMapPropertyId = Shader.PropertyToID("_BaseMap");
             paintMaskPropertyId = Shader.PropertyToID("_PaintMask");
             propertyBlock = new MaterialPropertyBlock();
 
@@ -169,8 +171,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 paintedMask = new bool[width * height];
             }
 
-            // Apply mask to renderer
+            // Apply textures to renderer
             propertyBlock.SetTexture(paintMaskPropertyId, paintMaskTexture);
+            propertyBlock.SetTexture(baseMapPropertyId, Data.Texture);
             bodyRenderer.SetPropertyBlock(propertyBlock);
         }
 
