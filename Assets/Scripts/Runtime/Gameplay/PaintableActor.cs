@@ -161,7 +161,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 var pixelData = paintMaskTexture.GetRawTextureData<Color32>();
                 for (var index = 0; index < pixelData.Length; index++)
                 {
-                    var initialColor = Color.white;
+                    var initialColor = Color.clear;
                     initialColor.a = 0f;
                     pixelData[index] = initialColor;
                 }

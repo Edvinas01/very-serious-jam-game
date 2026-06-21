@@ -22,6 +22,6 @@ MonoBehaviour:
   rotation: {x: 0, y: 180, z: 0}
   offset: {x: 0, y: 0, z: 0}
   score: 500
-  fullyPaintedRange: {x: 0, y: 0.8}
+  fullyPaintedRange: {x: 0, y: 0.6}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
   slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}

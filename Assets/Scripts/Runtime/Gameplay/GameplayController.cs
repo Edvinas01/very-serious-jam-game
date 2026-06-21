@@ -232,7 +232,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private async UniTask PlayIntroAsync(CancellationToken cancellationToken)
         {
-            if (introPlayable)
+            if (data.PlayIntro && introPlayable)
             {
                 introCamera.enabled = true;
                 await introPlayable.PlayAsync(cancellationToken);
