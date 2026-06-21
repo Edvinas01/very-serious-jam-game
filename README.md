@@ -16,6 +16,7 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 
 - TODO: itch.io page
 - [The Very Serious Juniper Dev Game Jam](https://itch.io/jam/theveryseriousjuniperdevgamejam)
+- [PixaTool Preset](PixaTool/Preset_Pixatool.preset)
 
 ## APIs
 
@@ -37,3 +38,7 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 
 - [Hover 1 by plasterbrain](https://freesound.org/people/plasterbrain/sounds/237422/) | License: Creative Commons 0
 - [Button Hover Click by eqylizer](https://freesound.org/people/eqylizer/sounds/623990/) | License: Creative Commons 0
+
+### Tools
+
+- [PixaTool by KronBits](https://kronbits.itch.io/pixatool) - used for pixalizing textures
