@@ -131,6 +131,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     continue;
                 }
 
+                Debug.Log(Time.frameCount + " paint : " + paintable.name + " " + hit.textureCoord);
                 paintable.Paint(uv: hit.textureCoord, brush: this);
             }
         }
