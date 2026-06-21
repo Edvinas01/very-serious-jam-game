@@ -233,6 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2174572958076040443}
+  - component: {fileID: 1667963644878484693}
   - component: {fileID: 1419719022233555066}
   - component: {fileID: 1817869150670352746}
   - component: {fileID: 6510100384265224043}
@@ -262,6 +263,33 @@ Transform:
   - {fileID: 3925573619907480048}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1667963644878484693
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185940483046597163}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!135 &1419719022233555066
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -299,6 +327,7 @@ MonoBehaviour:
   paintTipRenderer: {fileID: 404400593156606594}
   paintTip: {fileID: 3825078504042644143}
   paintColor: {r: 0.8627452, g: 0.07843138, b: 0.2352941, a: 1}
+  paintScore: 1
   paintTriggerRadius: 0.12
   paintTexelRadius: 6
   paintLayerMask:
