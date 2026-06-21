@@ -30,6 +30,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private int maxScore = 1000;
 
+        [Min(0)]
+        [SerializeField]
+        private int startingScore;
+
         [Header("Scenes")]
         [SerializeField]
         private SceneData gameOverScene;
@@ -40,28 +44,125 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private GameplaySystem gameplaySystem;
         private ISceneSystem sceneSystem;
+        private CancellationTokenSource gameplayCancellation;
 
-        public float GameplayDuration => gameplayDuration;
-
-        public int MaxScore => maxScore;
+        private readonly List<PaintableActor> paintables = new();
+        private PlayerActor player;
+        private PedestalActor pedestal;
 
         private void Awake()
         {
             gameplaySystem = Game.GetObject<GameplaySystem>();
             sceneSystem = Game.GetObject<ISceneSystem>();
+
+            player = FindAnyObjectByType<PlayerActor>();
+            if (player == false)
+            {
+                Debug.LogError("No Player found in scene, gameplay will not start", this);
+            }
+
+            pedestal = FindAnyObjectByType<PedestalActor>();
+            if (pedestal == false)
+            {
+                Debug.LogError("No Pedestal found in scene, gameplay will not start", this);
+            }
         }
 
         private void Start()
         {
-            gameplaySystem.StartGame(this);
+            gameplayCancellation = new CancellationTokenSource();
+            StartGameAsync(gameplayCancellation.Token).Forget();
         }
 
         private void OnDestroy()
         {
-            gameplaySystem.StopGame();
+            gameplayCancellation?.Cancel();
+            gameplayCancellation?.Dispose();
+            gameplayCancellation = null;
         }
 
-        public PaintableActor CreatePaintable(Transform parent)
+        private async UniTaskVoid StartGameAsync(CancellationToken cancellationToken)
+        {
+            if (player == false)
+            {
+                Debug.LogError("Cannot start game, no player found", this);
+                return;
+            }
+
+            if (pedestal == false)
+            {
+                Debug.LogError("Cannot start game, no pedestal found", this);
+                return;
+            }
+
+            gameplaySystem.State = GameplayState.Introduction;
+
+            // Init game
+            gameplaySystem.ClearPaintedObjects();
+            gameplaySystem.RemainingTime = gameplayDuration;
+            gameplaySystem.Score = startingScore;
+
+            // Disable player so no movement during intro
+            player.DisableInteraction();
+            player.DisableCamera();
+
+            // Intro anim
+            await PlayIntroAsync(cancellationToken);
+
+            // Enable player
+            player.EnableInteraction();
+            player.EnableCamera();
+
+            // Spawn pedestal object
+            gameplaySystem.State = GameplayState.SpawningObject;
+            var paintable = CreatePaintable(pedestal.ObjectParent);
+            paintable.gameObject.SetActive(false);
+            paintable.OnPainted += OnObjectPainted;
+            await paintable.SlideInAsync(cancellationToken);
+            gameplaySystem.State = GameplayState.PaintingObject;
+
+            // Game loop
+            do
+            {
+                // Switch painted object
+                if (paintable.PaintAmount >= 1f)
+                {
+                    gameplaySystem.Score += paintable.Data.Score;
+
+                    // Slide out old object
+                    gameplaySystem.State = GameplayState.SpawningObject;
+                    await paintable.SlideOutAsync(cancellationToken);
+                    paintable.OnPainted -= OnObjectPainted;
+                    gameplaySystem.Store(paintable);
+
+                    // GG: reached max score
+                    if (gameplaySystem.Score >= maxScore)
+                    {
+                        gameplaySystem.State = GameplayState.GameOver;
+                        break;
+                    }
+
+                    // Slide in new object
+                    paintable = CreatePaintable(pedestal.ObjectParent);
+                    paintable.gameObject.SetActive(false);
+                    paintable.OnPainted += OnObjectPainted;
+
+                    await paintable.SlideInAsync(cancellationToken);
+                    gameplaySystem.State = GameplayState.PaintingObject;
+                }
+
+                await UniTask.Yield(cancellationToken);
+            } while (gameplaySystem.State != GameplayState.GameOver);
+
+            LoadGameOverScene();
+        }
+
+        private void OnObjectPainted(float paintAmount)
+        {
+            gameplaySystem.PaintAmount = paintAmount;
+        }
+
+        private PaintableActor CreatePaintable(Transform parent)
         {
             if (pedestalObjects.TryGetRandom(out var pedestalObject))
             {
@@ -75,12 +176,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             throw new Exception("No pedestal object found");
         }
 
-        public void LoadGameOverScene()
+        private void LoadGameOverScene()
         {
             sceneSystem.LoadScene(new SceneLoadArgs(gameOverScene));
         }
 
-        public async UniTask PlayIntroAsync(CancellationToken cancellationToken)
+        private async UniTask PlayIntroAsync(CancellationToken cancellationToken)
         {
             if (introPlayable)
             {

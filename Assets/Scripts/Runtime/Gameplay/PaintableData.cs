@@ -23,6 +23,25 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private PaintableActor paintablePrefab;
 
+        // TODO
+        [SerializeField]
+        private Mesh paintableMesh;
+
+        [SerializeField]
+        private Texture2D paintableTexture;
+
+        [SerializeField]
+        private Material paintableMaterial;
+
+        // TODO
+        [Min(0)]
+        [SerializeField]
+        private Vector3 paintableScale = new(1f, 1f, 1f);
+
+        [Min(0)]
+        [SerializeField]
+        private Vector3 paintableRotation = new(1f, 1f, 1f);
+
         [Header("Scoring")]
         [Min(0)]
         [SerializeField]
@@ -43,6 +62,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public GameObject Prefab => paintablePrefab ? paintablePrefab.gameObject : null;
 
         public Sprite Icon => icon;
+
+        public Mesh PaintableMesh => paintableMesh;
+
+        public Texture2D PaintableTexture => paintableTexture;
+
+        public Material PaintableMaterial => paintableMaterial;
+
+        public Vector3 PaintableScale => paintableScale;
+
+        public Vector3 PaintableRotation => paintableRotation;
 
         public int Score => score;
 

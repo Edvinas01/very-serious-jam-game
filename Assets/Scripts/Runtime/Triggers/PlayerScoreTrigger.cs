@@ -1,4 +1,5 @@
 ﻿using DoubleD.VerySeriousJamGame.Runtime.Gameplay;
+using InSun.GameCore;
 using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Triggers
@@ -8,15 +9,21 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Triggers
         [SerializeField]
         private int scoreValue;
 
+        private GameplaySystem gameplaySystem;
+
+        private void Awake()
+        {
+            gameplaySystem = Game.GetObject<GameplaySystem>();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            var player = other.GetComponentInParent<PlayerActor>();
-            if (player == false)
+            if (other.GetComponentInParent<PlayerActor>() == false)
             {
                 return;
             }
 
-            player.Score += scoreValue;
+            gameplaySystem.Score += scoreValue;
         }
     }
 }

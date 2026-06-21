@@ -1,5 +1,4 @@
-﻿using InSun.GameCore;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
@@ -27,16 +26,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             objectParent.Rotate(Vector3.up, totalSpeed * deltaTime, Space.World);
             currentSpinSpeed = Mathf.Lerp(currentSpinSpeed, 0f, spinDecaySpeed * deltaTime);
-        }
-
-        private void OnEnable()
-        {
-            Game.AddObject<int, PedestalActor>(GetInstanceID(), this);
-        }
-
-        private void OnDisable()
-        {
-            Game.RemoveObject<int, PedestalActor>(GetInstanceID());
         }
 
         public void AddSpinSpeed(float speed)

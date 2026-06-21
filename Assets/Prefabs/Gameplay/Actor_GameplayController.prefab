@@ -126,6 +126,7 @@ MonoBehaviour:
   introPlayable: {fileID: 893833677348635595}
   gameplayDuration: 120
   maxScore: 2000
+  startingScore: 0
   gameOverScene: {fileID: 11400000, guid: 848106c1d3df82142b22a5fca8da4cb6, type: 2}
   pedestalObjects:
   - {fileID: 11400000, guid: d406e59873d3fbd48899618ad96b0f32, type: 2}

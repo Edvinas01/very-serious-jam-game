@@ -1,38 +1,28 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using InSun.GameCore;
 using InSun.GameCore.Objects;
 using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
-    internal sealed class GameplaySystem : MonoBehaviour, ILifecycleListener
+    internal sealed class GameplaySystem : MonoBehaviour, IUpdateListener
     {
         [SerializeField]
         private Transform fullyPaintedObjectTransform;
 
         private readonly List<PaintableActor> fullyPaintedObjects = new();
 
-        private IObjectGroup<PlayerActor> players;
-        private IObjectGroup<PedestalActor> pedestals;
-        private IObjectGroup<PaintableActor> paintables;
-
-        private CancellationTokenSource gameplayCancellation;
-        private GameplayController context;
-
         private GameplayState currentState = GameplayState.None;
         private float currentRemainingTime;
-        private int currentScore;
         private float currentPaintAmount;
+        private int currentScore;
 
         public IReadOnlyList<PaintableActor> FullyPaintedObjects => fullyPaintedObjects;
 
         public float PaintAmount
         {
             get => currentPaintAmount;
-            private set
+            set
             {
                 var valuePrev = currentPaintAmount;
                 var valueNext = value;
@@ -51,16 +41,27 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public float RemainingTime
         {
             get => currentRemainingTime;
-            private set => currentRemainingTime = Mathf.Clamp(value, 0f, context.GameplayDuration);
+            set
+            {
+                currentRemainingTime = Mathf.Max(0f, value);
+
+                var remainingSecondsPrev = Mathf.CeilToInt(currentRemainingTime);
+                var remainingSecondsNext = Mathf.CeilToInt(value);
+
+                if (remainingSecondsPrev != remainingSecondsNext)
+                {
+                    Game.PublishMessage(new RemainingTimeChangedMessage(currentRemainingTime));
+                }
+            }
         }
 
         public int Score
         {
             get => currentScore;
-            private set
+            set
             {
                 var valuePrev = currentScore;
-                var valueNext = Mathf.Clamp(value, 0, context.MaxScore);
+                var valueNext = value;
 
                 if (valuePrev == valueNext)
                 {
@@ -68,7 +69,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 }
 
                 Debug.Log($"Score changed {valuePrev}->{valueNext}", this);
-                currentScore = value;
+                currentScore = valueNext;
 
                 Game.PublishMessage(new ScoreChangedMessage(valuePrev, valueNext));
             }
@@ -77,7 +78,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public GameplayState State
         {
             get => currentState;
-            private set
+            set
             {
                 var valuePrev = currentState;
                 var valueNext = value;
@@ -88,64 +89,25 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 }
 
                 Debug.Log($"State changed {valuePrev}->{valueNext}", this);
-                currentState = value;
+                currentState = valueNext;
 
                 Game.PublishMessage(new GameplayStateChangedMessage(valuePrev, valueNext));
             }
         }
 
-        public void OnInitialized()
+        public void OnUpdated(float deltaTime)
         {
-            players = Game.GetObjectGroup<PlayerActor>();
-            players.OnObjectAdded += OnPlayerAdded;
-            players.OnObjectRemoved += OnPlayerRemoved;
-
-            pedestals = Game.GetObjectGroup<PedestalActor>();
-            pedestals.OnObjectAdded += OnPedestalAdded;
-            pedestals.OnObjectRemoved += OnPedestalRemoved;
-
-            paintables = Game.GetObjectGroup<PaintableActor>();
-            paintables.OnObjectAdded += OnPedestalObjectAdded;
-            paintables.OnObjectRemoved += OnPedestalObjectRemoved;
-        }
-
-        public void OnDisposed()
-        {
-            gameplayCancellation?.Cancel();
-            gameplayCancellation?.Dispose();
-            gameplayCancellation = null;
-        }
-
-        public void StartGame(GameplayController newController)
-        {
-            if (context != null)
+            if (currentState is GameplayState.None or GameplayState.GameOver)
             {
-                Debug.LogWarning("Game is already started", this);
                 return;
             }
 
-            context = newController;
+            RemainingTime -= deltaTime;
 
-            gameplayCancellation?.Cancel();
-            gameplayCancellation?.Dispose();
-            gameplayCancellation = new CancellationTokenSource();
-
-            StartGameAsync(gameplayCancellation.Token).Forget();
-        }
-
-        public void StopGame()
-        {
-            if (context == null)
+            if (currentRemainingTime <= 0f)
             {
-                Debug.LogWarning("Game is not started", this);
-                return;
+                State = GameplayState.GameOver;
             }
-
-            gameplayCancellation?.Cancel();
-            gameplayCancellation?.Dispose();
-            gameplayCancellation = null;
-
-            context = null;
         }
 
         public void ClearPaintedObjects()
@@ -161,141 +123,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             fullyPaintedObjects.Clear();
         }
 
-        private async UniTaskVoid StartGameAsync(CancellationToken cancellationToken)
+        public void Store(PaintableActor paintable)
         {
-            if (TryGetPlayer(out var player) == false)
-            {
-                Debug.LogError("Cannot start game, no players found", this);
-                return;
-            }
+            fullyPaintedObjects.Add(paintable);
 
-            if (TryGetPedestal(out var pedestal) == false)
-            {
-                Debug.LogError("Cannot start game, no pedestals found", this);
-                return;
-            }
-
-            State = GameplayState.Introduction;
-
-            // Init game
-            ClearPaintedObjects();
-            RemainingTime = context.GameplayDuration;
-            Score = 0;
-
-            // Disable player so no movement during intro
-            player.DisableInteraction();
-            player.DisableCamera();
-
-            // Intro anim
-            await context.PlayIntroAsync(cancellationToken);
-
-            // Enable player
-            player.EnableInteraction();
-            player.EnableCamera();
-
-            // Spaw pedestal object
-            State = GameplayState.SpawningObject;
-            var paintable = context.CreatePaintable(pedestal.ObjectParent);
+            paintable.transform.position = fullyPaintedObjectTransform.position;
+            paintable.transform.parent = fullyPaintedObjectTransform;
             paintable.gameObject.SetActive(false);
-            paintable.OnPainted += OnObjectPainted;
-            await paintable.SlideInAsync(cancellationToken);
-            State = GameplayState.PaintingObject;
-
-            // Game loop
-            do
-            {
-                RemainingTime -= Time.deltaTime;
-
-                // GG: out of time
-                if (RemainingTime <= 0f)
-                {
-                    State = GameplayState.GameOver;
-                    break;
-                }
-
-                // Switch painted object
-                if (paintable.PaintAmount >= 1f)
-                {
-                    Score += paintable.Data.Score;
-
-                    // Slide out old object
-                    State = GameplayState.SpawningObject;
-                    await paintable.SlideOutAsync(cancellationToken);
-                    fullyPaintedObjects.Add(paintable);
-
-                    paintable.transform.position = fullyPaintedObjectTransform.transform.position;
-                    paintable.transform.parent = fullyPaintedObjectTransform;
-                    paintable.gameObject.SetActive(false);
-                    paintable.OnPainted -= OnObjectPainted;
-
-                    // GG: reached max score
-                    if (Score >= context.MaxScore)
-                    {
-                        State = GameplayState.GameOver;
-                        break;
-                    }
-
-                    // Slide in new object
-                    paintable = context.CreatePaintable(pedestal.ObjectParent);
-                    paintable.gameObject.SetActive(false);
-                    paintable.OnPainted += OnObjectPainted;
-
-                    await paintable.SlideInAsync(cancellationToken);
-                    State = GameplayState.PaintingObject;
-                }
-
-                await UniTask.Yield(cancellationToken);
-            } while (State != GameplayState.GameOver);
-
-            context.LoadGameOverScene();
-            State = GameplayState.GameOver;
-        }
-
-        private bool TryGetPlayer(out PlayerActor player)
-        {
-            player = players.FirstOrDefault();
-            return player;
-        }
-
-        private bool TryGetPedestal(out PedestalActor pedestal)
-        {
-            pedestal = pedestals.FirstOrDefault();
-            return pedestal;
-        }
-
-        private void OnObjectPainted(float paintAmount)
-        {
-            PaintAmount = paintAmount;
-        }
-
-        private void OnPedestalAdded(PedestalActor pedestal)
-        {
-            Debug.Log($"Added Pedestal '{pedestal.name}'", pedestal);
-        }
-
-        private void OnPedestalRemoved(PedestalActor pedestal)
-        {
-            Debug.Log($"Removed Pedestal '{pedestal.name}'", pedestal);
-        }
-
-        private void OnPedestalObjectAdded(PaintableActor paintable)
-        {
-            Debug.Log($"Added PedestalObject '{paintable.name}'", paintable);
-        }
-
-        private void OnPedestalObjectRemoved(PaintableActor paintable)
-        {
-            Debug.Log($"Removed PedestalObject '{paintable.name}'", paintable);
-        }
-
-        private void OnPlayerAdded(PlayerActor player)
-        {
-            Debug.Log($"Added Player '{player.name}'", player);
-        }
-
-        private void OnPlayerRemoved(PlayerActor player)
-        {
-            Debug.Log($"Removed Player '{player.name}'", player);
         }
     }
 }

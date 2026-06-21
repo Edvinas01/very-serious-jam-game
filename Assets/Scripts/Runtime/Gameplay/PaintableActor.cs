@@ -2,7 +2,6 @@
 using System.Threading;
 using Animancer;
 using Cysharp.Threading.Tasks;
-using InSun.GameCore;
 using InSun.GameCore.Animations;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
     {
         [Header("General")]
         [SerializeField]
-        private Renderer objectRenderer;
+        private MeshRenderer objectRenderer;
 
         [SerializeField]
         private AnimancerComponent animancer;
@@ -100,17 +99,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             objectRenderer.SetPropertyBlock(propertyBlock);
         }
 
-
-        private void OnEnable()
-        {
-            Game.AddObject<int, PaintableActor>(GetInstanceID(), this);
-        }
-
-        private void OnDisable()
-        {
-            Game.RemoveObject<int, PaintableActor>(GetInstanceID());
-        }
-
         private void LateUpdate()
         {
             if (isPaintedThisFrame == false)
@@ -127,6 +115,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             PaintAmount = percent;
 
             OnPainted?.Invoke(percent);
+        }
+
+        public void Initialize(PaintableData data)
+        {
+            // transform.localScale = data.PaintableScale;
         }
 
         public async UniTask SlideInAsync(CancellationToken cancellationToken)
