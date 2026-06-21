@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5475973264131276011}
   - component: {fileID: 6487093046360305889}
   - component: {fileID: 5941037513804927845}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HandPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,8 +101,9 @@ GameObject:
   - component: {fileID: 907271507499519247}
   - component: {fileID: 2081058924629547402}
   - component: {fileID: 903834376351855763}
+  - component: {fileID: 1072270903636431866}
   - component: {fileID: 6558826671384385569}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HandActor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,8 +173,21 @@ MonoBehaviour:
   targetCamera: {fileID: 0}
   springForce: 300
   springDamper: 20
+  interactor: {fileID: 1072270903636431866}
   handPickUpAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   handPushAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+--- !u!114 &1072270903636431866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784971153794966932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fde62d8177649f9b4ca0265be452be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Interactables.SimpleInteractor
 --- !u!135 &6558826671384385569
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -189,8 +203,8 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 1
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.08
