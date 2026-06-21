@@ -190,7 +190,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             gameObject.SetActive(true);
 
             await animancer.Play(clip).ToUniTask(cancellationToken: cancellationToken);
-            await slidedInTween.PlayAsync(cancellationToken);
+            slidedInTween.Play();
         }
 
         public async UniTask SlideOutAsync(CancellationToken cancellationToken)
