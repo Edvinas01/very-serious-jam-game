@@ -1,4 +1,5 @@
-﻿using InSun.GameCore.Interactables;
+﻿using Animancer;
+using InSun.GameCore.Interactables;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -46,6 +47,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [SerializeField]
         private bool isSmoothEdges;
+
+        [Header("Events")]
+        [SerializeField]
+        private UnityEvent onPainted;
 
         private static readonly RaycastHit[] HitBuffer = new RaycastHit[10];
         private MaterialPropertyBlock paintTipPropertyBlock;
@@ -142,6 +147,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 }
 
                 paintable.Paint(uv: hit.textureCoord, brush: this, isSmoothEdges: isSmoothEdges);
+                onPainted.Invoke();
             }
         }
 
