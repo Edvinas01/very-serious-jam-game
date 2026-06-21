@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dev_PedestalObject
+  m_Name: Paintable_Default
   m_Shader: {fileID: -6465566751694194690, guid: 9439589596c582449ae76d5ed9e804cd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
