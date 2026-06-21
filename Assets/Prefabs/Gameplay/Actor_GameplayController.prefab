@@ -56,7 +56,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 40
+    FieldOfView: 80
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -148,6 +148,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -7945664351084952596, guid: 94c3645f069ec9144b21ece098ffc3df, type: 2}
     value: {fileID: 9127269286135637015}
+  - key: {fileID: 7093316798460471998, guid: 94c3645f069ec9144b21ece098ffc3df, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!95 &9127269286135637015

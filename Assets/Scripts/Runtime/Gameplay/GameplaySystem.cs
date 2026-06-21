@@ -182,14 +182,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             currentRemainingTime = context.GameplayDuration;
             currentScore = 0;
 
-            // // disable player so no movement during intro
-            // player.DisableInteraction();
-            // player.DisableCamera();
-            //
-            // // intro anim
-            // await context.PlayIntroAsync(cancellationToken);
+            // Disable player so no movement during intro
+            player.DisableInteraction();
+            player.DisableCamera();
 
-            //
+            // Intro anim
+            await context.PlayIntroAsync(cancellationToken);
+
             // Enable player
             player.EnableInteraction();
             player.EnableCamera();
