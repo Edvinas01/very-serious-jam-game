@@ -38,6 +38,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public string Name => objectName;
 
+        public GameObject Prefab => pedestalObjectPrefab ? pedestalObjectPrefab.gameObject : null;
+
         public Sprite Icon => icon;
 
         public int Score => score;

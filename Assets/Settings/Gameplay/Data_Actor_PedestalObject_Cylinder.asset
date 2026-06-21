@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_Actor_PedestalObject_Cylinder
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
   objectName: Cylinder
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 1e831dc96b717e54e9498889d7761fb8, type: 3}
   pedestalObjectPrefab: {fileID: 4123869648464709884, guid: 996a6c783e53b2c4e801c777c22ece24, type: 3}
   score: 500
   fullyPaintedRange: {x: 0, y: 0.9}

@@ -20,5 +20,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             Game.RemoveObject<int, PedestalActor>(GetInstanceID());
         }
+
+        public void AddSpinSpeed(float speed)
+        {
+        }
     }
 }

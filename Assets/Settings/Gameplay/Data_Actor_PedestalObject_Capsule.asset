@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_Actor_PedestalObject_Capsule
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
   objectName: Capsule
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b1f54161a12644648a5fbcc5a2798a2f, type: 3}
   pedestalObjectPrefab: {fileID: 4123869648464709884, guid: 5cf1385ea7d27034ba15d45c1c80069d, type: 3}
   score: 500
   fullyPaintedRange: {x: 0, y: 0.9}
