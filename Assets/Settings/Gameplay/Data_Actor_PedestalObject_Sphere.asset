@@ -15,7 +15,7 @@ MonoBehaviour:
   objectName: Sphere
   icon: {fileID: 21300000, guid: c135f6c63d0fa7740aefe50dbd318525, type: 3}
   pedestalObjectPrefab: {fileID: 4123869648464709884, guid: b33aa50b8a14be74ba9810d48ffa8313, type: 3}
-  score: 500
+  score: 400
   fullyPaintedRange: {x: 0, y: 0.9}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
   slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}

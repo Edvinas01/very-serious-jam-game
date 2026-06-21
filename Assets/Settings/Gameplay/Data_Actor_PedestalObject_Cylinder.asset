@@ -16,6 +16,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 1e831dc96b717e54e9498889d7761fb8, type: 3}
   pedestalObjectPrefab: {fileID: 4123869648464709884, guid: 996a6c783e53b2c4e801c777c22ece24, type: 3}
   score: 500
-  fullyPaintedRange: {x: 0, y: 0.9}
+  fullyPaintedRange: {x: 0, y: 0.8}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
   slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}

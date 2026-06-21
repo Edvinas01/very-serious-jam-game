@@ -299,8 +299,8 @@ MonoBehaviour:
   paintTipRenderer: {fileID: 404400593156606594}
   paintTip: {fileID: 3825078504042644143}
   paintColor: {r: 0.8627452, g: 0.07843138, b: 0.2352941, a: 1}
-  paintTriggerRadius: 0.1
-  paintTexelRadius: 4
+  paintTriggerRadius: 0.12
+  paintTexelRadius: 6
   paintLayerMask:
     serializedVersion: 2
     m_Bits: 256
