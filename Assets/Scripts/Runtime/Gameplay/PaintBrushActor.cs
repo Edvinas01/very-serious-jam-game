@@ -50,8 +50,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private static readonly RaycastHit[] HitBuffer = new RaycastHit[10];
         private MaterialPropertyBlock paintTipPropertyBlock;
 
-        private Vector3 originalPosition;
-        private Quaternion originalRotation;
+        private Transform originalParent;
+        private Vector3 originalLocalPosition;
+        private Quaternion originalLocalRotation;
 
         public int PaintScore => paintScore;
 
@@ -110,8 +111,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             paintTipPropertyBlock = new MaterialPropertyBlock();
             brushRenderer.GetPropertyBlock(paintTipPropertyBlock);
 
-            originalPosition = transform.position;
-            originalRotation = transform.rotation;
+            originalParent = transform.parent;
+            originalLocalPosition = transform.localPosition;
+            originalLocalRotation = transform.localRotation;
         }
 
         private void Start()
@@ -165,9 +167,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void OnInteractionExited(InteractableInteractionExitedArgs args)
         {
-            transform.SetParent(null);
-            transform.position = originalPosition;
-            transform.rotation = originalRotation;
+            transform.SetParent(originalParent);
+            transform.localPosition = originalLocalPosition;
+            transform.localRotation = originalLocalRotation;
         }
 
         private void SetColor(Color color)
