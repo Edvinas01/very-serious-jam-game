@@ -3,12 +3,16 @@ using InSun.GameCore.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.UI
 {
     internal sealed class GameplayView : View
     {
-        [Header("Text")]
+        [Header("Paintable")]
+        [SerializeField]
+        private Image paintableIconImage;
+
         [SerializeField]
         private TMP_Text paintableNameText;
 
@@ -93,6 +97,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         public string PaintableName
         {
             set => paintableNameText.text = value;
+        }
+
+        public Sprite PaintableIcon
+        {
+            set
+            {
+                paintableIconImage.enabled = value == true;
+                paintableIconImage.sprite = value;
+            }
         }
     }
 }

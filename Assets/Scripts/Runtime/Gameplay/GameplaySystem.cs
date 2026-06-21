@@ -10,22 +10,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private readonly List<PaintableScoreEntry> scoreEntries = new();
 
         private GameplayState currentState = GameplayState.None;
+        private PaintableActor currentPaintable;
         private float currentRemainingTime;
         private float currentPaintAmount;
         private int currentScore;
-        private string currentPaintableName;
 
         public float CurrentMultiplier { get; set; } = 1f;
-
-        public string CurrentPaintableName
-        {
-            get => currentPaintableName;
-            set
-            {
-                currentPaintableName = value;
-                Game.PublishMessage(new PaintableNameChangedMessage(value));
-            }
-        }
 
         public IReadOnlyList<PaintableScoreEntry> ScoreEntries => scoreEntries;
 
@@ -105,6 +95,25 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
         }
 
+        public PaintableActor CurrentPaintableData
+        {
+            set
+            {
+                var valuePrev = currentPaintable;
+                var valueNext = value;
+
+                if (valuePrev == valueNext)
+                {
+                    return;
+                }
+
+                Debug.Log($"Paintable changed {valuePrev?.name}->{valueNext?.name}", this);
+                currentPaintable = valueNext;
+
+                Game.PublishMessage(new CurrentPaintableChangedMessage(valueNext));
+            }
+        }
+
         public void OnUpdated(float deltaTime)
         {
             if (currentState is GameplayState.None or GameplayState.GameOver or GameplayState.Introduction)
@@ -142,6 +151,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             Score += (int)(entry.BaseScore * entry.ScoreMultiplier);
             scoreEntries.Add(entry);
+        }
+
+        public bool TryGetPaintable(out PaintableActor paintable)
+        {
+            paintable = currentPaintable;
+            return paintable;
         }
     }
 }

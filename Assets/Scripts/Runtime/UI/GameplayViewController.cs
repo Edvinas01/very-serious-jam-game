@@ -21,13 +21,23 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
             Game.AddListener<ScoreChangedMessage>(OnScoreChanged);
             Game.AddListener<PaintAmountChangedMessage>(OnPaintAmountChanged);
-            Game.AddListener<PaintableNameChangedMessage>(OnPaintableNameChanged);
+            Game.AddListener<CurrentPaintableChangedMessage>(OnCurrentPaintableChanged);
 
             View.RemainingTime = gameplaySystem.RemainingTime;
             View.Score = gameplaySystem.Score;
             View.PaintAmount = gameplaySystem.PaintAmount;
             View.SpeedMultiplier = gameplaySystem.CurrentMultiplier;
-            View.PaintableName = gameplaySystem.CurrentPaintableName;
+
+            if (gameplaySystem.TryGetPaintable(out var paintable))
+            {
+                View.PaintableName = paintable.Data.Name;
+                View.PaintableIcon = paintable.Data.Icon;
+            }
+            else
+            {
+                View.PaintableName = null;
+                View.PaintableIcon = null;
+            }
         }
 
         protected override void OnViewHideEntered()
@@ -36,7 +46,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
             Game.RemoveListener<ScoreChangedMessage>(OnScoreChanged);
             Game.RemoveListener<PaintAmountChangedMessage>(OnPaintAmountChanged);
-            Game.RemoveListener<PaintableNameChangedMessage>(OnPaintableNameChanged);
+            Game.RemoveListener<CurrentPaintableChangedMessage>(OnCurrentPaintableChanged);
         }
 
         protected override void OnDestroy()
@@ -45,7 +55,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
             Game.RemoveListener<ScoreChangedMessage>(OnScoreChanged);
             Game.RemoveListener<PaintAmountChangedMessage>(OnPaintAmountChanged);
-            Game.RemoveListener<PaintableNameChangedMessage>(OnPaintableNameChanged);
+            Game.RemoveListener<CurrentPaintableChangedMessage>(OnCurrentPaintableChanged);
         }
 
         protected override void Update()
@@ -71,9 +81,19 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             View.PaintAmount = message.PaintAmount;
         }
 
-        private void OnPaintableNameChanged(PaintableNameChangedMessage message)
+        private void OnCurrentPaintableChanged(CurrentPaintableChangedMessage message)
         {
-            View.PaintableName = message.Name;
+            var paintable = message.Paintable;
+            if (paintable)
+            {
+                View.PaintableName = paintable.Data.Name;
+                View.PaintableIcon = paintable.Data.Icon;
+            }
+            else
+            {
+                View.PaintableName = null;
+                View.PaintableIcon = null;
+            }
         }
     }
 }

@@ -48,13 +48,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         }
     }
 
-    internal readonly struct PaintableNameChangedMessage : IMessage
+    internal readonly struct CurrentPaintableChangedMessage : IMessage
     {
-        public string Name { get; }
+        public PaintableActor Paintable { get; }
 
-        public PaintableNameChangedMessage(string name)
+        public CurrentPaintableChangedMessage(PaintableActor paintable)
         {
-            Name = name;
+            Paintable = paintable;
         }
     }
 }

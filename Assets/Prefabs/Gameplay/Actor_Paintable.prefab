@@ -137,8 +137,6 @@ MonoBehaviour:
   bodyMeshFilter: {fileID: 3275355856940355972}
   bodyMeshCollider: {fileID: 5876405984323091657}
   rigidBody: {fileID: 7724232707726890045}
-  painMaskDefaultWidth: 256
-  painMaskDefaultHeight: 256
   animancer: {fileID: 6507820498644437029}
   slidedInTween: {fileID: 3927680282487132847}
 --- !u!114 &3927680282487132847
@@ -276,7 +274,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6632175066485564335}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!64 &5876405984323091657
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -317,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1343050262094677398
 Transform:
   m_ObjectHideFlags: 0
