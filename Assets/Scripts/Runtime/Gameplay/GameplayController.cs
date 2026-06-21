@@ -25,6 +25,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private GameplayData data;
 
+        [Header("Multiplier")]
+        [Min(0f)]
+        [SerializeField]
+        private float multiplierDecaySpeed = 0.5f;
+
         private GameplaySystem gameplaySystem;
         private ISceneSystem sceneSystem;
         private CancellationTokenSource gameplayCancellation;
@@ -101,7 +106,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // Init game
             gameplaySystem.ResetScoreEntries();
-            gameplaySystem.ResetSpeedSamples();
+            gameplaySystem.ResetMultiplier();
             currentPaintableScore = 0;
             gameplaySystem.RemainingTime = data.GameplayDuration;
             gameplaySystem.Score = data.StartingScore;
@@ -166,8 +171,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     await paintable.SlideInAsync(cancellationToken);
                 }
 
-                gameplaySystem.AddSpeedSample(pedestal.SpinSpeed, Time.deltaTime);
-                gameplaySystem.CurrentMultiplier = data.GetScoreMultiplier(gameplaySystem.AverageSpeed);
+                var targetMultiplier = data.GetScoreMultiplier(pedestal.SpinSpeed);
+                gameplaySystem.CurrentMultiplier = Mathf.Lerp(
+                    gameplaySystem.CurrentMultiplier,
+                    targetMultiplier,
+                    multiplierDecaySpeed * Time.deltaTime
+                );
 
                 await UniTask.Yield(cancellationToken);
             } while (gameplaySystem.State != GameplayState.GameOver);

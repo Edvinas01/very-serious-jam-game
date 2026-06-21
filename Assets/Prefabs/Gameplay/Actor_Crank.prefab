@@ -284,7 +284,7 @@ MonoBehaviour:
   interactable: {fileID: 8707825538216795170}
   anchorOffsetTransform: {fileID: 0}
   torqueMultiplier: 2
-  damping: 10
+  damping: 7
   rotationDeltaMultiplier: 0.1
 --- !u!114 &8707825538216795170
 MonoBehaviour:
