@@ -115,16 +115,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 // Switch painted object
                 if (paintable.PaintAmount >= 1f)
                 {
-                    var totalScoreMultiplier = gameplaySystem.CurrentMultiplier;
-                    var totalScore = currentPaintableScore + (int)(paintable.Data.Score * totalScoreMultiplier);
+                    var scoreMultiplier = gameplaySystem.CurrentMultiplier;
+                    var scoreResult = currentPaintableScore + (int)(paintable.Data.Score * scoreMultiplier);
 
                     gameplaySystem.RecordScore(
                         new PaintableScoreEntry(
                             data: paintable.Data,
                             maskTexture: paintable.MaskTexture,
                             paintableScore: currentPaintableScore,
-                            totalScoreMultiplier: totalScoreMultiplier,
-                            totalScore: totalScore
+                            baseScore: paintable.Data.Score,
+                            scoreMultiplier: gameplaySystem.CurrentMultiplier,
+                            scoreResult: scoreResult
                         )
                     );
 
@@ -134,25 +135,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     await paintable.SlideOutAsync(cancellationToken);
                     paintable.OnPainted -= OnObjectPainted;
 
-                    // GG: reached max score
-                    if (gameplaySystem.Score >= data.MaxScore)
-                    {
-                        gameplaySystem.State = GameplayState.GameOver;
-                        break;
-                    }
-
                     // Slide in new object
                     paintable = CreatePaintable(pedestal.ObjectParent);
                     paintable.gameObject.SetActive(false);
                     paintable.OnPainted += OnObjectPainted;
 
-                    currentPaintableScore = 0;
                     gameplaySystem.PaintAmount = 0f;
+                    gameplaySystem.State = GameplayState.PaintingObject;
+                    currentPaintableScore = 0;
 
                     await paintable.SlideInAsync(cancellationToken);
-                    gameplaySystem.ResetSpeedSamples();
-                    currentPaintableScore = 0;
-                    gameplaySystem.State = GameplayState.PaintingObject;
                 }
 
                 gameplaySystem.AddSpeedSample(pedestal.SpinSpeed, Time.deltaTime);
@@ -161,11 +153,30 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 await UniTask.Yield(cancellationToken);
             } while (gameplaySystem.State != GameplayState.GameOver);
 
+            // Record last object sample
+            {
+                gameplaySystem.RecordScore(
+                    new PaintableScoreEntry(
+                        data: paintable.Data,
+                        maskTexture: paintable.MaskTexture,
+                        paintableScore: currentPaintableScore,
+                        baseScore: 0,
+                        scoreMultiplier: gameplaySystem.CurrentMultiplier,
+                        scoreResult: currentPaintableScore
+                    )
+                );
+            }
+
             LoadGameOverScene();
         }
 
         private void OnObjectPainted(PaintedArgs args)
         {
+            if (gameplaySystem.State != GameplayState.PaintingObject)
+            {
+                return;
+            }
+
             gameplaySystem.PaintAmount = args.PaintAmount;
             var scoreThisTick = Mathf.RoundToInt(args.PaintedScore * gameplaySystem.CurrentMultiplier);
             currentPaintableScore += scoreThisTick;

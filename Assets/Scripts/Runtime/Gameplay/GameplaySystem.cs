@@ -142,7 +142,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public void RecordScore(PaintableScoreEntry entry)
         {
-            Score += entry.TotalScore - entry.PaintableScore;
+            Score += (int)(entry.BaseScore * entry.ScoreMultiplier);
             scoreEntires.Add(entry);
         }
     }

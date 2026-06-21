@@ -18,10 +18,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Min(0)]
         [SerializeField]
-        private int maxScore = 1000;
-
-        [Min(0)]
-        [SerializeField]
         private int startingScore;
 
         [Tooltip("x - spin speed, y - score multiplier")]
@@ -37,8 +33,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private List<PaintableData> paintables;
 
         public float GameplayDuration => gameplayDuration;
-
-        public int MaxScore => maxScore;
 
         public int StartingScore => startingScore;
 
