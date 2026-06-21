@@ -179,8 +179,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // Init game
             ClearPaintedObjects();
-            currentRemainingTime = context.GameplayDuration;
-            currentScore = 0;
+            RemainingTime = context.GameplayDuration;
+            Score = 0;
 
             // Disable player so no movement during intro
             player.DisableInteraction();
