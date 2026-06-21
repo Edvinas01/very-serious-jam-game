@@ -21,14 +21,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Header("Torque")]
         [SerializeField]
-        private float torqueMultiplier = 50f;
+        private float torqueMultiplier = 2f;
 
         [SerializeField]
-        private float damping = 5f;
+        private float damping = 7f;
 
         [Min(0f)]
         [SerializeField]
-        private float rotationDeltaMultiplier = 1f;
+        private float rotationDeltaMultiplier = 0.1f;
 
         private Rigidbody handTargetRigidbody;
 

@@ -13,7 +13,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Min(0f)]
         [SerializeField]
-        private float spinDecaySpeed = 1.2f;
+        private float spinDecaySpeed = 0.4f;
 
         private float currentSpinSpeed;
 
