@@ -15,12 +15,12 @@ MonoBehaviour:
   sceneAsset: {fileID: 102900000, guid: 351eefb6e1537c34ca5f6f9bd930b897, type: 3}
   scenePath: Assets/Scenes/Scene_GameOver.unity
   sceneGuid: 351eefb6e1537c34ca5f6f9bd930b897
-  loadingScene: {fileID: 0}
+  loadingScene: {fileID: 11400000, guid: 944124344d2b9a9449ae95ea3dcf2bba, type: 2}
   prettyName: Game Over
   icon: {fileID: 0}
   isUnloadUnusedAssets: 0
-  isFadingEnabled: 0
-  showFadeDuration: 0.5
+  isFadingEnabled: 1
+  showFadeDuration: 0.3
   hideFadeDuration: 1
   isPauseBeforeLoad: 0
   loadPauseDuration: 0.3

@@ -35,6 +35,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             Game.RemoveListener<PaintAmountChangedMessage>(OnPaintAmountChanged);
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            Game.RemoveListener<ScoreChangedMessage>(OnScoreChanged);
+            Game.RemoveListener<PaintAmountChangedMessage>(OnPaintAmountChanged);
+        }
+
         protected override void Update()
         {
             base.Update();

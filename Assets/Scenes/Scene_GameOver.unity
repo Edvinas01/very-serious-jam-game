@@ -792,6 +792,7 @@ MonoBehaviour:
     sortingOrder: 0
   gameplayScene: {fileID: 11400000, guid: 927b88a37c74b9244a75b91e74fc00c9, type: 2}
   mainMenuScene: {fileID: 11400000, guid: 27eb7705de30c50459a2ebab173e0252, type: 2}
+  entrySpawnDelay: 0.5
 --- !u!1 &1547416878
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,7 +819,7 @@ Transform:
   m_GameObject: {fileID: 1547416878}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -837,7 +838,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142bbb0e980e41849f545d4194aea694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.TrophyZoneActor
-  areaSize: {x: 3, y: 3}
+  spawnAreaSize: {x: 3, y: 3}
+  spawnRotation: 15
+  entrySpawnDelay: 0.3
 --- !u!1 &1710925284
 GameObject:
   m_ObjectHideFlags: 0

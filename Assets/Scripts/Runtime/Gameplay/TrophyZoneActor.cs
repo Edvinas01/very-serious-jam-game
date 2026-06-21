@@ -1,4 +1,6 @@
-﻿using InSun.GameCore;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
+using InSun.GameCore;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,12 +8,18 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class TrophyZoneActor : MonoBehaviour
     {
+        [Header("Randomization")]
         [SerializeField]
         private Vector2 spawnAreaSize = new(3f, 3f);
 
         [Min(0f)]
         [SerializeField]
         private float spawnRotation = 15f;
+
+        [Header("Timings")]
+        [Min(0f)]
+        [SerializeField]
+        private float entrySpawnDelay = 0.2f;
 
         private GameplaySystem gameplaySystem;
 
@@ -29,8 +37,23 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void Start()
         {
+            SpawnTrophiesAsync(this.GetCancellationTokenOnDestroy()).Forget();
+        }
+
+        private void OnDestroy()
+        {
+            gameplaySystem.ClearPaintedObjects();
+        }
+
+        private async UniTaskVoid SpawnTrophiesAsync(CancellationToken cancellationToken)
+        {
             foreach (var paintedObject in gameplaySystem.FullyPaintedObjects)
             {
+                await UniTask.WaitForSeconds(
+                    entrySpawnDelay,
+                    cancellationToken: cancellationToken
+                );
+
                 paintedObject.IsKinematic = false;
                 paintedObject.transform.position = GetRandomSpawnPoint();
                 paintedObject.transform.rotation = Quaternion.Euler(
@@ -41,14 +64,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
                 paintedObject.transform.parent = transform;
                 paintedObject.gameObject.SetActive(true);
-            }
-        }
-
-        private void OnDestroy()
-        {
-            foreach (var paintedObject in gameplaySystem.FullyPaintedObjects)
-            {
-                gameplaySystem.Return(paintedObject);
             }
         }
 

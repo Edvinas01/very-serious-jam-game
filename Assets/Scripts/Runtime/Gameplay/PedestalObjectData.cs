@@ -14,6 +14,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private string objectName;
 
+        [SerializeField]
+        private Sprite icon;
+
         [Header("Instantiation")]
         [SerializeField]
         private PedestalObjectActor pedestalObjectPrefab;
@@ -34,6 +37,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private AnimationClip slideOutClip;
 
         public string Name => objectName;
+
+        public Sprite Icon => icon;
 
         public int Score => score;
 
