@@ -51,10 +51,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [Header("Mask Texture")]
         [Range(0.01f, 10f)]
         [SerializeField]
-        private float maskResolutionScale = 1f;
+        private float maskResolutionScale = 0.5f;
 
         [SerializeField]
-        private FilterMode maskFilterMode = FilterMode.Bilinear;
+        private FilterMode maskFilterMode = FilterMode.Point;
 
         [Header("Scoring")]
         [Min(0)]
