@@ -38,6 +38,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private static readonly RaycastHit[] HitBuffer = new RaycastHit[10];
         private MaterialPropertyBlock paintTipPropertyBlock;
 
+        private Vector3 originalPosition;
+        private Quaternion originalRotation;
+
 #if UNITY_EDITOR
         private void OnValidate()
         {
@@ -79,6 +82,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             paintTipPropertyBlock = new MaterialPropertyBlock();
             paintTipRenderer.GetPropertyBlock(paintTipPropertyBlock);
+
+            originalPosition = transform.position;
+            originalRotation = transform.rotation;
         }
 
         private void Start()
@@ -124,10 +130,21 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void OnInteractionEntered(InteractableInteractionEnteredArgs args)
         {
+            if (args.Interactor is not MonoBehaviour interactor)
+            {
+                return;
+            }
+
+            transform.SetParent(interactor.transform);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
         }
 
         private void OnInteractionExited(InteractableInteractionExitedArgs args)
         {
+            transform.SetParent(null);
+            transform.position = originalPosition;
+            transform.rotation = originalRotation;
         }
 
         private void SetColor(Color color)

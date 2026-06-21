@@ -1,4 +1,5 @@
 ﻿using System;
+using InSun.GameCore.Interactables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,6 +34,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [SerializeField]
         private float springDamper = 5f;
+
+        [Header("Interaction")]
+        [SerializeField]
+        private SimpleInteractor interactor;
 
         [Header("Input")]
         [SerializeField]
@@ -143,6 +148,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
             propertyBlock.SetTexture("_BaseMap", closedHandTexture);
             quadRenderer.SetPropertyBlock(propertyBlock);
+
+            interactor.StartInteraction();
         }
 
         private void OnPickUpCancelled(InputAction.CallbackContext context)
@@ -150,6 +157,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
             propertyBlock.SetTexture("_BaseMap", openHandTexture);
             quadRenderer.SetPropertyBlock(propertyBlock);
+
+            interactor.StopInteraction();
         }
 
         private void OnHandPushedPreformed(InputAction.CallbackContext context)
