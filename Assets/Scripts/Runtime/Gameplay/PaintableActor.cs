@@ -65,10 +65,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             {
                 if (value == false)
                 {
-                    foreach (var meshCollider in GetComponentsInChildren<MeshCollider>())
-                    {
-                        meshCollider.convex = true;
-                    }
+                    bodyMeshCollider.convex = true;
                 }
 
                 rigidBody.isKinematic = value;
