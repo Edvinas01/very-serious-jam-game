@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
@@ -9,25 +8,29 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public Texture2D MaskTexture { get; }
 
+        public float ScoreMultiplier { get; }
+
+        public int ScoreResult { get; }
+
         public int PaintableScore { get; }
 
-        public float TotalScoreMultiplier { get; }
-
-        public int TotalScore { get; }
+        public int BaseScore { get; }
 
         public PaintableScoreEntry(
             PaintableData data,
             Texture2D maskTexture,
+            float scoreMultiplier,
+            int scoreResult,
             int paintableScore,
-            float totalScoreMultiplier,
-            int totalScore
+            int baseScore
         )
         {
             Data = data;
             MaskTexture = maskTexture;
+            ScoreMultiplier = scoreMultiplier;
+            ScoreResult = scoreResult;
             PaintableScore = paintableScore;
-            TotalScoreMultiplier = totalScoreMultiplier;
-            TotalScore = totalScore;
+            BaseScore = baseScore;
         }
     }
 }

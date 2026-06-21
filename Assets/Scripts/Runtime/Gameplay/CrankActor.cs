@@ -26,6 +26,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private float damping = 5f;
 
+        [Min(0f)]
+        [SerializeField]
+        private float rotationDeltaMultiplier = 1f;
+
         private Rigidbody handTargetRigidbody;
 
         public float RotationDelta { get; private set; }
@@ -50,7 +54,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void FixedUpdate()
         {
-            RotationDelta = crankRigidbody.angularVelocity.z;
+            RotationDelta = crankRigidbody.angularVelocity.z * rotationDeltaMultiplier;
 
             if (handTargetRigidbody == null)
             {

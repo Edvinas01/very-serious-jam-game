@@ -25,12 +25,19 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private GameplayData data;
 
+        [Header("Multiplier")]
+        [Min(0f)]
+        [SerializeField]
+        private float multiplierDecaySpeed = 0.5f;
+
         private GameplaySystem gameplaySystem;
         private ISceneSystem sceneSystem;
         private CancellationTokenSource gameplayCancellation;
 
         private PlayerActor player;
         private PedestalActor pedestal;
+        private CrankActor crank;
+
         private int currentPaintableScore;
 
         private void Awake()
@@ -42,12 +49,24 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             if (player == false)
             {
                 Debug.LogError("No Player found in scene, gameplay will not start", this);
+                enabled = false;
+                return;
             }
 
             pedestal = FindAnyObjectByType<PedestalActor>();
             if (pedestal == false)
             {
                 Debug.LogError("No Pedestal found in scene, gameplay will not start", this);
+                enabled = false;
+                return;
+            }
+
+            crank = FindAnyObjectByType<CrankActor>();
+            if (crank == false)
+            {
+                Debug.LogError("No Crank found in scene, gameplay will not start", this);
+                enabled = false;
+                return;
             }
         }
 
@@ -55,6 +74,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             gameplayCancellation = new CancellationTokenSource();
             StartGameAsync(gameplayCancellation.Token).Forget();
+        }
+
+        private void Update()
+        {
+            pedestal.AddSpinSpeed(crank.RotationDelta);
         }
 
         private void OnDestroy()
@@ -82,7 +106,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // Init game
             gameplaySystem.ResetScoreEntries();
-            gameplaySystem.ResetSpeedSamples();
+            gameplaySystem.ResetMultiplier();
             currentPaintableScore = 0;
             gameplaySystem.RemainingTime = data.GameplayDuration;
             gameplaySystem.Score = data.StartingScore;
@@ -115,16 +139,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 // Switch painted object
                 if (paintable.PaintAmount >= 1f)
                 {
-                    var totalScoreMultiplier = gameplaySystem.CurrentMultiplier;
-                    var totalScore = currentPaintableScore + (int)(paintable.Data.Score * totalScoreMultiplier);
+                    var scoreMultiplier = gameplaySystem.CurrentMultiplier;
+                    var scoreResult = currentPaintableScore + (int)(paintable.Data.Score * scoreMultiplier);
 
                     gameplaySystem.RecordScore(
                         new PaintableScoreEntry(
                             data: paintable.Data,
                             maskTexture: paintable.MaskTexture,
                             paintableScore: currentPaintableScore,
-                            totalScoreMultiplier: totalScoreMultiplier,
-                            totalScore: totalScore
+                            baseScore: paintable.Data.Score,
+                            scoreMultiplier: gameplaySystem.CurrentMultiplier,
+                            scoreResult: scoreResult
                         )
                     );
 
@@ -134,38 +159,52 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     await paintable.SlideOutAsync(cancellationToken);
                     paintable.OnPainted -= OnObjectPainted;
 
-                    // GG: reached max score
-                    if (gameplaySystem.Score >= data.MaxScore)
-                    {
-                        gameplaySystem.State = GameplayState.GameOver;
-                        break;
-                    }
-
                     // Slide in new object
                     paintable = CreatePaintable(pedestal.ObjectParent);
                     paintable.gameObject.SetActive(false);
                     paintable.OnPainted += OnObjectPainted;
 
-                    currentPaintableScore = 0;
                     gameplaySystem.PaintAmount = 0f;
+                    gameplaySystem.State = GameplayState.PaintingObject;
+                    currentPaintableScore = 0;
 
                     await paintable.SlideInAsync(cancellationToken);
-                    gameplaySystem.ResetSpeedSamples();
-                    currentPaintableScore = 0;
-                    gameplaySystem.State = GameplayState.PaintingObject;
                 }
 
-                gameplaySystem.AddSpeedSample(pedestal.SpinSpeed, Time.deltaTime);
-                gameplaySystem.CurrentMultiplier = data.GetScoreMultiplier(gameplaySystem.AverageSpeed);
+                var targetMultiplier = data.GetScoreMultiplier(pedestal.SpinSpeed);
+                gameplaySystem.CurrentMultiplier = Mathf.Lerp(
+                    gameplaySystem.CurrentMultiplier,
+                    targetMultiplier,
+                    multiplierDecaySpeed * Time.deltaTime
+                );
 
                 await UniTask.Yield(cancellationToken);
             } while (gameplaySystem.State != GameplayState.GameOver);
+
+            // Record last object sample
+            {
+                gameplaySystem.RecordScore(
+                    new PaintableScoreEntry(
+                        data: paintable.Data,
+                        maskTexture: paintable.MaskTexture,
+                        paintableScore: currentPaintableScore,
+                        baseScore: 0,
+                        scoreMultiplier: gameplaySystem.CurrentMultiplier,
+                        scoreResult: currentPaintableScore
+                    )
+                );
+            }
 
             LoadGameOverScene();
         }
 
         private void OnObjectPainted(PaintedArgs args)
         {
+            if (gameplaySystem.State != GameplayState.PaintingObject)
+            {
+                return;
+            }
+
             gameplaySystem.PaintAmount = args.PaintAmount;
             var scoreThisTick = Mathf.RoundToInt(args.PaintedScore * gameplaySystem.CurrentMultiplier);
             currentPaintableScore += scoreThisTick;

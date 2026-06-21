@@ -69,7 +69,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             foreach (var entry in gameplaySystem.ScoreEntires)
             {
                 await UniTask.WaitForSeconds(entrySpawnDelay, cancellationToken: cancellationToken);
-                View.ShowScoreEntry(entry.Data.Icon, entry.PaintableScore, entry.Data.Score, entry.TotalScoreMultiplier, entry.TotalScore);
+                View.ShowScoreEntry(
+                    icon: entry.Data.Icon,
+                    paintSessionScore: entry.PaintableScore,
+                    baseScore: entry.BaseScore,
+                    multiplier: entry.ScoreMultiplier,
+                    totalScore: entry.ScoreResult
+                );
             }
 
             await UniTask.WaitForSeconds(entrySpawnDelay, cancellationToken: cancellationToken);

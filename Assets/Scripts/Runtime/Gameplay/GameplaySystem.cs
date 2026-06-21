@@ -14,11 +14,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private float currentPaintAmount;
         private int currentScore;
 
-        private float speedAccumulatorTime;
-        private float speedAccumulator;
-
-        public float AverageSpeed => speedAccumulatorTime > 0f ? speedAccumulator / speedAccumulatorTime : 0f;
-
         public float CurrentMultiplier { get; set; } = 1f;
 
         public IReadOnlyList<PaintableScoreEntry> ScoreEntires => scoreEntires;
@@ -101,7 +96,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public void OnUpdated(float deltaTime)
         {
-            if (currentState is GameplayState.None or GameplayState.GameOver)
+            if (currentState is GameplayState.None or GameplayState.GameOver or GameplayState.Introduction)
             {
                 return;
             }
@@ -114,16 +109,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
         }
 
-        public void AddSpeedSample(float speed, float deltaTime)
+        public void ResetMultiplier()
         {
-            speedAccumulator += Mathf.Abs(speed) * deltaTime;
-            speedAccumulatorTime += deltaTime;
-        }
-
-        public void ResetSpeedSamples()
-        {
-            speedAccumulator = 0f;
-            speedAccumulatorTime = 0f;
             CurrentMultiplier = 1f;
         }
 
@@ -142,7 +129,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public void RecordScore(PaintableScoreEntry entry)
         {
-            Score += entry.TotalScore - entry.PaintableScore;
+            Score += (int)(entry.BaseScore * entry.ScoreMultiplier);
             scoreEntires.Add(entry);
         }
     }

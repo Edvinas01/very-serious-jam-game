@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalActor
   objectParent: {fileID: 8827148994839850029}
-  constantSpeed: 50
-  spinDecaySpeed: 0.3
+  constantSpeed: 0
+  spinDecaySpeed: 0.4
 --- !u!1 &5598079878854317177
 GameObject:
   m_ObjectHideFlags: 0
