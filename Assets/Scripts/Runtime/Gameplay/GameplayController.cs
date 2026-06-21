@@ -131,6 +131,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             await paintable.SlideInAsync(cancellationToken);
 
+            gameplaySystem.CurrentPaintableName = paintable.Data.Name;
             gameplaySystem.State = GameplayState.PaintingObject;
 
             // Game loop
@@ -165,8 +166,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     paintable.OnPainted += OnObjectPainted;
 
                     gameplaySystem.PaintAmount = 0f;
-                    gameplaySystem.State = GameplayState.PaintingObject;
+                    gameplaySystem.CurrentPaintableName = paintable.Data.Name;
                     currentPaintableScore = 0;
+                    gameplaySystem.State = GameplayState.PaintingObject;
 
                     await paintable.SlideInAsync(cancellationToken);
                 }

@@ -47,4 +47,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             RemainingTime = remainingTime;
         }
     }
+
+    internal readonly struct PaintableNameChangedMessage : IMessage
+    {
+        public string Name { get; }
+
+        public PaintableNameChangedMessage(string name)
+        {
+            Name = name;
+        }
+    }
 }

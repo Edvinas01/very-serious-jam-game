@@ -66,7 +66,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             View.IsButtonsInteractable = false;
             View.HideTotalScore();
 
-            foreach (var entry in gameplaySystem.ScoreEntires)
+            foreach (var entry in gameplaySystem.ScoreEntries)
             {
                 await UniTask.WaitForSeconds(entrySpawnDelay, cancellationToken: cancellationToken);
                 View.ShowScoreEntry(

@@ -8,7 +8,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 {
     internal sealed class GameplayView : View
     {
-        [Header("Counters")]
+        [Header("Text")]
+        [SerializeField]
+        private TMP_Text paintableNameText;
+
         [SerializeField]
         private TMP_Text remainingTimeText;
 
@@ -85,6 +88,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         public float SpeedMultiplier
         {
             set => speedMultiplierText.text = $"x{value:F1}";
+        }
+
+        public string PaintableName
+        {
+            set => paintableNameText.text = value;
         }
     }
 }

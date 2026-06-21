@@ -54,7 +54,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private async UniTaskVoid SpawnTrophiesAsync(CancellationToken cancellationToken)
         {
-            foreach (var scoreEntry in gameplaySystem.ScoreEntires)
+            foreach (var scoreEntry in gameplaySystem.ScoreEntries)
             {
                 await UniTask.WaitForSeconds(
                     entrySpawnDelay,

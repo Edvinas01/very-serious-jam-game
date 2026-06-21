@@ -7,16 +7,27 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class GameplaySystem : MonoBehaviour, IUpdateListener
     {
-        private readonly List<PaintableScoreEntry> scoreEntires = new();
+        private readonly List<PaintableScoreEntry> scoreEntries = new();
 
         private GameplayState currentState = GameplayState.None;
         private float currentRemainingTime;
         private float currentPaintAmount;
         private int currentScore;
+        private string currentPaintableName;
 
         public float CurrentMultiplier { get; set; } = 1f;
 
-        public IReadOnlyList<PaintableScoreEntry> ScoreEntires => scoreEntires;
+        public string CurrentPaintableName
+        {
+            get => currentPaintableName;
+            set
+            {
+                currentPaintableName = value;
+                Game.PublishMessage(new PaintableNameChangedMessage(value));
+            }
+        }
+
+        public IReadOnlyList<PaintableScoreEntry> ScoreEntries => scoreEntries;
 
         public float PaintAmount
         {
@@ -116,7 +127,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public void ResetScoreEntries()
         {
-            foreach (var scoreEntry in scoreEntires)
+            foreach (var scoreEntry in scoreEntries)
             {
                 if (scoreEntry.MaskTexture)
                 {
@@ -124,13 +135,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 }
             }
 
-            scoreEntires.Clear();
+            scoreEntries.Clear();
         }
 
         public void RecordScore(PaintableScoreEntry entry)
         {
             Score += (int)(entry.BaseScore * entry.ScoreMultiplier);
-            scoreEntires.Add(entry);
+            scoreEntries.Add(entry);
         }
     }
 }
