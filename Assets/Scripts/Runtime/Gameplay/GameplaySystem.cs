@@ -196,6 +196,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // Spaw pedestal object
             State = GameplayState.SpawningObject;
             var pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
+            pedestalObject.gameObject.SetActive(false);
             pedestalObject.OnPainted += OnObjectPainted;
             await pedestalObject.SlideInAsync(cancellationToken);
             State = GameplayState.PaintingObject;
@@ -236,7 +237,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
                     // Slide in new object
                     pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
+                    pedestalObject.gameObject.SetActive(false);
                     pedestalObject.OnPainted += OnObjectPainted;
+
                     await pedestalObject.SlideInAsync(cancellationToken);
                     State = GameplayState.PaintingObject;
                 }
@@ -258,12 +261,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             pedestal = pedestals.FirstOrDefault();
             return pedestal;
-        }
-
-        private bool TryGetPedestalObject(out PedestalObjectActor pedestalObject)
-        {
-            pedestalObject = pedestalObjects.FirstOrDefault();
-            return pedestalObject;
         }
 
         private void OnObjectPainted(float paintAmount)

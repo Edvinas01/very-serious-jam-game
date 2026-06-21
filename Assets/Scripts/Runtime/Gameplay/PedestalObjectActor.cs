@@ -131,7 +131,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public async UniTask SlideInAsync(CancellationToken cancellationToken)
         {
-            await animancer.Play(Data.SlideInClip).ToUniTask(cancellationToken: cancellationToken);
+            var clip = Data.SlideInClip;
+            clip.SampleAnimation(gameObject, 0f);
+
+            gameObject.SetActive(true);
+
+            await animancer.Play(clip).ToUniTask(cancellationToken: cancellationToken);
             await slidedInTween.PlayAsync(cancellationToken);
         }
 
