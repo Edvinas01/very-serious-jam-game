@@ -21,6 +21,8 @@ MonoBehaviour:
   scale: {x: 0.5, y: 0.5, z: 0.5}
   rotation: {x: 0, y: 180, z: 0}
   offset: {x: 0, y: 0, z: 0}
+  maskResolutionScale: 0.5
+  maskFilterMode: 0
   score: 500
   fullyPaintedRange: {x: 0, y: 0.6}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}

@@ -48,6 +48,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private Vector3 offset;
 
+        [Header("Mask Texture")]
+        [Range(0.01f, 10f)]
+        [SerializeField]
+        private float maskResolutionScale = 1f;
+
+        [SerializeField]
+        private FilterMode maskFilterMode = FilterMode.Bilinear;
+
         [Header("Scoring")]
         [Min(0)]
         [SerializeField]
@@ -72,6 +80,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public Mesh SharedMesh => sharedMesh;
 
         public Texture2D Texture => texture;
+
+        public float MaskResolutionScale => maskResolutionScale;
+
+        public FilterMode MaskFilterMode => maskFilterMode;
 
         public Material Material => material;
 

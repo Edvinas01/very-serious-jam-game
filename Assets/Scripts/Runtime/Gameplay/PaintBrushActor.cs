@@ -26,21 +26,26 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private Color paintColor = Color.crimson;
 
-        [Min(0)]
-        [SerializeField]
-        private int paintScore = 1;
-
         [Header("Raycasts")]
         [Min(0f)]
         [SerializeField]
         private float paintTriggerRadius = 0.1f;
 
+        [SerializeField]
+        private LayerMask paintLayerMask;
+
+        [Header("Score")]
+        [Min(0)]
+        [SerializeField]
+        private int paintScore = 1;
+
+        [Header("Painting")]
         [Min(1)]
         [SerializeField]
         private int paintTexelRadius = 20;
 
         [SerializeField]
-        private LayerMask paintLayerMask;
+        private bool isSmoothEdges;
 
         private static readonly RaycastHit[] HitBuffer = new RaycastHit[10];
         private MaterialPropertyBlock paintTipPropertyBlock;
@@ -134,8 +139,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     continue;
                 }
 
-                Debug.Log(Time.frameCount + " paint : " + paintable.name + " " + hit.textureCoord);
-                paintable.Paint(uv: hit.textureCoord, brush: this);
+                paintable.Paint(uv: hit.textureCoord, brush: this, isSmoothEdges: isSmoothEdges);
             }
         }
 

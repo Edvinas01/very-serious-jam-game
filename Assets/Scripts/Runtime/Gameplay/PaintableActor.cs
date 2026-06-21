@@ -147,15 +147,20 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             else
             {
                 // Create paint mask texture
-                var width = data.Texture ? data.Texture.width : painMaskDefaultWidth;
-                var height = data.Texture ? data.Texture.height : painMaskDefaultHeight;
+                var sourceWidth = data.Texture ? data.Texture.width : painMaskDefaultWidth;
+                var sourceHeight = data.Texture ? data.Texture.height : painMaskDefaultHeight;
+                var width = Mathf.Max(1, Mathf.RoundToInt(sourceWidth * data.MaskResolutionScale));
+                var height = Mathf.Max(1, Mathf.RoundToInt(sourceHeight * data.MaskResolutionScale));
 
                 paintMaskTexture = new Texture2D(
                     width: width,
                     height: height,
                     textureFormat: TextureFormat.RGBA32,
                     mipChain: false
-                );
+                )
+                {
+                    filterMode = data.MaskFilterMode
+                };
 
                 // Clear mask texture
                 var pixelData = paintMaskTexture.GetRawTextureData<Color32>();
@@ -193,7 +198,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             await animancer.Play(Data.SlideOutClip).ToUniTask(cancellationToken: cancellationToken);
         }
 
-        public void Paint(Vector2 uv, PaintBrushActor brush)
+        public void Paint(Vector2 uv, PaintBrushActor brush, bool isSmoothEdges)
         {
             var pixelData = paintMaskTexture.GetRawTextureData<Color32>();
             var targetColor = (Color32)brush.Color;
@@ -233,10 +238,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     }
 
                     // Apply some fade on edges
-                    var currentColor = pixelData[pixelIndex];
-                    var colorFade = Mathf.InverseLerp(0, radiusSqr, distanceSqr);
+                    if (isSmoothEdges)
+                    {
+                        var currentColor = pixelData[pixelIndex];
+                        var colorFade = Mathf.InverseLerp(0, radiusSqr, distanceSqr);
 
-                    pixelData[pixelIndex] = Color.Lerp(targetColor, currentColor, colorFade);
+                        pixelData[pixelIndex] = Color.Lerp(targetColor, currentColor, colorFade);
+                    }
+                    else
+                    {
+                        pixelData[pixelIndex] = targetColor;
+                    }
                 }
             }
 
