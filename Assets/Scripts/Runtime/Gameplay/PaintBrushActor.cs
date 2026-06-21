@@ -78,6 +78,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             interactable.OnInteractionExited += OnInteractionExited;
         }
 
+        private void OnDisable()
+        {
+            interactable.OnHoverEntered -= OnHoverEntered;
+            interactable.OnHoverExited -= OnHoverExited;
+
+            interactable.OnInteractionEntered -= OnInteractionEntered;
+            interactable.OnInteractionExited -= OnInteractionExited;
+        }
+
         private void Awake()
         {
             paintTipPropertyBlock = new MaterialPropertyBlock();

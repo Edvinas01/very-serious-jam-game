@@ -99,7 +99,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 907271507499519247}
-  - component: {fileID: 2081058924629547402}
   - component: {fileID: 903834376351855763}
   - component: {fileID: 1072270903636431866}
   - component: {fileID: 6558826671384385569}
@@ -126,33 +125,6 @@ Transform:
   - {fileID: 5475973264131276011}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &2081058924629547402
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3784971153794966932}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
 --- !u!114 &903834376351855763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,10 +141,8 @@ MonoBehaviour:
   openHandTexture: {fileID: 2800000, guid: 00567b7b8da3f4e4a827d3f04c48ef1d, type: 3}
   closedHandTexture: {fileID: 2800000, guid: d79ff9d43fe316d44823ad3d1d464011, type: 3}
   pushDistance: 3
-  handRigidBody: {fileID: 2081058924629547402}
   targetCamera: {fileID: 0}
-  springForce: 300
-  springDamper: 20
+  smoothTime: 0.05
   interactor: {fileID: 1072270903636431866}
   handPickUpAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   handPushAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
