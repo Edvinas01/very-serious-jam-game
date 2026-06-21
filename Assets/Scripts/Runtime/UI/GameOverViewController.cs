@@ -1,3 +1,7 @@
+using System.Linq;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using DoubleD.VerySeriousJamGame.Runtime.Gameplay;
 using InSun.GameCore;
 using InSun.GameCore.Scenes;
 using InSun.GameCore.UI;
@@ -7,18 +11,26 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 {
     internal sealed class GameOverViewController : ViewController<GameOverView>
     {
+        [Header("Scenes")]
         [SerializeField]
         private SceneData gameplayScene;
 
         [SerializeField]
         private SceneData mainMenuScene;
 
+        [Header("Timings")]
+        [Min(0f)]
+        [SerializeField]
+        private float entrySpawnDelay = 0.5f;
+
+        private GameplaySystem gameplaySystem;
         private ISceneSystem sceneSystem;
 
         protected override void Awake()
         {
             base.Awake();
 
+            gameplaySystem = Game.GetObject<GameplaySystem>();
             sceneSystem = Game.GetObject<ISceneSystem>();
         }
 
@@ -28,6 +40,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
             View.OnRestartClicked += OnViewRestartClicked;
             View.OnExitClicked += OnViewExitClicked;
+
+            SpawnScoreEntriesAsync(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
         protected override void OnViewHideEntered()
@@ -46,6 +60,32 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         private void OnViewExitClicked()
         {
             sceneSystem.LoadScene(new SceneLoadArgs(mainMenuScene));
+        }
+
+        private async UniTaskVoid SpawnScoreEntriesAsync(CancellationToken cancellationToken)
+        {
+            View.HideTotalScore();
+
+            var groupedByData = gameplaySystem.FullyPaintedObjects
+                .GroupBy(pedestalObject => pedestalObject.Data)
+                .Select(group => (data: group.Key, count: group.Count()));
+
+            foreach (var (data, count) in groupedByData)
+            {
+                await UniTask.WaitForSeconds(
+                    entrySpawnDelay,
+                    cancellationToken: cancellationToken
+                );
+
+                View.ShowScoreEntry(data.Icon, data.Score, count);
+            }
+
+            await UniTask.WaitForSeconds(
+                entrySpawnDelay,
+                cancellationToken: cancellationToken
+            );
+
+            View.ShowTotalScore(gameplaySystem.Score);
         }
     }
 }

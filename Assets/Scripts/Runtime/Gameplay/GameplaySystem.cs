@@ -147,10 +147,18 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             context = null;
         }
-        public void Return(PedestalObjectActor pedestal)
+
+        public void ClearPaintedObjects()
         {
-            pedestal.transform.parent = fullyPaintedObjectTransform;
-            pedestal.gameObject.SetActive(true);
+            foreach (var paintedObject in fullyPaintedObjects)
+            {
+                if (paintedObject)
+                {
+                    Destroy(paintedObject.gameObject);
+                }
+            }
+
+            fullyPaintedObjects.Clear();
         }
 
         private async UniTaskVoid StartGameAsync(CancellationToken cancellationToken)
@@ -170,14 +178,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             State = GameplayState.Introduction;
 
             // Init game
-            foreach (var paintedObject in fullyPaintedObjects)
-            {
-                Destroy(paintedObject.gameObject);
-            }
-
-            fullyPaintedObjects.Clear();
-            RemainingTime = context.GameplayDuration;
-            Score = 0;
+            ClearPaintedObjects();
+            currentRemainingTime = context.GameplayDuration;
+            currentScore = 0;
 
             // // disable player so no movement during intro
             // player.DisableInteraction();
