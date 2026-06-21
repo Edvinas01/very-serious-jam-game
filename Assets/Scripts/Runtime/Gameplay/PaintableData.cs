@@ -49,6 +49,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private Vector3 offset;
 
         [Header("Mask Texture")]
+        [Min(1)]
+        [SerializeField]
+        private int maskDefaultWidth = 256;
+
+        [Min(1)]
+        [SerializeField]
+        private int maskDefaultHeight = 256;
+
         [Range(0.01f, 10f)]
         [SerializeField]
         private float maskResolutionScale = 0.5f;
@@ -80,6 +88,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public Mesh SharedMesh => sharedMesh;
 
         public Texture2D Texture => texture;
+
+        public int MaskDefaultWidth => maskDefaultWidth;
+
+        public int MaskDefaultHeight => maskDefaultHeight;
 
         public float MaskResolutionScale => maskResolutionScale;
 

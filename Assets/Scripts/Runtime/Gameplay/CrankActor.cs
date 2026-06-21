@@ -6,6 +6,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class CrankActor : MonoBehaviour
     {
+        [Header("General")]
+        [SerializeField]
+        private CrankData data;
+
+        [Header("Interaction")]
         [SerializeField]
         private Transform handleTransform;
 
@@ -18,17 +23,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [Header("Grabbing")]
         [SerializeField]
         private Transform anchorOffsetTransform;
-
-        [Header("Torque")]
-        [SerializeField]
-        private float torqueMultiplier = 2f;
-
-        [SerializeField]
-        private float damping = 7f;
-
-        [Min(0f)]
-        [SerializeField]
-        private float rotationDeltaMultiplier = 0.1f;
 
         private Rigidbody handTargetRigidbody;
 
@@ -54,7 +48,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void FixedUpdate()
         {
-            RotationDelta = crankRigidbody.angularVelocity.z * rotationDeltaMultiplier;
+            RotationDelta = crankRigidbody.angularVelocity.z * data.RotationDeltaMultiplier;
 
             if (handTargetRigidbody == null)
             {
@@ -62,8 +56,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
 
             var mouseDelta = Mouse.current.delta.ReadValue();
-            crankRigidbody.AddTorque(Vector3.back * (mouseDelta.x * torqueMultiplier));
-            crankRigidbody.angularVelocity *= 1f - damping * Time.fixedDeltaTime;
+            crankRigidbody.AddTorque(Vector3.back * (mouseDelta.x * data.TorqueMultiplier));
+            crankRigidbody.angularVelocity *= 1f - data.Damping * Time.fixedDeltaTime;
         }
 
         private void OnInteractionEntered(InteractableInteractionEnteredArgs args)

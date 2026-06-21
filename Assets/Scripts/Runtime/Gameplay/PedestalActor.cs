@@ -5,29 +5,27 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
     [SelectionBase]
     internal sealed class PedestalActor : MonoBehaviour
     {
+        [Header("General")]
+        [SerializeField]
+        private PedestalData data;
+
+        [Header("Paintables")]
         [SerializeField]
         private Transform objectParent;
 
-        [SerializeField]
-        private float constantSpeed;
-
-        [Min(0f)]
-        [SerializeField]
-        private float spinDecaySpeed = 0.4f;
-
         private float currentSpinSpeed;
 
-        public float SpinSpeed => constantSpeed + currentSpinSpeed;
+        public float SpinSpeed => data.ConstantSpeed + currentSpinSpeed;
 
         public Transform ObjectParent => objectParent;
 
         private void FixedUpdate()
         {
-            var totalSpeed = constantSpeed + currentSpinSpeed;
+            var totalSpeed = data.ConstantSpeed + currentSpinSpeed;
             var deltaTime = Time.deltaTime;
 
             objectParent.Rotate(Vector3.up, totalSpeed * deltaTime, Space.World);
-            currentSpinSpeed = Mathf.Lerp(currentSpinSpeed, 0f, spinDecaySpeed * deltaTime);
+            currentSpinSpeed = Mathf.Lerp(currentSpinSpeed, 0f, data.SpinDecaySpeed * deltaTime);
         }
 
         public void AddSpinSpeed(float speed)

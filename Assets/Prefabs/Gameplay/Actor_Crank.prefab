@@ -283,9 +283,7 @@ MonoBehaviour:
   crankRigidbody: {fileID: 6084417814831146444}
   interactable: {fileID: 8707825538216795170}
   anchorOffsetTransform: {fileID: 0}
-  torqueMultiplier: 2
-  damping: 7
-  rotationDeltaMultiplier: 0.1
+  data: {fileID: 11400000, guid: 9e111c5f78ab2a647bc945cd828f9d02, type: 2}
 --- !u!114 &8707825538216795170
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -31,15 +31,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private Rigidbody rigidBody;
 
-        [Header("Mask")]
-        [Min(0)]
-        [SerializeField]
-        private int painMaskDefaultWidth = 256;
-
-        [Min(0)]
-        [SerializeField]
-        private int painMaskDefaultHeight = 256;
-
         [Header("Animations")]
         [SerializeField]
         private AnimancerComponent animancer;
@@ -147,8 +138,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             else
             {
                 // Create paint mask texture
-                var sourceWidth = data.Texture ? data.Texture.width : painMaskDefaultWidth;
-                var sourceHeight = data.Texture ? data.Texture.height : painMaskDefaultHeight;
+                var sourceWidth = data.Texture ? data.Texture.width : data.MaskDefaultWidth;
+                var sourceHeight = data.Texture ? data.Texture.height : data.MaskDefaultHeight;
                 var width = Mathf.Max(1, Mathf.RoundToInt(sourceWidth * data.MaskResolutionScale));
                 var height = Mathf.Max(1, Mathf.RoundToInt(sourceHeight * data.MaskResolutionScale));
 
