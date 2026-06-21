@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 907271507499519247}
   - component: {fileID: 2081058924629547402}
   - component: {fileID: 903834376351855763}
+  - component: {fileID: 6558826671384385569}
   m_Layer: 0
   m_Name: HandActor
   m_TagString: Untagged
@@ -173,3 +174,24 @@ MonoBehaviour:
   springDamper: 20
   handPickUpAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   handPushAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+--- !u!135 &6558826671384385569
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784971153794966932}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.08
+  m_Center: {x: 0, y: 0, z: 0}
