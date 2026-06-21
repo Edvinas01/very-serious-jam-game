@@ -15,5 +15,7 @@ namespace InSun.GameCore.Interactables
         public void StartInteraction();
 
         public void StopInteraction();
+
+        public bool TryGetComponent<T>(out T interactable);
     }
 }
