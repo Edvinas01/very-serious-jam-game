@@ -132,7 +132,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             await paintable.SlideInAsync(cancellationToken);
 
             gameplaySystem.State = GameplayState.PaintingObject;
-            gameplaySystem.CurrentPaintableName = paintable.Data.Name;
+            gameplaySystem.CurrentPaintableData = paintable;
 
             // Game loop
             do
@@ -156,7 +156,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
                     // Slide out old object
                     gameplaySystem.State = GameplayState.SpawningObject;
-                    gameplaySystem.CurrentPaintableName = null;
+                    gameplaySystem.CurrentPaintableData = null;
 
                     await paintable.SlideOutAsync(cancellationToken);
                     paintable.OnPainted -= OnObjectPainted;
@@ -172,7 +172,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
                     await paintable.SlideInAsync(cancellationToken);
 
-                    gameplaySystem.CurrentPaintableName = paintable.Data.Name;
+                    gameplaySystem.CurrentPaintableData = paintable;
                 }
 
                 var targetMultiplier = data.GetScoreMultiplier(pedestal.SpinSpeed);
