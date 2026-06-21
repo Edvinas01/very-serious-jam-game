@@ -33,7 +33,10 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 ### Models
 
 - [Color Palette by Natalie](https://sketchfab.com/3d-models/color-palette-a6d64e6b377c4946ab4b1b0bea056c0b)
-- TODO: brush
+- [Funny Horse by Neoferi](https://sketchfab.com/3d-models/funny-horse-e87d0b20226941b5bfed10773268badc)
+- [Cute Hamster by The guy that makes goofy stuff](https://sketchfab.com/3d-models/cute-hamster-c7082aba297d482aad4c826e0eb36de0)
+- [Pug by Liam.Bailey](https://sketchfab.com/3d-models/pug-319666fddfe94e5c9ef9beafcd1d0281)
+- [Toon Paint Brush - GameReady by onion_3d](https://sketchfab.com/3d-models/toon-paint-brush-gameready-fba7de3a8cf948468ca2526cff5433a7)
 
 ### Audio
 
