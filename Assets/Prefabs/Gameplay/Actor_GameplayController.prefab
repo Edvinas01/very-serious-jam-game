@@ -56,7 +56,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 80
+    FieldOfView: 70
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -125,6 +125,7 @@ MonoBehaviour:
   introCamera: {fileID: 6868056181506637406}
   introPlayable: {fileID: 893833677348635595}
   data: {fileID: 11400000, guid: bab5403b1cea3de4d938c3ab5acca76e, type: 2}
+  multiplierDecaySpeed: 0.5
 --- !u!320 &893833677348635595
 PlayableDirector:
   m_ObjectHideFlags: 0
