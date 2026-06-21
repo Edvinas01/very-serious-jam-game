@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
   m_Name: Data_Paintable_PugDog
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: Pug Dog
-  icon: {fileID: 21300000, guid: 1e831dc96b717e54e9498889d7761fb8, type: 3}
+  objectName: Dog
+  icon: {fileID: 21300000, guid: 9610afa522da41a44bb95ceddd6096d4, type: 3}
   paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
   sharedMesh: {fileID: -3428616745730278307, guid: a051cb9bcc1d7b64aa7f320601587c15, type: 3}
   texture: {fileID: 2800000, guid: 8b0faa2a7499fa740ba13162eef28619, type: 3}
@@ -21,6 +21,8 @@ MonoBehaviour:
   scale: {x: 0.5, y: 0.5, z: 0.5}
   rotation: {x: 0, y: 180, z: 0}
   offset: {x: 0, y: 0, z: 0}
+  maskDefaultWidth: 256
+  maskDefaultHeight: 256
   maskResolutionScale: 0.5
   maskFilterMode: 0
   score: 200

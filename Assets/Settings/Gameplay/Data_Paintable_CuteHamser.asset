@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
   m_Name: Data_Paintable_CuteHamser
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: Cute Hamser
-  icon: {fileID: 21300000, guid: b1f54161a12644648a5fbcc5a2798a2f, type: 3}
+  objectName: Hamser
+  icon: {fileID: 21300000, guid: c34b6929b369ef249a7f4ce0cd98cc95, type: 3}
   paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
   sharedMesh: {fileID: 9204514418414261446, guid: 2510dcf19bea4804cb7a39cd7a96ebb3, type: 3}
   texture: {fileID: 2800000, guid: 413056d8ede7b0348b613c179b049a91, type: 3}
