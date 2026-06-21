@@ -11,15 +11,18 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private SimpleInteractable interactable;
 
-        [Header("Paint Tip")]
-        [SerializeField]
-        private Renderer paintTipRenderer;
-
         [FormerlySerializedAs("paintPoint")]
         [SerializeField]
         private Transform paintTip;
 
-        [Header("Painting")]
+        [Header("Rendering")]
+        [SerializeField]
+        private Renderer brushRenderer;
+
+        [Min(0)]
+        [SerializeField]
+        private int tipMaterialIndex = 2;
+
         [SerializeField]
         private Color paintColor = Color.crimson;
 
@@ -54,7 +57,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (paintTipRenderer == false)
+            if (brushRenderer == false)
             {
                 return;
             }
@@ -100,7 +103,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private void Awake()
         {
             paintTipPropertyBlock = new MaterialPropertyBlock();
-            paintTipRenderer.GetPropertyBlock(paintTipPropertyBlock);
+            brushRenderer.GetPropertyBlock(paintTipPropertyBlock);
 
             originalPosition = transform.position;
             originalRotation = transform.rotation;
@@ -169,7 +172,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
             paintTipPropertyBlock.SetColor("_BaseColor", color);
-            paintTipRenderer.SetPropertyBlock(paintTipPropertyBlock);
+            brushRenderer.SetPropertyBlock(paintTipPropertyBlock, tipMaterialIndex);
         }
     }
 }
