@@ -23,6 +23,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private Color paintColor = Color.crimson;
 
+        [Min(0)]
+        [SerializeField]
+        private int paintScore = 1;
+
         [Header("Raycasts")]
         [Min(0f)]
         [SerializeField]
@@ -40,6 +44,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private Vector3 originalPosition;
         private Quaternion originalRotation;
+
+        public int PaintScore => paintScore;
+
+        public int Radius => paintTexelRadius;
+
+        public Color Color => paintColor;
 
 #if UNITY_EDITOR
         private void OnValidate()
@@ -112,11 +122,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     continue;
                 }
 
-                paintable.Paint(
-                    uv: hit.textureCoord,
-                    radius: paintTexelRadius,
-                    color: paintColor
-                );
+                paintable.Paint(uv: hit.textureCoord, brush: this);
             }
         }
 

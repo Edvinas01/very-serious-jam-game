@@ -57,11 +57,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             exitButton.OnClicked -= OnExitButtonClicked;
         }
 
-        public ScoreElement ShowScoreEntry(Sprite icon, int scorePerObject, int count)
+        public ScoreElement ShowScoreEntry(Sprite icon, int paintSessionScore, int baseScore, float multiplier, int totalScore)
         {
             var entry = Instantiate(scoreElementPrefab, scoreElementParent);
             entry.Icon = icon;
-            entry.ScoreText = $"{scorePerObject} x {count} = {scorePerObject * count}";
+            entry.ScoreText = $"{paintSessionScore} + {baseScore} x{multiplier:F1} = {totalScore}";
 
             if (entry.TryGetComponent<TweenAnimation>(out var tween))
             {

@@ -31,6 +31,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private PlayerActor player;
         private PedestalActor pedestal;
+        private int currentPaintableScore;
 
         private void Awake()
         {
@@ -80,7 +81,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             gameplaySystem.State = GameplayState.Introduction;
 
             // Init game
-            gameplaySystem.ClearPaintedObjects();
+            gameplaySystem.ResetScoreEntries();
+            gameplaySystem.ResetSpeedSamples();
+            currentPaintableScore = 0;
             gameplaySystem.RemainingTime = data.GameplayDuration;
             gameplaySystem.Score = data.StartingScore;
 
@@ -97,10 +100,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // Spawn pedestal object
             gameplaySystem.State = GameplayState.SpawningObject;
+
             var paintable = CreatePaintable(pedestal.ObjectParent);
             paintable.gameObject.SetActive(false);
             paintable.OnPainted += OnObjectPainted;
+
             await paintable.SlideInAsync(cancellationToken);
+
             gameplaySystem.State = GameplayState.PaintingObject;
 
             // Game loop
@@ -109,13 +115,24 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 // Switch painted object
                 if (paintable.PaintAmount >= 1f)
                 {
-                    gameplaySystem.Score += paintable.Data.Score;
+                    var totalScoreMultiplier = gameplaySystem.CurrentMultiplier;
+                    var totalScore = currentPaintableScore + (int)(paintable.Data.Score * totalScoreMultiplier);
+
+                    gameplaySystem.RecordScore(
+                        new PaintableScoreEntry(
+                            data: paintable.Data,
+                            maskTexture: paintable.MaskTexture,
+                            paintableScore: currentPaintableScore,
+                            totalScoreMultiplier: totalScoreMultiplier,
+                            totalScore: totalScore
+                        )
+                    );
 
                     // Slide out old object
                     gameplaySystem.State = GameplayState.SpawningObject;
+
                     await paintable.SlideOutAsync(cancellationToken);
                     paintable.OnPainted -= OnObjectPainted;
-                    gameplaySystem.Store(paintable);
 
                     // GG: reached max score
                     if (gameplaySystem.Score >= data.MaxScore)
@@ -129,11 +146,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     paintable.gameObject.SetActive(false);
                     paintable.OnPainted += OnObjectPainted;
 
+                    currentPaintableScore = 0;
                     gameplaySystem.PaintAmount = 0f;
 
                     await paintable.SlideInAsync(cancellationToken);
+                    gameplaySystem.ResetSpeedSamples();
+                    currentPaintableScore = 0;
                     gameplaySystem.State = GameplayState.PaintingObject;
                 }
+
+                gameplaySystem.AddSpeedSample(pedestal.SpinSpeed, Time.deltaTime);
+                gameplaySystem.CurrentMultiplier = data.GetScoreMultiplier(gameplaySystem.AverageSpeed);
 
                 await UniTask.Yield(cancellationToken);
             } while (gameplaySystem.State != GameplayState.GameOver);
@@ -141,9 +164,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             LoadGameOverScene();
         }
 
-        private void OnObjectPainted(float paintAmount)
+        private void OnObjectPainted(PaintedArgs args)
         {
-            gameplaySystem.PaintAmount = paintAmount;
+            gameplaySystem.PaintAmount = args.PaintAmount;
+            var scoreThisTick = Mathf.RoundToInt(args.PaintedScore * gameplaySystem.CurrentMultiplier);
+            currentPaintableScore += scoreThisTick;
+            gameplaySystem.Score += scoreThisTick;
         }
 
         private PaintableActor CreatePaintable(Transform parent)
@@ -151,9 +177,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             if (data.Paintables.TryGetRandom(out var pedestalObject))
             {
                 return pedestalObject.CreatePaintable(
-                    parent.position,
-                    Quaternion.identity,
-                    parent
+                    pos: parent.position,
+                    rot: Quaternion.identity,
+                    parent: parent
                 );
             }
 

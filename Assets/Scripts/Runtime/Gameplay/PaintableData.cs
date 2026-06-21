@@ -89,10 +89,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public AnimationClip SlideOutClip => slideOutClip;
 
-        public PaintableActor CreatePaintable(Vector3 pos, Quaternion rot, Transform parent)
+        public PaintableActor CreatePaintable(
+            Vector3 pos,
+            Quaternion rot,
+            Transform parent,
+            Texture2D maskTexture = null
+        )
         {
             var instance = Instantiate(paintablePrefab, pos, rot, parent);
-            instance.Initialize(this);
+            instance.Initialize(this, maskTexture);
 
             return instance;
         }

@@ -17,6 +17,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private float currentSpinSpeed;
 
+        public float SpinSpeed => constantSpeed + currentSpinSpeed;
+
         public Transform ObjectParent => objectParent;
 
         private void FixedUpdate()

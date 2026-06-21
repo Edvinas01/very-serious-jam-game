@@ -53,9 +53,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private Texture2D paintMaskTexture;
         private bool[] paintedMask;
         private int paintedPixelCount;
+
+        private PaintBrushActor lastBrush;
+        private float paintAmountLastTick;
         private bool isPaintedThisFrame;
 
         public PaintableData Data => data;
+
+        public Texture2D MaskTexture => paintMaskTexture;
 
         public float PaintAmount { get; private set; }
 
@@ -72,7 +77,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
         }
 
-        public event Action<float> OnPainted;
+        public event Action<PaintedArgs> OnPainted;
 
         private void LateUpdate()
         {
@@ -82,14 +87,19 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
 
             paintMaskTexture.Apply();
-            isPaintedThisFrame = false;
 
             var rawPercent = (float)paintedPixelCount / paintedMask.Length;
-            var percent = Mathf.InverseLerp(Data.FullyPaintedRange.x, Data.FullyPaintedRange.y, rawPercent);
 
-            PaintAmount = percent;
+            PaintAmount = Mathf.InverseLerp(Data.FullyPaintedRange.x, Data.FullyPaintedRange.y, rawPercent);
 
-            OnPainted?.Invoke(percent);
+            if (Math.Abs(PaintAmount - paintAmountLastTick) > 0.01f || PaintAmount >= 1f || PaintAmount <= 0f)
+            {
+                paintAmountLastTick = PaintAmount;
+                OnPainted?.Invoke(new PaintedArgs(PaintAmount, lastBrush.PaintScore));
+            }
+
+            isPaintedThisFrame = false;
+            lastBrush = null;
         }
 
         [ContextMenu("Initialize")]
@@ -104,7 +114,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             Initialize(data);
         }
 
-        public void Initialize(PaintableData newData)
+        public void Initialize(PaintableData newData, Texture2D maskTexture = null)
         {
             if (newData == false)
             {
@@ -127,29 +137,37 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             bodyTransform.localRotation = Quaternion.Euler(data.Rotation);
             bodyTransform.localPosition = data.Offset;
 
-            // Create paint mask texture
-            var width = data.Texture ? data.Texture.width : painMaskDefaultWidth;
-            var height = data.Texture ? data.Texture.height : painMaskDefaultHeight;
-
-            paintMaskTexture = new Texture2D(
-                width: width,
-                height: height,
-                textureFormat: TextureFormat.RGBA32,
-                mipChain: false
-            );
-
-            // Clear mask texture
-            var pixelData = paintMaskTexture.GetRawTextureData<Color32>();
-            for (var index = 0; index < pixelData.Length; index++)
+            if (maskTexture)
             {
-                var initialColor = Color.white;
-                initialColor.a = 0f;
-                pixelData[index] = initialColor;
+                paintMaskTexture = maskTexture;
+                paintedMask = new bool[maskTexture.width * maskTexture.height];
             }
+            else
+            {
+                // Create paint mask texture
+                var width = data.Texture ? data.Texture.width : painMaskDefaultWidth;
+                var height = data.Texture ? data.Texture.height : painMaskDefaultHeight;
 
-            paintMaskTexture.Apply();
+                paintMaskTexture = new Texture2D(
+                    width: width,
+                    height: height,
+                    textureFormat: TextureFormat.RGBA32,
+                    mipChain: false
+                );
 
-            paintedMask = new bool[width * height];
+                // Clear mask texture
+                var pixelData = paintMaskTexture.GetRawTextureData<Color32>();
+                for (var index = 0; index < pixelData.Length; index++)
+                {
+                    var initialColor = Color.white;
+                    initialColor.a = 0f;
+                    pixelData[index] = initialColor;
+                }
+
+                paintMaskTexture.Apply();
+
+                paintedMask = new bool[width * height];
+            }
 
             // Apply mask to renderer
             propertyBlock.SetTexture(paintMaskPropertyId, paintMaskTexture);
@@ -172,10 +190,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             await animancer.Play(Data.SlideOutClip).ToUniTask(cancellationToken: cancellationToken);
         }
 
-        public void Paint(Vector2 uv, int radius, Color color)
+        public void Paint(Vector2 uv, PaintBrushActor brush)
         {
             var pixelData = paintMaskTexture.GetRawTextureData<Color32>();
-            var targetColor = (Color32)color;
+            var targetColor = (Color32)brush.Color;
+            var radius = brush.Radius;
 
             var textureW = paintMaskTexture.width;
             var textureH = paintMaskTexture.height;
@@ -218,6 +237,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 }
             }
 
+            lastBrush = brush;
             isPaintedThisFrame = true;
         }
     }

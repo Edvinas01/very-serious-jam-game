@@ -7,17 +7,21 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class GameplaySystem : MonoBehaviour, IUpdateListener
     {
-        [SerializeField]
-        private Transform fullyPaintedObjectTransform;
-
-        private readonly List<PaintableActor> fullyPaintedObjects = new();
+        private readonly List<PaintableScoreEntry> scoreEntires = new();
 
         private GameplayState currentState = GameplayState.None;
         private float currentRemainingTime;
         private float currentPaintAmount;
         private int currentScore;
 
-        public IReadOnlyList<PaintableActor> FullyPaintedObjects => fullyPaintedObjects;
+        private float speedAccumulatorTime;
+        private float speedAccumulator;
+
+        public float AverageSpeed => speedAccumulatorTime > 0f ? speedAccumulator / speedAccumulatorTime : 0f;
+
+        public float CurrentMultiplier { get; set; } = 1f;
+
+        public IReadOnlyList<PaintableScoreEntry> ScoreEntires => scoreEntires;
 
         public float PaintAmount
         {
@@ -110,26 +114,36 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
         }
 
-        public void ClearPaintedObjects()
+        public void AddSpeedSample(float speed, float deltaTime)
         {
-            foreach (var paintedObject in fullyPaintedObjects)
+            speedAccumulator += Mathf.Abs(speed) * deltaTime;
+            speedAccumulatorTime += deltaTime;
+        }
+
+        public void ResetSpeedSamples()
+        {
+            speedAccumulator = 0f;
+            speedAccumulatorTime = 0f;
+            CurrentMultiplier = 1f;
+        }
+
+        public void ResetScoreEntries()
+        {
+            foreach (var scoreEntry in scoreEntires)
             {
-                if (paintedObject)
+                if (scoreEntry.MaskTexture)
                 {
-                    Destroy(paintedObject.gameObject);
+                    Destroy(scoreEntry.MaskTexture);
                 }
             }
 
-            fullyPaintedObjects.Clear();
+            scoreEntires.Clear();
         }
 
-        public void Store(PaintableActor paintable)
+        public void RecordScore(PaintableScoreEntry entry)
         {
-            fullyPaintedObjects.Add(paintable);
-
-            paintable.transform.position = fullyPaintedObjectTransform.position;
-            paintable.transform.parent = fullyPaintedObjectTransform;
-            paintable.gameObject.SetActive(false);
+            Score += entry.TotalScore - entry.PaintableScore;
+            scoreEntires.Add(entry);
         }
     }
 }

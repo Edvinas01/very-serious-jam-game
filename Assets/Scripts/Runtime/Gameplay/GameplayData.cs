@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using InSun.GameCore.Scenes;
 using InSun.GameCore.SunnyInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
@@ -25,6 +24,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private int startingScore;
 
+        [Tooltip("x - spin speed, y - score multiplier")]
+        [SerializeField]
+        private AnimationCurve scoreMultiplierCurve;
+
         [Header("Scenes")]
         [SerializeField]
         private SceneData gameOverScene;
@@ -42,5 +45,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public SceneData GameOverScene => gameOverScene;
 
         public IReadOnlyList<PaintableData> Paintables => paintables;
+
+        public float GetScoreMultiplier(float speed)
+        {
+            return scoreMultiplierCurve.Evaluate(Mathf.Abs(speed));
+        }
     }
 }

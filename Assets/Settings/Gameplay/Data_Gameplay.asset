@@ -15,6 +15,57 @@ MonoBehaviour:
   gameplayDuration: 60
   maxScore: 1000
   startingScore: 0
+  scoreMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 50
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 134.52682
+      value: 4.878543
+      inSlope: 0.040482663
+      outSlope: 0.040482663
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.27703947
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 500
+      value: 10
+      inSlope: 0.002528575
+      outSlope: 0.002528575
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06087511
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   gameOverScene: {fileID: 11400000, guid: 848106c1d3df82142b22a5fca8da4cb6, type: 2}
   paintables:
   - {fileID: 11400000, guid: d406e59873d3fbd48899618ad96b0f32, type: 2}
