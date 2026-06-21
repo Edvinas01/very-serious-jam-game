@@ -267,7 +267,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 80
+  field of view: 70
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -558,10 +558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 628a4b68c42648968545ee9311531a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Player.PlayerActor
-  startingScore: 50
-  maxScore: 100
-  moveInputAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  movementController: {fileID: 0}
   playerCamera: {fileID: 2423186951633129722}
   forwardTransform: {fileID: 7240733415801242291}
 --- !u!1 &8100905921308907247
@@ -657,7 +653,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 80
+    FieldOfView: 70
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000

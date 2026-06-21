@@ -30,14 +30,15 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 - [PrimeTween by KyryloKuzyk](https://github.com/KyryloKuzyk/PrimeTween)
 - [Animancer Lite v8 by Kybernetik](https://assetstore.unity.com/packages/tools/animation/animancer-lite-v8-293524)
 
-### Textures
+### Models
 
-- TODO
+- [Color Palette by Natalie](https://sketchfab.com/3d-models/color-palette-a6d64e6b377c4946ab4b1b0bea056c0b)
+- TODO: brush
 
 ### Audio
 
-- [Hover 1 by plasterbrain](https://freesound.org/people/plasterbrain/sounds/237422/) | License: Creative Commons 0
-- [Button Hover Click by eqylizer](https://freesound.org/people/eqylizer/sounds/623990/) | License: Creative Commons 0
+- [Hover 1 by plasterbrain](https://freesound.org/people/plasterbrain/sounds/237422/)
+- [Button Hover Click by eqylizer](https://freesound.org/people/eqylizer/sounds/623990/)
 
 ### Tools
 
