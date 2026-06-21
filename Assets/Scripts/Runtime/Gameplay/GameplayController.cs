@@ -31,6 +31,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private PlayerActor player;
         private PedestalActor pedestal;
+        private CrankActor crank;
+
         private int currentPaintableScore;
 
         private void Awake()
@@ -42,12 +44,24 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             if (player == false)
             {
                 Debug.LogError("No Player found in scene, gameplay will not start", this);
+                enabled = false;
+                return;
             }
 
             pedestal = FindAnyObjectByType<PedestalActor>();
             if (pedestal == false)
             {
                 Debug.LogError("No Pedestal found in scene, gameplay will not start", this);
+                enabled = false;
+                return;
+            }
+
+            crank = FindAnyObjectByType<CrankActor>();
+            if (crank == false)
+            {
+                Debug.LogError("No Crank found in scene, gameplay will not start", this);
+                enabled = false;
+                return;
             }
         }
 
@@ -55,6 +69,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             gameplayCancellation = new CancellationTokenSource();
             StartGameAsync(gameplayCancellation.Token).Forget();
+        }
+
+        private void Update()
+        {
+            pedestal.AddSpinSpeed(crank.RotationDelta);
         }
 
         private void OnDestroy()
