@@ -59,6 +59,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public Color Color => paintColor;
 
+        public bool IsPainting { get; private set; }
+
 #if UNITY_EDITOR
         private void OnValidate()
         {
@@ -130,6 +132,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 queryTriggerInteraction: QueryTriggerInteraction.Ignore
             );
 
+            IsPainting = false;
+
             for (var index = 0; index < count; index++)
             {
                 var hit = HitBuffer[index];
@@ -140,6 +144,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 }
 
                 paintable.Paint(uv: hit.textureCoord, brush: this, isSmoothEdges: isSmoothEdges);
+                IsPainting = true;
             }
         }
 

@@ -43,6 +43,25 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private SimpleInteractor interactor;
 
+        [Header("Tilt")]
+        [SerializeField]
+        private float maxTiltX = 30f;
+
+        [SerializeField]
+        private float maxTiltY = 30f;
+
+        [SerializeField]
+        private float tiltStep = 0.5f;
+
+        [SerializeField]
+        private float tiltSmoothTime = 0.1f;
+
+        [SerializeField]
+        private float paintTiltStep = 5f;
+
+        [SerializeField]
+        private PedestalActor pedestal;
+
         [Header("Input")]
         [SerializeField]
         private InputActionReference handPickUpAction;
@@ -60,6 +79,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private Quaternion followRotation;
         private Vector3 smoothVelocity;
 
+        private Vector2 previousMousePosition;
+        private float currentTiltX;
+        private float currentTiltY;
+        private float tiltVelocityX;
+        private float tiltVelocityY;
+        private PaintBrushActor heldBrush;
+
         private void Awake()
         {
             propertyBlock = new MaterialPropertyBlock();
@@ -73,6 +99,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
             propertyBlock.SetTexture("_BaseMap", openHandTexture);
             quadRenderer.SetPropertyBlock(propertyBlock);
+
+            previousMousePosition = Mouse.current.position.ReadValue();
         }
 
         private void OnEnable()
@@ -96,15 +124,51 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private void Update()
         {
             MoveTarget();
+            UpdateTilt();
 
             if (followTarget == null)
             {
                 transform.position = Vector3.SmoothDamp(transform.position, targetRigidbody.position, ref smoothVelocity, smoothTime);
+                transform.rotation = Quaternion.Euler(currentTiltX, currentTiltY, 0f);
             }
             else
             {
                 transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime / smoothTime);
                 transform.rotation = followRotation;
+            }
+        }
+
+        private void UpdateTilt()
+        {
+            var mousePosition = Mouse.current.position.ReadValue();
+            var delta = mousePosition - previousMousePosition;
+            previousMousePosition = mousePosition;
+
+            if (interactor.IsInteracting)
+            {
+                if (heldBrush == null)
+                {
+                    heldBrush = GetComponentInChildren<PaintBrushActor>();
+                }
+
+                var surfaceTiltY = 0f;
+
+                if (pedestal && heldBrush && heldBrush.IsPainting)
+                {
+                    surfaceTiltY = -pedestal.SpinSpeed * paintTiltStep;
+                }
+
+                var targetTiltX = Mathf.Clamp(delta.y * tiltStep, -maxTiltX, maxTiltX);
+                var targetTiltY = Mathf.Clamp(-delta.x * tiltStep + surfaceTiltY, -maxTiltY, maxTiltY);
+
+                currentTiltX = Mathf.SmoothDamp(currentTiltX, targetTiltX, ref tiltVelocityX, tiltSmoothTime);
+                currentTiltY = Mathf.SmoothDamp(currentTiltY, targetTiltY, ref tiltVelocityY, tiltSmoothTime);
+            }
+            else
+            {
+                heldBrush = null;
+                currentTiltX = Mathf.SmoothDamp(currentTiltX, 0f, ref tiltVelocityX, tiltSmoothTime);
+                currentTiltY = Mathf.SmoothDamp(currentTiltY, 0f, ref tiltVelocityY, tiltSmoothTime);
             }
         }
 

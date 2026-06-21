@@ -266,7 +266,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 94
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &600812143892464459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,11 +279,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ee90c7eb7d46c28e7882c8ac325ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.CrankActor
+  data: {fileID: 11400000, guid: 9e111c5f78ab2a647bc945cd828f9d02, type: 2}
   handleTransform: {fileID: 739302180084238648}
   crankRigidbody: {fileID: 6084417814831146444}
   interactable: {fileID: 8707825538216795170}
   anchorOffsetTransform: {fileID: 0}
-  data: {fileID: 11400000, guid: 9e111c5f78ab2a647bc945cd828f9d02, type: 2}
 --- !u!114 &8707825538216795170
 MonoBehaviour:
   m_ObjectHideFlags: 0

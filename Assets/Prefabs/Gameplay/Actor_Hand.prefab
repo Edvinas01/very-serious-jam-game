@@ -140,8 +140,8 @@ MonoBehaviour:
   quadRenderer: {fileID: 5941037513804927845}
   openHandTexture: {fileID: 2800000, guid: 00567b7b8da3f4e4a827d3f04c48ef1d, type: 3}
   closedHandTexture: {fileID: 2800000, guid: d79ff9d43fe316d44823ad3d1d464011, type: 3}
-  pushDistance: 0.5
-  toolLength: 0.4
+  pushDistance: 1
+  toolLength: 0.2
   pushCastRadius: 0.05
   pushLayerMask:
     serializedVersion: 2
@@ -149,6 +149,12 @@ MonoBehaviour:
   targetCamera: {fileID: 0}
   smoothTime: 0.05
   interactor: {fileID: 1072270903636431866}
+  maxTiltX: 50
+  maxTiltY: 50
+  tiltStep: 0.8
+  tiltSmoothTime: 0.1
+  paintTiltStep: 0.2
+  pedestal: {fileID: 0}
   handPickUpAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   handPushAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &1072270903636431866
