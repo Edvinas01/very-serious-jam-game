@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DoubleD.VerySeriousJamGame.Runtime.Utilities;
@@ -22,31 +21,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private PlayableDirector introPlayable;
 
-        [Header("Gameplay")]
+        [Header("Data")]
         [SerializeField]
-        private float gameplayDuration = 60f;
-
-        [Min(0)]
-        [SerializeField]
-        private int maxScore = 1000;
-
-        [Min(0)]
-        [SerializeField]
-        private int startingScore;
-
-        [Header("Scenes")]
-        [SerializeField]
-        private SceneData gameOverScene;
-
-        [Header("Pedestal Objects")]
-        [SerializeField]
-        private List<PaintableData> pedestalObjects;
+        private GameplayData data;
 
         private GameplaySystem gameplaySystem;
         private ISceneSystem sceneSystem;
         private CancellationTokenSource gameplayCancellation;
 
-        private readonly List<PaintableActor> paintables = new();
         private PlayerActor player;
         private PedestalActor pedestal;
 
@@ -99,8 +81,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // Init game
             gameplaySystem.ClearPaintedObjects();
-            gameplaySystem.RemainingTime = gameplayDuration;
-            gameplaySystem.Score = startingScore;
+            gameplaySystem.RemainingTime = data.GameplayDuration;
+            gameplaySystem.Score = data.StartingScore;
 
             // Disable player so no movement during intro
             player.DisableInteraction();
@@ -136,7 +118,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     gameplaySystem.Store(paintable);
 
                     // GG: reached max score
-                    if (gameplaySystem.Score >= maxScore)
+                    if (gameplaySystem.Score >= data.MaxScore)
                     {
                         gameplaySystem.State = GameplayState.GameOver;
                         break;
@@ -146,6 +128,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     paintable = CreatePaintable(pedestal.ObjectParent);
                     paintable.gameObject.SetActive(false);
                     paintable.OnPainted += OnObjectPainted;
+
+                    gameplaySystem.PaintAmount = 0f;
 
                     await paintable.SlideInAsync(cancellationToken);
                     gameplaySystem.State = GameplayState.PaintingObject;
@@ -164,7 +148,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private PaintableActor CreatePaintable(Transform parent)
         {
-            if (pedestalObjects.TryGetRandom(out var pedestalObject))
+            if (data.Paintables.TryGetRandom(out var pedestalObject))
             {
                 return pedestalObject.CreatePaintable(
                     parent.position,
@@ -178,7 +162,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void LoadGameOverScene()
         {
-            sceneSystem.LoadScene(new SceneLoadArgs(gameOverScene));
+            sceneSystem.LoadScene(new SceneLoadArgs(data.GameOverScene));
         }
 
         private async UniTask PlayIntroAsync(CancellationToken cancellationToken)

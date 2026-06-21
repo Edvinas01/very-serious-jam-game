@@ -4,7 +4,11 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - pedestalObjectPrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
+  - icon: {fileID: 21300000, guid: ed0f268d29a65944ebb536f6d1fd0d9a, type: 3}
+  - paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
+  - sharedMesh: {instanceID: 0}
+  - texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+  - material: {fileID: 2100000, guid: 5a2b4ef330deb6f4393e20fbd7984b3f, type: 2}
   - slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
   - slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}
   executionOrder: 0

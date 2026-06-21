@@ -23,24 +23,30 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private PaintableActor paintablePrefab;
 
-        // TODO
+        [FormerlySerializedAs("paintableMesh")]
         [SerializeField]
-        private Mesh paintableMesh;
+        private Mesh sharedMesh;
 
+        [FormerlySerializedAs("paintableTexture")]
         [SerializeField]
-        private Texture2D paintableTexture;
+        private Texture2D texture;
 
+        [FormerlySerializedAs("paintableMaterial")]
         [SerializeField]
-        private Material paintableMaterial;
+        private Material material;
 
-        // TODO
+        [FormerlySerializedAs("paintableScale")]
         [Min(0)]
         [SerializeField]
-        private Vector3 paintableScale = new(1f, 1f, 1f);
+        private Vector3 scale = new(1f, 1f, 1f);
 
+        [FormerlySerializedAs("paintableRotation")]
         [Min(0)]
         [SerializeField]
-        private Vector3 paintableRotation = new(1f, 1f, 1f);
+        private Vector3 rotation = new(0f, 0f, 0f);
+
+        [SerializeField]
+        private Vector3 offset;
 
         [Header("Scoring")]
         [Min(0)]
@@ -63,15 +69,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public Sprite Icon => icon;
 
-        public Mesh PaintableMesh => paintableMesh;
+        public Mesh SharedMesh => sharedMesh;
 
-        public Texture2D PaintableTexture => paintableTexture;
+        public Texture2D Texture => texture;
 
-        public Material PaintableMaterial => paintableMaterial;
+        public Material Material => material;
 
-        public Vector3 PaintableScale => paintableScale;
+        public Vector3 Scale => scale;
 
-        public Vector3 PaintableRotation => paintableRotation;
+        public Vector3 Rotation => rotation;
+
+        public Vector3 Offset => offset;
 
         public int Score => score;
 
@@ -81,11 +89,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public AnimationClip SlideOutClip => slideOutClip;
 
-        public PaintableActor CreatePaintable(Vector3 position, Quaternion rotation, Transform parent)
+        public PaintableActor CreatePaintable(Vector3 pos, Quaternion rot, Transform parent)
         {
-            var instance = Instantiate(paintablePrefab, position, rotation, parent);
-            instance.name = $"{nameof(PaintableActor)} ({Name})";
-            instance.Data = this;
+            var instance = Instantiate(paintablePrefab, pos, rot, parent);
+            instance.Initialize(this);
 
             return instance;
         }

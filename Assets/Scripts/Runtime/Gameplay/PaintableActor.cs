@@ -4,17 +4,29 @@ using Animancer;
 using Cysharp.Threading.Tasks;
 using InSun.GameCore.Animations;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class PaintableActor : MonoBehaviour
     {
+        [FormerlySerializedAs("objectRenderer")]
         [Header("General")]
         [SerializeField]
-        private MeshRenderer objectRenderer;
+        private PaintableData data;
+
+        [Header("Body")]
+        [SerializeField]
+        private Transform bodyTransform;
 
         [SerializeField]
-        private AnimancerComponent animancer;
+        private MeshRenderer bodyRenderer;
+
+        [SerializeField]
+        private MeshFilter bodyMeshFilter;
+
+        [SerializeField]
+        private MeshCollider bodyMeshCollider;
 
         [SerializeField]
         private Rigidbody rigidBody;
@@ -28,7 +40,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private int painMaskDefaultHeight = 256;
 
-        [Header("Tweens")]
+        [Header("Animations")]
+        [SerializeField]
+        private AnimancerComponent animancer;
+
         [SerializeField]
         private TweenAnimation slidedInTween;
 
@@ -40,7 +55,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private int paintedPixelCount;
         private bool isPaintedThisFrame;
 
-        public PaintableData Data { get; set; }
+        public PaintableData Data => data;
 
         public float PaintAmount { get; private set; }
 
@@ -62,17 +77,62 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public event Action<float> OnPainted;
 
-        private void Awake()
+        private void LateUpdate()
         {
-            // Init share stuffs
+            if (isPaintedThisFrame == false)
+            {
+                return;
+            }
+
+            paintMaskTexture.Apply();
+            isPaintedThisFrame = false;
+
+            var rawPercent = (float)paintedPixelCount / paintedMask.Length;
+            var percent = Mathf.InverseLerp(Data.FullyPaintedRange.x, Data.FullyPaintedRange.y, rawPercent);
+
+            PaintAmount = percent;
+
+            OnPainted?.Invoke(percent);
+        }
+
+        [ContextMenu("Initialize")]
+        private void Initialize()
+        {
+            if (data == false)
+            {
+                Debug.LogError($"{nameof(data)} is not set", this);
+                return;
+            }
+
+            Initialize(data);
+        }
+
+        public void Initialize(PaintableData newData)
+        {
+            if (newData == false)
+            {
+                Debug.LogError("Trying to initialize with null data", this);
+                return;
+            }
+
+            data = newData;
+
+            name = $"{nameof(PaintableActor)} ({data.Name})";
+
             paintMaskPropertyId = Shader.PropertyToID("_PaintMask");
             propertyBlock = new MaterialPropertyBlock();
 
-            // Create mask texture
-            var meshMaterial = objectRenderer.sharedMaterial;
-            var meshTexture = meshMaterial.mainTexture as Texture2D;
-            var width = meshTexture ? meshTexture.width : painMaskDefaultWidth;
-            var height = meshTexture ? meshTexture.height : painMaskDefaultHeight;
+            // Apply mesh data
+            bodyMeshFilter.sharedMesh = data.SharedMesh;
+            bodyMeshCollider.sharedMesh = data.SharedMesh;
+            bodyRenderer.sharedMaterial = data.Material;
+            bodyTransform.localScale = data.Scale;
+            bodyTransform.localRotation = Quaternion.Euler(data.Rotation);
+            bodyTransform.localPosition = data.Offset;
+
+            // Create paint mask texture
+            var width = data.Texture ? data.Texture.width : painMaskDefaultWidth;
+            var height = data.Texture ? data.Texture.height : painMaskDefaultHeight;
 
             paintMaskTexture = new Texture2D(
                 width: width,
@@ -96,30 +156,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // Apply mask to renderer
             propertyBlock.SetTexture(paintMaskPropertyId, paintMaskTexture);
-            objectRenderer.SetPropertyBlock(propertyBlock);
-        }
-
-        private void LateUpdate()
-        {
-            if (isPaintedThisFrame == false)
-            {
-                return;
-            }
-
-            paintMaskTexture.Apply();
-            isPaintedThisFrame = false;
-
-            var rawPercent = (float)paintedPixelCount / paintedMask.Length;
-            var percent = Mathf.InverseLerp(Data.FullyPaintedRange.x, Data.FullyPaintedRange.y, rawPercent);
-
-            PaintAmount = percent;
-
-            OnPainted?.Invoke(percent);
-        }
-
-        public void Initialize(PaintableData data)
-        {
-            // transform.localScale = data.PaintableScale;
+            bodyRenderer.SetPropertyBlock(propertyBlock);
         }
 
         public async UniTask SlideInAsync(CancellationToken cancellationToken)
