@@ -41,6 +41,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private int paintScore = 1;
 
         [Header("Painting")]
+        [SerializeField]
+        private ParticleSystem paintParticles;
+
         [Min(1)]
         [SerializeField]
         private int paintTexelRadius = 20;
@@ -50,7 +53,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Header("Events")]
         [SerializeField]
-        private UnityEvent onPainted;
+        private UnityEvent onPaintEntered;
+
+        [SerializeField]
+        private UnityEvent onPaintExited;
 
         private static readonly RaycastHit[] HitBuffer = new RaycastHit[10];
         private MaterialPropertyBlock paintTipPropertyBlock;
@@ -130,6 +136,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void FixedUpdate()
         {
+            var isPaintingPrev = IsPainting;
+
             var count = Physics.RaycastNonAlloc(
                 origin: paintTip.position,
                 direction: paintTip.forward,
@@ -151,8 +159,24 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 }
 
                 paintable.Paint(uv: hit.textureCoord, brush: this, isSmoothEdges: isSmoothEdges);
+
+                if (paintParticles)
+                {
+                    var emitParams = new ParticleSystem.EmitParams
+                    {
+                        position = hit.point,
+                        applyShapeToPosition = true,
+                        startColor = paintColor,
+                    };
+
+                    paintParticles.Emit(emitParams, 1);
+                }
+
                 IsPainting = true;
             }
+
+            var isPaintingNext = IsPainting;
+            UpdatePaintingEvents(isPaintingPrev, isPaintingNext);
         }
 
         private void OnHoverEntered(InteractableHoverEnteredArgs args)
@@ -189,6 +213,23 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
             paintTipPropertyBlock.SetColor("_BaseColor", color);
             brushRenderer.SetPropertyBlock(paintTipPropertyBlock, tipMaterialIndex);
+        }
+
+        private void UpdatePaintingEvents(bool isPaintingPrev, bool isPaintingNext)
+        {
+            if (isPaintingPrev == isPaintingNext)
+            {
+                return;
+            }
+
+            if (isPaintingNext)
+            {
+                onPaintEntered.Invoke();
+            }
+            else
+            {
+                onPaintExited.Invoke();
+            }
         }
     }
 }
