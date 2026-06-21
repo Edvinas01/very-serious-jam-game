@@ -64,6 +64,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
         private async UniTaskVoid SpawnScoreEntriesAsync(CancellationToken cancellationToken)
         {
+            View.IsButtonsInteractable = false;
             View.HideTotalScore();
 
             var groupedByData = gameplaySystem.FullyPaintedObjects
@@ -72,19 +73,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
             foreach (var (data, count) in groupedByData)
             {
-                await UniTask.WaitForSeconds(
-                    entrySpawnDelay,
-                    cancellationToken: cancellationToken
-                );
-
+                await UniTask.WaitForSeconds(entrySpawnDelay, cancellationToken: cancellationToken);
                 View.ShowScoreEntry(data.Icon, data.Score, count);
             }
 
-            await UniTask.WaitForSeconds(
-                entrySpawnDelay,
-                cancellationToken: cancellationToken
-            );
+            await UniTask.WaitForSeconds(entrySpawnDelay, cancellationToken: cancellationToken);
 
+            View.IsButtonsInteractable = true;
             View.ShowTotalScore(gameplaySystem.Score);
         }
     }

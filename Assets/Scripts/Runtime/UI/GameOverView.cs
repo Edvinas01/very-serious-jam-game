@@ -28,6 +28,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         [SerializeField]
         private TMP_Text totalScoreText;
 
+        public bool IsButtonsInteractable
+        {
+            set
+            {
+                restartButton.interactable = value;
+                exitButton.interactable = value;
+            }
+        }
+
         public event Action OnRestartClicked;
 
         public event Action OnExitClicked;
