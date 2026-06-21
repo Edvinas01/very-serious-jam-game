@@ -18,6 +18,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         [SerializeField]
         private TMP_Text paintPercentageText;
 
+        [SerializeField]
+        private TMP_Text speedMultiplierText;
+
         [Header("Events")]
         [SerializeField]
         private UnityEvent onRemainingTimeChanged;
@@ -77,6 +80,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
                 paintPercentageText.text = $"{paintPercentageNext}%";
                 paintAmountPrev = paintPercentageNext;
             }
+        }
+
+        public float SpeedMultiplier
+        {
+            set => speedMultiplierText.text = $"x{value:F1}";
         }
     }
 }

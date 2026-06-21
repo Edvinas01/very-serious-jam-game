@@ -1,5 +1,4 @@
-﻿using InSun.GameCore;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
@@ -9,16 +8,31 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private Transform objectParent;
 
+        [SerializeField]
+        private float constantSpeed;
+
+        [Min(0f)]
+        [SerializeField]
+        private float spinDecaySpeed = 0.3f;
+
+        private float currentSpinSpeed;
+
+        public float SpinSpeed => constantSpeed + currentSpinSpeed;
+
         public Transform ObjectParent => objectParent;
 
-        private void OnEnable()
+        private void FixedUpdate()
         {
-            Game.AddObject<int, PedestalActor>(GetInstanceID(), this);
+            var totalSpeed = constantSpeed + currentSpinSpeed;
+            var deltaTime = Time.deltaTime;
+
+            objectParent.Rotate(Vector3.up, totalSpeed * deltaTime, Space.World);
+            currentSpinSpeed = Mathf.Lerp(currentSpinSpeed, 0f, spinDecaySpeed * deltaTime);
         }
 
-        private void OnDisable()
+        public void AddSpinSpeed(float speed)
         {
-            Game.RemoveObject<int, PedestalActor>(GetInstanceID());
+            currentSpinSpeed += speed;
         }
     }
 }

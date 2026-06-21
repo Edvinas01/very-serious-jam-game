@@ -2,7 +2,8 @@
     "name": "DoubleD.VerySeriousJamGame.Editor",
     "rootNamespace": "DoubleD.VerySeriousJamGame",
     "references": [
-        "GUID:43b166730a62e4e48bb725ef6e857757",
+        "GUID:89c59f17ca1d5ea4b9262921e58ed5b3",
+        "GUID:03e5df88ead74bdaa2b8ce9d42f1293f",
         "GUID:3e81533b576da454e97839625e95d356"
     ],
     "includePlatforms": [

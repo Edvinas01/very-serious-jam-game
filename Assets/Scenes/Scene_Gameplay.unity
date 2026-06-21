@@ -2112,6 +2112,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1575031536}
     m_Modifications:
+    - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
+      propertyPath: m_SceneBindings.Array.data[1].value
+      value: 
+      objectReference: {fileID: 33258009}
     - target: {fileID: 2445969886325984365, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
       propertyPath: m_Name
       value: Actor_GameplayController

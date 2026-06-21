@@ -8,6 +8,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
     internal sealed class TrophyZoneActor : MonoBehaviour
     {
+        [Header("Transforms")]
+        [SerializeField]
+        private Transform initializingTransform;
+
+        [SerializeField]
+        private Transform initializedTransform;
+
         [Header("Randomization")]
         [SerializeField]
         private Vector2 spawnAreaSize = new(3f, 3f);
@@ -42,28 +49,33 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void OnDestroy()
         {
-            gameplaySystem.ClearPaintedObjects();
+            gameplaySystem.ResetScoreEntries();
         }
 
         private async UniTaskVoid SpawnTrophiesAsync(CancellationToken cancellationToken)
         {
-            foreach (var paintedObject in gameplaySystem.FullyPaintedObjects)
+            foreach (var scoreEntry in gameplaySystem.ScoreEntires)
             {
                 await UniTask.WaitForSeconds(
                     entrySpawnDelay,
                     cancellationToken: cancellationToken
                 );
 
-                paintedObject.IsKinematic = false;
-                paintedObject.transform.position = GetRandomSpawnPoint();
-                paintedObject.transform.rotation = Quaternion.Euler(
-                    Random.Range(-spawnRotation, spawnRotation),
-                    Random.Range(0f, 360f),
-                    Random.Range(-spawnRotation, spawnRotation)
+                var data = scoreEntry.Data;
+                var paintable = data.CreatePaintable(
+                    pos: GetRandomSpawnPoint(),
+                    rot: Quaternion.Euler(
+                        Random.Range(-spawnRotation, spawnRotation),
+                        Random.Range(0f, 360f),
+                        Random.Range(-spawnRotation, spawnRotation)
+                    ),
+                    parent: initializingTransform,
+                    maskTexture: scoreEntry.MaskTexture
                 );
 
-                paintedObject.transform.parent = transform;
-                paintedObject.gameObject.SetActive(true);
+                paintable.IsKinematic = false;
+                paintable.transform.parent = initializedTransform;
+                paintable.gameObject.SetActive(true);
             }
         }
 

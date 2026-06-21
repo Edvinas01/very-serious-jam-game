@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DoubleD.VerySeriousJamGame.Runtime.Gameplay;
@@ -64,27 +63,18 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
         private async UniTaskVoid SpawnScoreEntriesAsync(CancellationToken cancellationToken)
         {
+            View.IsButtonsInteractable = false;
             View.HideTotalScore();
 
-            var groupedByData = gameplaySystem.FullyPaintedObjects
-                .GroupBy(pedestalObject => pedestalObject.Data)
-                .Select(group => (data: group.Key, count: group.Count()));
-
-            foreach (var (data, count) in groupedByData)
+            foreach (var entry in gameplaySystem.ScoreEntires)
             {
-                await UniTask.WaitForSeconds(
-                    entrySpawnDelay,
-                    cancellationToken: cancellationToken
-                );
-
-                View.ShowScoreEntry(data.Icon, data.Score, count);
+                await UniTask.WaitForSeconds(entrySpawnDelay, cancellationToken: cancellationToken);
+                View.ShowScoreEntry(entry.Data.Icon, entry.PaintableScore, entry.Data.Score, entry.TotalScoreMultiplier, entry.TotalScore);
             }
 
-            await UniTask.WaitForSeconds(
-                entrySpawnDelay,
-                cancellationToken: cancellationToken
-            );
+            await UniTask.WaitForSeconds(entrySpawnDelay, cancellationToken: cancellationToken);
 
+            View.IsButtonsInteractable = true;
             View.ShowTotalScore(gameplaySystem.Score);
         }
     }

@@ -25,6 +25,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             View.RemainingTime = gameplaySystem.RemainingTime;
             View.Score = gameplaySystem.Score;
             View.PaintAmount = gameplaySystem.PaintAmount;
+            View.SpeedMultiplier = gameplaySystem.CurrentMultiplier;
         }
 
         protected override void OnViewHideEntered()
@@ -53,6 +54,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             }
 
             View.RemainingTime = gameplaySystem.RemainingTime;
+            View.SpeedMultiplier = gameplaySystem.CurrentMultiplier;
         }
 
         private void OnScoreChanged(ScoreChangedMessage message)

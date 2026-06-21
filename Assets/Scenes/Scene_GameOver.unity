@@ -838,6 +838,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142bbb0e980e41849f545d4194aea694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.TrophyZoneActor
+  initializingTransform: {fileID: 1394333115}
+  initializedTransform: {fileID: 1547416879}
   spawnAreaSize: {x: 3, y: 3}
   spawnRotation: 15
   entrySpawnDelay: 0.3

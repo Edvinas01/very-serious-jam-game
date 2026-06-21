@@ -56,7 +56,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 40
+    FieldOfView: 80
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -124,13 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.GameplayController
   introCamera: {fileID: 6868056181506637406}
   introPlayable: {fileID: 893833677348635595}
-  gameplayDuration: 60
-  maxScore: 1000
-  gameOverScene: {fileID: 11400000, guid: 848106c1d3df82142b22a5fca8da4cb6, type: 2}
-  pedestalObjects:
-  - {fileID: 11400000, guid: d406e59873d3fbd48899618ad96b0f32, type: 2}
-  - {fileID: 11400000, guid: 48a9ff9452d48cb44942f08f33213992, type: 2}
-  - {fileID: 11400000, guid: 1b1a90d0db8359248945239c7d173e74, type: 2}
+  data: {fileID: 11400000, guid: bab5403b1cea3de4d938c3ab5acca76e, type: 2}
 --- !u!320 &893833677348635595
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -148,6 +142,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -7945664351084952596, guid: 94c3645f069ec9144b21ece098ffc3df, type: 2}
     value: {fileID: 9127269286135637015}
+  - key: {fileID: 7093316798460471998, guid: 94c3645f069ec9144b21ece098ffc3df, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!95 &9127269286135637015

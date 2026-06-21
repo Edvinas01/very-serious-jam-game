@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
-  m_Name: Data_Actor_PedestalObject_Capsule
+  m_Name: Data_Paintable_Cylinder
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: Capsule
-  icon: {fileID: 0}
-  pedestalObjectPrefab: {fileID: 4123869648464709884, guid: 5cf1385ea7d27034ba15d45c1c80069d, type: 3}
+  objectName: Cylinder
+  icon: {fileID: 21300000, guid: 1e831dc96b717e54e9498889d7761fb8, type: 3}
+  paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
+  sharedMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+  material: {fileID: 2100000, guid: 5a2b4ef330deb6f4393e20fbd7984b3f, type: 2}
+  scale: {x: 0.5, y: 0.25, z: 0.5}
+  rotation: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0.25, z: 0}
   score: 500
-  fullyPaintedRange: {x: 0, y: 0.9}
+  fullyPaintedRange: {x: 0, y: 0.8}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
   slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}
