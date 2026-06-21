@@ -145,12 +145,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void OnInteractionEntered(InteractableInteractionEnteredArgs args)
         {
-            if (args.Interactor is not MonoBehaviour interactor)
+            if (args.Interactor.TryGetComponent(out HandActor handActor) == false)
             {
                 return;
             }
 
-            transform.SetParent(interactor.transform);
+            transform.SetParent(handActor.transform);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
         }

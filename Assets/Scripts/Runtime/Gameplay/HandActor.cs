@@ -1,5 +1,4 @@
-﻿using System;
-using InSun.GameCore.Interactables;
+﻿using InSun.GameCore.Interactables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,6 +20,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [Header("Movement")]
         [SerializeField]
         private float pushDistance = 1f;
+
+        [Min(0f)]
+        [SerializeField]
+        private float toolLength;
+
+        [Min(0f)]
+        [SerializeField]
+        private float pushCastRadius = 0.05f;
+
+        [SerializeField]
+        private LayerMask pushLayerMask;
 
         [SerializeField]
         private Camera targetCamera;
@@ -106,7 +116,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             if (isPushing)
             {
-                worldPosition.z = originalDistance + pushDistance;
+                var castOrigin = new Vector3(worldPosition.x, worldPosition.y, originalDistance);
+                var maxPush = pushDistance - toolLength;
+                var fullArmDistance = pushDistance + toolLength;
+
+                if (Physics.SphereCast(castOrigin, pushCastRadius, Vector3.forward, out var hit, fullArmDistance, pushLayerMask, QueryTriggerInteraction.Ignore))
+                {
+                    maxPush = Mathf.Max(0f, hit.distance - toolLength);
+                }
+
+                worldPosition.z = originalDistance + maxPush;
             }
             else
             {
