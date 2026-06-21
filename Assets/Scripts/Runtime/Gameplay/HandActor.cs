@@ -23,17 +23,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private float pushDistance = 1f;
 
         [SerializeField]
-        private Rigidbody handRigidBody;
-
-        [SerializeField]
         private Camera targetCamera;
 
-        [Header("Spring")]
+        [Header("Smooth Damp")]
         [SerializeField]
-        private float springForce = 50f;
-
-        [SerializeField]
-        private float springDamper = 5f;
+        private float smoothTime = 0.05f;
 
         [Header("Interaction")]
         [SerializeField]
@@ -51,13 +45,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private float originalDistance;
         private bool isPushing;
+        private Transform followTarget;
+        private Transform originalParent;
+        private Quaternion followRotation;
+        private Vector3 smoothVelocity;
 
         private void Awake()
         {
             propertyBlock = new MaterialPropertyBlock();
             originalDistance = transform.position.z;
 
-            SetupJoint();
+            CreateHandJoint();
         }
 
         private void Start()
@@ -88,6 +86,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private void Update()
         {
             MoveTarget();
+
+            if (followTarget == null)
+            {
+                transform.position = Vector3.SmoothDamp(transform.position, targetRigidbody.position, ref smoothVelocity, smoothTime);
+            }
+            else
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime / smoothTime);
+                transform.rotation = followRotation;
+            }
         }
 
         private void MoveTarget()
@@ -108,7 +116,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             targetRigidbody.MovePosition(worldPosition);
         }
 
-        private void SetupJoint()
+
+        private void CreateHandJoint()
         {
             var handJointTarget = new GameObject("HandJointTarget");
             handJointTarget.transform.SetParent(transform.parent);
@@ -116,32 +125,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             targetRigidbody = handJointTarget.AddComponent<Rigidbody>();
             targetRigidbody.isKinematic = true;
-
-            var joint = gameObject.AddComponent<ConfigurableJoint>();
-            joint.connectedBody = targetRigidbody;
-            joint.autoConfigureConnectedAnchor = false;
-            joint.anchor = Vector3.zero;
-            joint.connectedAnchor = Vector3.zero;
-
-            var drive = new JointDrive
-            {
-                positionSpring = springForce,
-                positionDamper = springDamper,
-                maximumForce = float.MaxValue
-            };
-
-            joint.xDrive = drive;
-            joint.yDrive = drive;
-            joint.zDrive = drive;
-
-            joint.xMotion = ConfigurableJointMotion.Free;
-            joint.yMotion = ConfigurableJointMotion.Free;
-            joint.zMotion = ConfigurableJointMotion.Free;
-
-            joint.angularXMotion = ConfigurableJointMotion.Locked;
-            joint.angularYMotion = ConfigurableJointMotion.Locked;
-            joint.angularZMotion = ConfigurableJointMotion.Locked;
         }
+
 
         private void OnPickUpPreformed(InputAction.CallbackContext context)
         {
@@ -169,6 +154,28 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private void OnHandPushedCancelled(InputAction.CallbackContext context)
         {
             isPushing = false;
+        }
+
+        public void SetFollowTarget(Transform target)
+        {
+            followTarget = target;
+            originalParent = transform.parent;
+            followRotation = transform.rotation;
+            transform.SetParent(target);
+        }
+
+        public void ClearFollowTarget()
+        {
+            transform.SetParent(originalParent);
+            transform.rotation = followRotation;
+            followTarget = null;
+            originalParent = null;
+            smoothVelocity = Vector3.zero;
+        }
+
+        public Rigidbody GetArmJointRigidbody()
+        {
+            return targetRigidbody;
         }
     }
 }
