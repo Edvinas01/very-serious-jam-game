@@ -37,6 +37,8 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 - [Cute Hamster by The guy that makes goofy stuff](https://sketchfab.com/3d-models/cute-hamster-c7082aba297d482aad4c826e0eb36de0)
 - [Pug by Liam.Bailey](https://sketchfab.com/3d-models/pug-319666fddfe94e5c9ef9beafcd1d0281)
 - [Toon Paint Brush - GameReady by onion_3d](https://sketchfab.com/3d-models/toon-paint-brush-gameready-fba7de3a8cf948468ca2526cff5433a7)
+- [Quirky Series - FREE Animals Pack by Omabuarts Studio](https://assetstore.unity.com/packages/3d/characters/animals/quirky-series-free-animals-pack-178235)
+- [Simple Modular Pillars by Knightferret Studios](https://assetstore.unity.com/packages/3d/environments/simple-modular-pillars-255707)
 
 ### Audio
 
