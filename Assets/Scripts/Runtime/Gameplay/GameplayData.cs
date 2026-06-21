@@ -14,7 +14,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
     {
         [Header("Gameplay")]
         [SerializeField]
-        private bool playIntro = true;
+        private bool isPlayIntro = true;
 
         [SerializeField]
         private float gameplayDuration = 60f;
@@ -35,7 +35,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private List<PaintableData> paintables;
 
-        public bool PlayIntro => playIntro;
+        public bool IsPlayIntro => isPlayIntro;
 
         public float GameplayDuration => gameplayDuration;
 
