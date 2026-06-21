@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
-    internal sealed class PedestalObjectActor : MonoBehaviour
+    internal sealed class PaintableActor : MonoBehaviour
     {
         [Header("General")]
         [SerializeField]
@@ -41,7 +41,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private int paintedPixelCount;
         private bool isPaintedThisFrame;
 
-        public PedestalObjectData Data { get; set; }
+        public PaintableData Data { get; set; }
 
         public float PaintAmount { get; private set; }
 
@@ -103,12 +103,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void OnEnable()
         {
-            Game.AddObject<int, PedestalObjectActor>(GetInstanceID(), this);
+            Game.AddObject<int, PaintableActor>(GetInstanceID(), this);
         }
 
         private void OnDisable()
         {
-            Game.RemoveObject<int, PedestalObjectActor>(GetInstanceID());
+            Game.RemoveObject<int, PaintableActor>(GetInstanceID());
         }
 
         private void LateUpdate()

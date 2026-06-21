@@ -36,7 +36,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Header("Pedestal Objects")]
         [SerializeField]
-        private List<PedestalObjectData> pedestalObjects;
+        private List<PaintableData> pedestalObjects;
 
         private GameplaySystem gameplaySystem;
         private ISceneSystem sceneSystem;
@@ -61,11 +61,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             gameplaySystem.StopGame();
         }
 
-        public PedestalObjectActor CreatePedestalObject(Transform parent)
+        public PaintableActor CreatePaintable(Transform parent)
         {
             if (pedestalObjects.TryGetRandom(out var pedestalObject))
             {
-                return pedestalObject.CreatePedestalObject(
+                return pedestalObject.CreatePaintable(
                     parent.position,
                     Quaternion.identity,
                     parent

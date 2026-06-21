@@ -106,13 +106,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             for (var index = 0; index < count; index++)
             {
                 var hit = HitBuffer[index];
-                var pedestalObject = hit.collider.GetComponentInParent<PedestalObjectActor>();
-                if (pedestalObject == false)
+                var paintable = hit.collider.GetComponentInParent<PaintableActor>();
+                if (paintable == false)
                 {
                     continue;
                 }
 
-                pedestalObject.Paint(
+                paintable.Paint(
                     uv: hit.textureCoord,
                     radius: paintTexelRadius,
                     color: paintColor

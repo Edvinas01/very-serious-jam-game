@@ -1,14 +1,15 @@
 ﻿using InSun.GameCore.SunnyInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
-    [SunnySettings(MenuPath = "Pedestal Objects")]
+    [SunnySettings(MenuPath = "Paintables")]
     [CreateAssetMenu(
-        menuName = "DoubleD/Very Serious Jam Game/Pedestal Object",
-        fileName = "Data_PedestalObject"
+        menuName = "DoubleD/Very Serious Jam Game/Paintable Data",
+        fileName = "Data_Paintable"
     )]
-    internal sealed class PedestalObjectData : ScriptableObject
+    internal sealed class PaintableData : ScriptableObject
     {
         [Header("Info")]
         [SerializeField]
@@ -18,8 +19,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private Sprite icon;
 
         [Header("Instantiation")]
+        [FormerlySerializedAs("pedestalObjectPrefab")]
         [SerializeField]
-        private PedestalObjectActor pedestalObjectPrefab;
+        private PaintableActor paintablePrefab;
 
         [Header("Scoring")]
         [Min(0)]
@@ -38,7 +40,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public string Name => objectName;
 
-        public GameObject Prefab => pedestalObjectPrefab ? pedestalObjectPrefab.gameObject : null;
+        public GameObject Prefab => paintablePrefab ? paintablePrefab.gameObject : null;
 
         public Sprite Icon => icon;
 
@@ -50,10 +52,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public AnimationClip SlideOutClip => slideOutClip;
 
-        public PedestalObjectActor CreatePedestalObject(Vector3 position, Quaternion rotation, Transform parent)
+        public PaintableActor CreatePaintable(Vector3 position, Quaternion rotation, Transform parent)
         {
-            var instance = Instantiate(pedestalObjectPrefab, position, rotation, parent);
-            instance.name = $"{nameof(PedestalObjectActor)} ({Name})";
+            var instance = Instantiate(paintablePrefab, position, rotation, parent);
+            instance.name = $"{nameof(PaintableActor)} ({Name})";
             instance.Data = this;
 
             return instance;

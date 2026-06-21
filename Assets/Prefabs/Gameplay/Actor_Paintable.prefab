@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 3927680282487132847}
   - component: {fileID: 6507820498644437029}
   m_Layer: 8
-  m_Name: Actor_PedestalObject
+  m_Name: Actor_Paintable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

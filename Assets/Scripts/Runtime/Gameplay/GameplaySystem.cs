@@ -13,11 +13,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private Transform fullyPaintedObjectTransform;
 
-        private readonly List<PedestalObjectActor> fullyPaintedObjects = new();
+        private readonly List<PaintableActor> fullyPaintedObjects = new();
 
         private IObjectGroup<PlayerActor> players;
         private IObjectGroup<PedestalActor> pedestals;
-        private IObjectGroup<PedestalObjectActor> pedestalObjects;
+        private IObjectGroup<PaintableActor> paintables;
 
         private CancellationTokenSource gameplayCancellation;
         private GameplayController context;
@@ -27,7 +27,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private int currentScore;
         private float currentPaintAmount;
 
-        public IReadOnlyList<PedestalObjectActor> FullyPaintedObjects => fullyPaintedObjects;
+        public IReadOnlyList<PaintableActor> FullyPaintedObjects => fullyPaintedObjects;
 
         public float PaintAmount
         {
@@ -104,9 +104,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             pedestals.OnObjectAdded += OnPedestalAdded;
             pedestals.OnObjectRemoved += OnPedestalRemoved;
 
-            pedestalObjects = Game.GetObjectGroup<PedestalObjectActor>();
-            pedestalObjects.OnObjectAdded += OnPedestalObjectAdded;
-            pedestalObjects.OnObjectRemoved += OnPedestalObjectRemoved;
+            paintables = Game.GetObjectGroup<PaintableActor>();
+            paintables.OnObjectAdded += OnPedestalObjectAdded;
+            paintables.OnObjectRemoved += OnPedestalObjectRemoved;
         }
 
         public void OnDisposed()
@@ -195,10 +195,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // Spaw pedestal object
             State = GameplayState.SpawningObject;
-            var pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
-            pedestalObject.gameObject.SetActive(false);
-            pedestalObject.OnPainted += OnObjectPainted;
-            await pedestalObject.SlideInAsync(cancellationToken);
+            var paintable = context.CreatePaintable(pedestal.ObjectParent);
+            paintable.gameObject.SetActive(false);
+            paintable.OnPainted += OnObjectPainted;
+            await paintable.SlideInAsync(cancellationToken);
             State = GameplayState.PaintingObject;
 
             // Game loop
@@ -214,19 +214,19 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 }
 
                 // Switch painted object
-                if (pedestalObject.PaintAmount >= 1f)
+                if (paintable.PaintAmount >= 1f)
                 {
-                    Score += pedestalObject.Data.Score;
+                    Score += paintable.Data.Score;
 
                     // Slide out old object
                     State = GameplayState.SpawningObject;
-                    await pedestalObject.SlideOutAsync(cancellationToken);
-                    fullyPaintedObjects.Add(pedestalObject);
+                    await paintable.SlideOutAsync(cancellationToken);
+                    fullyPaintedObjects.Add(paintable);
 
-                    pedestalObject.transform.position = fullyPaintedObjectTransform.transform.position;
-                    pedestalObject.transform.parent = fullyPaintedObjectTransform;
-                    pedestalObject.gameObject.SetActive(false);
-                    pedestalObject.OnPainted -= OnObjectPainted;
+                    paintable.transform.position = fullyPaintedObjectTransform.transform.position;
+                    paintable.transform.parent = fullyPaintedObjectTransform;
+                    paintable.gameObject.SetActive(false);
+                    paintable.OnPainted -= OnObjectPainted;
 
                     // GG: reached max score
                     if (Score >= context.MaxScore)
@@ -236,11 +236,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     }
 
                     // Slide in new object
-                    pedestalObject = context.CreatePedestalObject(pedestal.ObjectParent);
-                    pedestalObject.gameObject.SetActive(false);
-                    pedestalObject.OnPainted += OnObjectPainted;
+                    paintable = context.CreatePaintable(pedestal.ObjectParent);
+                    paintable.gameObject.SetActive(false);
+                    paintable.OnPainted += OnObjectPainted;
 
-                    await pedestalObject.SlideInAsync(cancellationToken);
+                    await paintable.SlideInAsync(cancellationToken);
                     State = GameplayState.PaintingObject;
                 }
 
@@ -278,14 +278,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             Debug.Log($"Removed Pedestal '{pedestal.name}'", pedestal);
         }
 
-        private void OnPedestalObjectAdded(PedestalObjectActor pedestalObject)
+        private void OnPedestalObjectAdded(PaintableActor paintable)
         {
-            Debug.Log($"Added PedestalObject '{pedestalObject.name}'", pedestalObject);
+            Debug.Log($"Added PedestalObject '{paintable.name}'", paintable);
         }
 
-        private void OnPedestalObjectRemoved(PedestalObjectActor pedestalObject)
+        private void OnPedestalObjectRemoved(PaintableActor paintable)
         {
-            Debug.Log($"Removed PedestalObject '{pedestalObject.name}'", pedestalObject);
+            Debug.Log($"Removed PedestalObject '{paintable.name}'", paintable);
         }
 
         private void OnPlayerAdded(PlayerActor player)

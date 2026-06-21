@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace DoubleD.VerySeriousJamGame.Editor.Gameplay
 {
-    [CustomEditor(typeof(PedestalObjectData))]
+    [CustomEditor(typeof(PaintableData))]
     internal sealed class PedestalObjectDataEditor : SunnyEditor
     {
         private const int TextureSize = 128;
@@ -28,7 +28,7 @@ namespace DoubleD.VerySeriousJamGame.Editor.Gameplay
 
         private void GenerateIconSprite()
         {
-            var data = (PedestalObjectData)target;
+            var data = (PaintableData)target;
 
             var (assetPath, fullPath) = GetSpritePath(data);
 
@@ -59,7 +59,7 @@ namespace DoubleD.VerySeriousJamGame.Editor.Gameplay
             ApplySprite(spriteBytes, assetPath, fullPath);
         }
 
-        private (string assetPath, string fullPath) GetSpritePath(PedestalObjectData data)
+        private (string assetPath, string fullPath) GetSpritePath(PaintableData data)
         {
             var safeName = string.IsNullOrWhiteSpace(data.Name) ? target.name : data.Name.Replace(" ", "_");
             var spriteName = $"PedestalObject_Icon_{safeName}";
