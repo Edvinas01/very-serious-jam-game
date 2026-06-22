@@ -69,3 +69,10 @@ MonoBehaviour:
   gameOverScene: {fileID: 11400000, guid: 848106c1d3df82142b22a5fca8da4cb6, type: 2}
   paintables:
   - {fileID: 11400000, guid: 68f1a3e082dc0e8458e30946af8f50fd, type: 2}
+  - {fileID: 11400000, guid: d406e59873d3fbd48899618ad96b0f32, type: 2}
+  - {fileID: 11400000, guid: 1b1a90d0db8359248945239c7d173e74, type: 2}
+  - {fileID: 11400000, guid: ffe516c3d0a7d2241934f06a3ee3d8e4, type: 2}
+  - {fileID: 11400000, guid: e74947e286c7a51468e06cefc74dca71, type: 2}
+  - {fileID: 11400000, guid: b4586213b96192b4098ed627f18616a4, type: 2}
+  - {fileID: 11400000, guid: 04ec0912237236a4f9d2449182b8ccea, type: 2}
+  - {fileID: 11400000, guid: b888df8df1f66e948b98be396aee1365, type: 2}
