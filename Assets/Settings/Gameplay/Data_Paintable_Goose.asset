@@ -20,12 +20,12 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 5a2b4ef330deb6f4393e20fbd7984b3f, type: 2}
   scale: {x: 0.5, y: 0.5, z: 0.5}
   rotation: {x: 0, y: 180, z: 0}
-  offset: {x: 0, y: 0.125, z: 0}
+  offset: {x: 0, y: 0, z: 0}
   maskDefaultWidth: 256
   maskDefaultHeight: 256
   maskResolutionScale: 0.25
   maskFilterMode: 1
-  score: 400
-  fullyPaintedRange: {x: 0, y: 0.8}
+  score: 450
+  fullyPaintedRange: {x: 0, y: 0.65}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
   slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}

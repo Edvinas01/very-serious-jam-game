@@ -18,8 +18,6 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 - [The Very Serious Juniper Dev Game Jam](https://itch.io/jam/theveryseriousjuniperdevgamejam)
 - [PixaTool Preset](PixaTool/Preset_Pixatool.preset)
 
-## APIs
-
 ## Attribution
 
 ### Code
@@ -37,10 +35,13 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 - [Cute Hamster by The guy that makes goofy stuff](https://sketchfab.com/3d-models/cute-hamster-c7082aba297d482aad4c826e0eb36de0)
 - [Pug by Liam.Bailey](https://sketchfab.com/3d-models/pug-319666fddfe94e5c9ef9beafcd1d0281)
 - [Toon Paint Brush - GameReady by onion_3d](https://sketchfab.com/3d-models/toon-paint-brush-gameready-fba7de3a8cf948468ca2526cff5433a7)
-- [Quirky Series - FREE Animals Pack by Omabuarts Studio](https://assetstore.unity.com/packages/3d/characters/animals/quirky-series-free-animals-pack-178235)
 - [Simple Modular Pillars by Knightferret Studios](https://assetstore.unity.com/packages/3d/environments/simple-modular-pillars-255707)
 - [Kebab - midpoly by Pierre.Bourdon](https://sketchfab.com/3d-models/kebab-midpoly-9e56cc9656ae4016b96cb4bb56fe3a43)
 - [3D Goose by Plewr](https://plewr.itch.io/goose)
+- [Procedural Watermelon [Free] by meow-vortex](https://sketchfab.com/3d-models/cactus-dr-c71ae26045a146548a77a84e26b91afew)
+- [Poison_Bottle by wolfmanos1](https://sketchfab.com/3d-models/poison-bottle-465306a1d7034416a02289a61f89a99b)
+- [Animated low poly toilet by Gamedirection](https://sketchfab.com/3d-models/animated-low-poly-toilet-c901dfa120a0487a9f5c9a2d241f70ab)
+- [Groovy Cactus 🌵 by TheoClarke](https://sketchfab.com/3d-models/groovy-cactus-ffabdcebe38e426ea6858602e90def39)
 
 ### Audio
 
