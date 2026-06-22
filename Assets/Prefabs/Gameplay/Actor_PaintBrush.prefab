@@ -144,7 +144,7 @@ MonoBehaviour:
   paintScore: 1
   paintParticles: {fileID: 7886550815633753027}
   paintTexelRadius: 6
-  isSmoothEdges: 0
+  isSmoothEdges: 1
   onPaintEntered:
     m_PersistentCalls:
       m_Calls: []

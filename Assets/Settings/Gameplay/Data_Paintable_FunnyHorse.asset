@@ -24,7 +24,7 @@ MonoBehaviour:
   maskDefaultWidth: 256
   maskDefaultHeight: 256
   maskResolutionScale: 0.5
-  maskFilterMode: 0
+  maskFilterMode: 1
   score: 500
   fullyPaintedRange: {x: 0, y: 0.55}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
