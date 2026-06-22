@@ -18,7 +18,7 @@ MonoBehaviour:
   sharedMesh: {fileID: 8704043944368765489, guid: 327306b11fe30bc409d446cbba429245, type: 3}
   texture: {fileID: 2800000, guid: 9f8284b54f8413e429335539723878d5, type: 3}
   material: {fileID: 2100000, guid: 5a2b4ef330deb6f4393e20fbd7984b3f, type: 2}
-  scale: {x: 0.6, y: 0.6, z: 0.6}
+  scale: {x: 0.8, y: 0.8, z: 0.8}
   rotation: {x: 0, y: 180, z: 0}
   offset: {x: 0, y: 0, z: 0}
   maskDefaultWidth: 256
