@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_Gameplay
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.GameplayData
   isPlayIntro: 0
-  gameplayDuration: 60
+  gameplayDuration: 180
   startingScore: 0
   scoreMultiplierCurve:
     serializedVersion: 2
