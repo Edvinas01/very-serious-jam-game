@@ -518,7 +518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0fb23996e74a138fa58064e9f80382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.GameplaySystem
-  fullyPaintedObjectTransform: {fileID: 456168241625349740}
 --- !u!1 &8903952689145618098
 GameObject:
   m_ObjectHideFlags: 0

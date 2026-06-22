@@ -101,7 +101,8 @@ GameObject:
   - component: {fileID: 907271507499519247}
   - component: {fileID: 903834376351855763}
   - component: {fileID: 1072270903636431866}
-  - component: {fileID: 6558826671384385569}
+  - component: {fileID: 636329064714557492}
+  - component: {fileID: 2137742974276779739}
   m_Layer: 9
   m_Name: Actor_Hand
   m_TagString: Untagged
@@ -141,11 +142,13 @@ MonoBehaviour:
   openHandTexture: {fileID: 2800000, guid: 00567b7b8da3f4e4a827d3f04c48ef1d, type: 3}
   closedHandTexture: {fileID: 2800000, guid: d79ff9d43fe316d44823ad3d1d464011, type: 3}
   pushDistance: 1
-  toolLength: 0.2
+  pullBackDistance: 0.5
+  toolLength: 0.15
+  noToolLength: 0
   pushCastRadius: 0.05
   pushLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   targetCamera: {fileID: 0}
   smoothTime: 0.05
   interactor: {fileID: 1072270903636431866}
@@ -170,8 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fde62d8177649f9b4ca0265be452be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Interactables.SimpleInteractor
---- !u!135 &6558826671384385569
-SphereCollider:
+  isSortHoveredByDistance: 1
+--- !u!136 &636329064714557492
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -188,6 +192,29 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Height: 0.35
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.1}
+--- !u!135 &2137742974276779739
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784971153794966932}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.08
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}

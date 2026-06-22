@@ -7,6 +7,9 @@ namespace InSun.GameCore.Interactables
 {
     public sealed class SimpleInteractor : MonoBehaviour, IInteractor
     {
+        [SerializeField]
+        private bool isSortHoveredByDistance = true;
+
         private readonly List<IInteractable> hoveredInteractables = new();
         private IInteractable selectedInteractable;
 
@@ -53,6 +56,11 @@ namespace InSun.GameCore.Interactables
 
         public void StartInteraction()
         {
+            if (isSortHoveredByDistance)
+            {
+                hoveredInteractables.Sort(CompareByDistanceToInteractor);
+            }
+
             var hoveredInteractable = hoveredInteractables.FirstOrDefault();
             if (hoveredInteractable == null)
             {
@@ -152,6 +160,22 @@ namespace InSun.GameCore.Interactables
                 OnInteractionEntered?.Invoke(interactable);
                 OnInteractionExited?.Invoke(interactable);
             }
+        }
+
+        private int CompareByDistanceToInteractor(IInteractable a, IInteractable b)
+        {
+            if (a is not Component aComp || b is not Component bComp)
+            {
+                return 0;
+            }
+
+            var posA = aComp.transform.position;
+            var posB = bComp.transform.position;
+
+            var dstA = (transform.position - posA).sqrMagnitude;
+            var dstB = (transform.position - posB).sqrMagnitude;
+
+            return dstA.CompareTo(dstB);
         }
     }
 }
