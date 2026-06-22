@@ -17,8 +17,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private float spinDecaySpeed = 0.4f;
 
+        [SerializeField]
+        private float maxSpinSpeed = 360f;
+
         public float ConstantSpeed => constantSpeed;
 
         public float SpinDecaySpeed => spinDecaySpeed;
+
+        public float MaxSpinSpeed => maxSpinSpeed;
     }
 }

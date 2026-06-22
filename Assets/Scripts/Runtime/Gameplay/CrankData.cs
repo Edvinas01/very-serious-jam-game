@@ -11,16 +11,26 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
     internal sealed class CrankData : ScriptableObject
     {
         [SerializeField]
-        private float torqueMultiplier = 2f;
+        private float maxTorque = 30f;
 
         [SerializeField]
-        private float damping = 7f;
+        private float maxAngularSpeed = 20f;
+
+        [SerializeField]
+        private float inputSmoothing = 5f;
+
+        [SerializeField]
+        private float damping = 2f;
 
         [Min(0f)]
         [SerializeField]
         private float rotationDeltaMultiplier = 0.1f;
 
-        public float TorqueMultiplier => torqueMultiplier;
+        public float MaxTorque => maxTorque;
+
+        public float InputSmoothing => inputSmoothing;
+
+        public float MaxAngularSpeed => maxAngularSpeed;
 
         public float Damping => damping;
 

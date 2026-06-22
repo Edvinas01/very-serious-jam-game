@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Data_Pedestal
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalData
   constantSpeed: 0
-  spinDecaySpeed: 0.4
+  spinDecaySpeed: 0.175
+  maxSpinSpeed: 800

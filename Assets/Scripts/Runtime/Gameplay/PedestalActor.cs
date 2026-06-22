@@ -30,7 +30,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public void AddSpinSpeed(float speed)
         {
-            currentSpinSpeed += speed;
+            currentSpinSpeed = Mathf.Clamp(currentSpinSpeed + speed, -data.MaxSpinSpeed, data.MaxSpinSpeed);
         }
     }
 }
