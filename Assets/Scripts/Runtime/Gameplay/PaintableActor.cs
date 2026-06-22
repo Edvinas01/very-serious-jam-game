@@ -189,7 +189,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             await animancer.Play(Data.SlideOutClip).ToUniTask(cancellationToken: cancellationToken);
         }
 
-        public void Paint(Vector2 uv, PaintBrushActor brush, bool isSmoothEdges)
+        public bool TryPaint(Vector2 uv, PaintBrushActor brush, bool isSmoothEdges)
         {
             var pixelData = paintMaskTexture.GetRawTextureData<Color32>();
             var targetColor = (Color32)brush.Color;
@@ -201,6 +201,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             var textureY = Mathf.RoundToInt(uv.y * textureH);
 
             var radiusSqr = radius * radius;
+            var isPainted = false;
 
             for (var dy = -radius; dy <= radius; dy++)
             {
@@ -228,23 +229,33 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                         paintedPixelCount++;
                     }
 
+                    Color32 colorPrev = pixelData[pixelIndex];
+                    Color32 colorNext;
+
                     // Apply some fade on edges
                     if (isSmoothEdges)
                     {
-                        var currentColor = pixelData[pixelIndex];
                         var colorFade = Mathf.InverseLerp(0, radiusSqr, distanceSqr);
-
-                        pixelData[pixelIndex] = Color.Lerp(targetColor, currentColor, colorFade);
+                        colorNext = Color.Lerp(targetColor, colorPrev, colorFade);
                     }
                     else
                     {
-                        pixelData[pixelIndex] = targetColor;
+                        colorNext = targetColor;
+                    }
+
+                    pixelData[pixelIndex] = colorNext;
+
+                    if (isPainted == false && colorPrev.Equals(colorNext) == false)
+                    {
+                        isPainted = true;
                     }
                 }
             }
 
             lastBrush = brush;
             isPaintedThisFrame = true;
+
+            return isPainted;
         }
     }
 }

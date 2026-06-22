@@ -158,9 +158,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     continue;
                 }
 
-                paintable.Paint(uv: hit.textureCoord, brush: this, isSmoothEdges: isSmoothEdges);
-
-                if (paintParticles)
+                var isPainted = paintable.TryPaint(uv: hit.textureCoord, brush: this, isSmoothEdges: isSmoothEdges);
+                if (isPainted && paintParticles)
                 {
                     var emitParams = new ParticleSystem.EmitParams
                     {
