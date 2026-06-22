@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
-  m_Name: Data_Paintable_Goose
+  m_Name: Data_Paintable_Watermelon
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: Goose
-  icon: {fileID: 21300000, guid: fec6d58030d887840b52148091256f8f, type: 3}
+  objectName: Watermelon
+  icon: {fileID: 21300000, guid: 34cbb2a544d69414d8f8c299c4b04ce9, type: 3}
   paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
-  sharedMesh: {fileID: 3791549743587090486, guid: d474bf4a74778cb49aea6fe831747472, type: 3}
-  texture: {fileID: 2800000, guid: 7762033b75f8c3f47a4cb08a67240809, type: 3}
+  sharedMesh: {fileID: -5859308341976906217, guid: 4b6c1b802898a744ba2a516c2915ad3e, type: 3}
+  texture: {fileID: 2800000, guid: 59578a0270e516f47869699abfe117c5, type: 3}
   material: {fileID: 2100000, guid: 5a2b4ef330deb6f4393e20fbd7984b3f, type: 2}
-  scale: {x: 0.5, y: 0.5, z: 0.5}
-  rotation: {x: 0, y: 180, z: 0}
-  offset: {x: 0, y: 0, z: 0}
+  scale: {x: 0.6, y: 0.6, z: 0.6}
+  rotation: {x: 0, y: 180, z: 90}
+  offset: {x: -0.18, y: 0.3, z: 0}
   maskDefaultWidth: 256
   maskDefaultHeight: 256
-  maskResolutionScale: 0.25
+  maskResolutionScale: 0.5
   maskFilterMode: 1
-  score: 400
+  score: 300
   fullyPaintedRange: {x: 0, y: 0.8}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
   slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}

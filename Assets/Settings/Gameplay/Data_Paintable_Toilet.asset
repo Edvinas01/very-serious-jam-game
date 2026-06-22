@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
-  m_Name: Data_Paintable_Goose
+  m_Name: Data_Paintable_Toilet
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: Goose
-  icon: {fileID: 21300000, guid: fec6d58030d887840b52148091256f8f, type: 3}
+  objectName: Toilet
+  icon: {fileID: 21300000, guid: ad97ba99bebe7cd41a3e4407ccb00afc, type: 3}
   paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
-  sharedMesh: {fileID: 3791549743587090486, guid: d474bf4a74778cb49aea6fe831747472, type: 3}
-  texture: {fileID: 2800000, guid: 7762033b75f8c3f47a4cb08a67240809, type: 3}
+  sharedMesh: {fileID: 509308304531610091, guid: 8cd016302eedd774dbf643f83eb2e141, type: 3}
+  texture: {fileID: 2800000, guid: d34d27e47a3244440ad3f6ad0b1806b3, type: 3}
   material: {fileID: 2100000, guid: 5a2b4ef330deb6f4393e20fbd7984b3f, type: 2}
-  scale: {x: 0.5, y: 0.5, z: 0.5}
+  scale: {x: 0.6, y: 0.6, z: 0.6}
   rotation: {x: 0, y: 180, z: 0}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0, z: 0.2}
   maskDefaultWidth: 256
   maskDefaultHeight: 256
   maskResolutionScale: 0.25
   maskFilterMode: 1
   score: 400
-  fullyPaintedRange: {x: 0, y: 0.8}
+  fullyPaintedRange: {x: 0, y: 0.35}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
   slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}
