@@ -64,6 +64,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Header("Input")]
         [SerializeField]
+        private InputActionReference pointerAction;
+
+        [SerializeField]
         private InputActionReference handPickUpAction;
 
         [SerializeField]
@@ -100,7 +103,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             propertyBlock.SetTexture("_BaseMap", openHandTexture);
             quadRenderer.SetPropertyBlock(propertyBlock);
 
-            previousMousePosition = Mouse.current.position.ReadValue();
+            previousMousePosition = pointerAction.action.ReadValue<Vector2>();
         }
 
         private void OnEnable()
@@ -140,7 +143,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void UpdateTilt()
         {
-            var mousePosition = Mouse.current.position.ReadValue();
+            var mousePosition = pointerAction.action.ReadValue<Vector2>();
             var delta = mousePosition - previousMousePosition;
             previousMousePosition = mousePosition;
 
@@ -174,9 +177,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void MoveTarget()
         {
-            var mousePosition = Mouse.current.position.ReadValue();
+            var pointerPosition = pointerAction.action.ReadValue<Vector2>();
             var distanceToPlane = originalDistance - targetCamera.transform.position.z;
-            var worldPosition = targetCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, distanceToPlane));
+            var worldPosition = targetCamera.ScreenToWorldPoint(new Vector3(pointerPosition.x, pointerPosition.y, distanceToPlane));
 
             if (isPushing)
             {
