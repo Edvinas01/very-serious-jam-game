@@ -23,7 +23,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Min(0f)]
         [SerializeField]
+        private float pullBackDistance;
+
+        [SerializeField]
         private float toolLength;
+
+        [SerializeField]
+        private float noToolLength;
 
         [Min(0f)]
         [SerializeField]
@@ -81,6 +87,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private Transform originalParent;
         private Quaternion followRotation;
         private Vector3 smoothVelocity;
+        private bool skipMoveTarget;
 
         private Vector2 previousMousePosition;
         private float currentTiltX;
@@ -177,27 +184,38 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void MoveTarget()
         {
+            if (skipMoveTarget)
+            {
+                skipMoveTarget = false;
+                return;
+            }
+
             var pointerPosition = pointerAction.action.ReadValue<Vector2>();
             var distanceToPlane = originalDistance - targetCamera.transform.position.z;
             var worldPosition = targetCamera.ScreenToWorldPoint(new Vector3(pointerPosition.x, pointerPosition.y, distanceToPlane));
 
-            if (isPushing)
-            {
-                var castOrigin = new Vector3(worldPosition.x, worldPosition.y, originalDistance);
-                var maxPush = pushDistance - toolLength;
-                var fullArmDistance = pushDistance + toolLength;
+            var activeToolLength = heldBrush != null ? toolLength : noToolLength;
+            var castOrigin = new Vector3(worldPosition.x, worldPosition.y, originalDistance - pullBackDistance);
 
-                if (Physics.SphereCast(castOrigin, pushCastRadius, Vector3.forward, out var hit, fullArmDistance, pushLayerMask, QueryTriggerInteraction.Ignore))
+            var maxPush = isPushing ? pushDistance - activeToolLength : 0f;
+            var fullArmDistance = pullBackDistance + pushDistance + activeToolLength;
+
+            var hits = Physics.SphereCastAll(castOrigin, pushCastRadius, Vector3.forward, fullArmDistance, pushLayerMask);
+            foreach (var hit in hits)
+            {
+                if (hit.collider.transform.IsChildOf(transform))
                 {
-                    maxPush = Mathf.Max(0f, hit.distance - toolLength);
+                    continue;
                 }
 
-                worldPosition.z = originalDistance + maxPush;
+                var pushCandidate = hit.distance - pullBackDistance - activeToolLength;
+                if (pushCandidate < maxPush)
+                {
+                    maxPush = pushCandidate;
+                }
             }
-            else
-            {
-                worldPosition.z = originalDistance;
-            }
+
+            worldPosition.z = originalDistance + maxPush;
 
             targetRigidbody.MovePosition(worldPosition);
         }
@@ -252,11 +270,23 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public void ClearFollowTarget()
         {
+            var handWorldPos = transform.position;
+
             transform.SetParent(originalParent);
             transform.rotation = followRotation;
+
             followTarget = null;
             originalParent = null;
             smoothVelocity = Vector3.zero;
+
+            targetRigidbody.position = handWorldPos;
+            transform.position = handWorldPos;
+
+            skipMoveTarget = true;
+
+            var screenPos = targetCamera.WorldToScreenPoint(handWorldPos);
+            Mouse.current.WarpCursorPosition(new Vector2(screenPos.x, screenPos.y));
+            previousMousePosition = new Vector2(screenPos.x, screenPos.y);
         }
 
         public Rigidbody GetArmJointRigidbody()
