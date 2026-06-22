@@ -68,6 +68,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   gameOverScene: {fileID: 11400000, guid: 848106c1d3df82142b22a5fca8da4cb6, type: 2}
   paintables:
+  - {fileID: 11400000, guid: ffe516c3d0a7d2241934f06a3ee3d8e4, type: 2}
+  - {fileID: 11400000, guid: 48a9ff9452d48cb44942f08f33213992, type: 2}
   - {fileID: 11400000, guid: 1b1a90d0db8359248945239c7d173e74, type: 2}
   - {fileID: 11400000, guid: d406e59873d3fbd48899618ad96b0f32, type: 2}
-  - {fileID: 11400000, guid: 48a9ff9452d48cb44942f08f33213992, type: 2}
+  - {fileID: 11400000, guid: e74947e286c7a51468e06cefc74dca71, type: 2}

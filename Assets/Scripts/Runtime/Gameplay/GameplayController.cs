@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DoubleD.VerySeriousJamGame.Runtime.Utilities;
@@ -39,6 +39,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private CrankActor crank;
 
         private int currentPaintableScore;
+        private readonly List<PaintableData> paintableQueue = new();
 
         private void Awake()
         {
@@ -68,6 +69,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 enabled = false;
                 return;
             }
+
+            ReloadPaintableQueue();
         }
 
         private void Start()
@@ -217,16 +220,27 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private PaintableActor CreatePaintable(Transform parent)
         {
-            if (data.Paintables.TryGetRandom(out var pedestalObject))
+            if (paintableQueue.Count <= 0)
             {
-                return pedestalObject.CreatePaintable(
-                    pos: parent.position,
-                    rot: Quaternion.identity,
-                    parent: parent
-                );
+                ReloadPaintableQueue();
             }
 
-            throw new Exception("No pedestal object found");
+            var index = paintableQueue.Count - 1;
+            var pedestalObject = paintableQueue[index];
+            paintableQueue.RemoveAt(index);
+
+            return pedestalObject.CreatePaintable(
+                pos: parent.position,
+                rot: Quaternion.identity,
+                parent: parent
+            );
+        }
+
+        private void ReloadPaintableQueue()
+        {
+            paintableQueue.Clear();
+            paintableQueue.AddRange(data.Paintables);
+            paintableQueue.Shuffle();
         }
 
         private void LoadGameOverScene()

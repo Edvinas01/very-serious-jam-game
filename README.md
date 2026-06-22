@@ -39,6 +39,8 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 - [Toon Paint Brush - GameReady by onion_3d](https://sketchfab.com/3d-models/toon-paint-brush-gameready-fba7de3a8cf948468ca2526cff5433a7)
 - [Quirky Series - FREE Animals Pack by Omabuarts Studio](https://assetstore.unity.com/packages/3d/characters/animals/quirky-series-free-animals-pack-178235)
 - [Simple Modular Pillars by Knightferret Studios](https://assetstore.unity.com/packages/3d/environments/simple-modular-pillars-255707)
+- [Kebab - midpoly by Pierre.Bourdon](https://sketchfab.com/3d-models/kebab-midpoly-9e56cc9656ae4016b96cb4bb56fe3a43)
+- [3D Goose by Plewr](https://plewr.itch.io/goose)
 
 ### Audio
 
