@@ -36,12 +36,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private Material material;
 
         [FormerlySerializedAs("paintableScale")]
-        [Min(0)]
+        [Min(0f)]
         [SerializeField]
         private Vector3 scale = new(1f, 1f, 1f);
 
         [FormerlySerializedAs("paintableRotation")]
-        [Min(0)]
         [SerializeField]
         private Vector3 rotation = new(0f, 0f, 0f);
 
