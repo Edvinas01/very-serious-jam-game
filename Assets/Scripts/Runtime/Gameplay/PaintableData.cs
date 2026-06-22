@@ -61,7 +61,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private float maskResolutionScale = 0.5f;
 
         [SerializeField]
-        private FilterMode maskFilterMode = FilterMode.Point;
+        private FilterMode maskFilterMode = FilterMode.Bilinear;
 
         [Header("Scoring")]
         [Min(0)]
