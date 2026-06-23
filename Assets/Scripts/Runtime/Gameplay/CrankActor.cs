@@ -1,4 +1,5 @@
 using DoubleD.VerySeriousJamGame.Runtime.Audio;
+using DoubleD.VerySeriousJamGame.Runtime.Utilities;
 using InSun.GameCore.Interactables;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +21,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [SerializeField]
         private SimpleInteractable interactable;
+
+        [SerializeField]
+        private TransformMover asideMover;
 
         [Header("Grabbing")]
         [SerializeField]
@@ -88,6 +92,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
 
             UpdateSpinAudio(Mathf.Abs(RotationDelta));
+        }
+
+        public void MoveAside()
+        {
+            asideMover.MoveToTarget();
+        }
+
+        public void MoveBack()
+        {
+            asideMover.MoveBack();
         }
 
         private void OnInteractionEntered(InteractableInteractionEnteredArgs args)

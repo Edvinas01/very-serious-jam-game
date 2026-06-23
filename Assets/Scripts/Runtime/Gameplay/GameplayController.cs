@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DoubleD.VerySeriousJamGame.Runtime.Utilities;
 using InSun.GameCore;
+using InSun.GameCore.Interactables;
 using InSun.GameCore.Scenes;
 using InSun.GameCore.Utilities;
 using Unity.Cinemachine;
@@ -34,9 +36,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private ISceneSystem sceneSystem;
         private CancellationTokenSource gameplayCancellation;
 
+        private HandActor hand;
         private PlayerActor player;
         private PedestalActor pedestal;
         private CrankActor crank;
+        private PaletteActor palette;
+        private List<PaintBrushActor> brushes;
 
         private int currentPaintableScore;
         private readonly List<PaintableData> paintableQueue = new();
@@ -45,6 +50,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             gameplaySystem = Game.GetObject<GameplaySystem>();
             sceneSystem = Game.GetObject<ISceneSystem>();
+
+            brushes = FindObjectsByType<PaintBrushActor>(FindObjectsSortMode.None).ToList();
+            hand = FindAnyObjectByType<HandActor>();
+            if (hand == false)
+            {
+                Debug.LogError("No Hand found in scene, gameplay will not start", this);
+                enabled = false;
+                return;
+            }
 
             player = FindAnyObjectByType<PlayerActor>();
             if (player == false)
@@ -70,7 +84,39 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 return;
             }
 
+            palette = FindAnyObjectByType<PaletteActor>();
+            if (palette == false)
+            {
+                Debug.LogError("No Palette found in scene, gameplay will not start", this);
+                enabled = false;
+                return;
+            }
+
             ReloadPaintableQueue();
+        }
+
+        private void OnEnable()
+        {
+            foreach (var brush in brushes)
+            {
+                if (brush.TryGetComponent<IInteractable>(out var interactor))
+                {
+                    interactor.OnInteractionEntered += OnInteractionEntered;
+                    interactor.OnInteractionExited += OnInteractionExited;
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (var brush in brushes)
+            {
+                if (brush.TryGetComponent<IInteractable>(out var interactor))
+                {
+                    interactor.OnInteractionEntered -= OnInteractionEntered;
+                    interactor.OnInteractionExited -= OnInteractionExited;
+                }
+            }
         }
 
         private void Start()
@@ -203,6 +249,18 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
 
             LoadGameOverScene();
+        }
+
+        private void OnInteractionEntered(InteractableInteractionEnteredArgs args)
+        {
+            palette.MoveAside();
+            // crank.MoveAside();
+        }
+
+        private void OnInteractionExited(InteractableInteractionExitedArgs args)
+        {
+            palette.MoveBack();
+            // crank.MoveBack();
         }
 
         private void OnObjectPainted(PaintedArgs args)

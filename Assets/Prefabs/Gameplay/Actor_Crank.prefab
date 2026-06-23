@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 6084417814831146444}
   - component: {fileID: 600812143892464459}
   - component: {fileID: 8707825538216795170}
+  - component: {fileID: 8701891946391489274}
   m_Layer: 9
   m_Name: Actor_Crank
   m_TagString: Untagged
@@ -413,6 +414,7 @@ MonoBehaviour:
   handleTransform: {fileID: 739302180084238648}
   crankRigidbody: {fileID: 6084417814831146444}
   interactable: {fileID: 8707825538216795170}
+  asideMover: {fileID: 8701891946391489274}
   anchorOffsetTransform: {fileID: 6196709523196291435}
   spinAudioSource: {fileID: 3601365189683162660}
   delta: 0
@@ -443,6 +445,20 @@ MonoBehaviour:
   onSelectExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8701891946391489274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7501535628953768836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8da6b74584444e4a8efb2c545b42152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Utilities.TransformMover
+  moveTarget: {fileID: 0}
+  moveSpeed: 5
 --- !u!1 &8975820083603097649
 GameObject:
   m_ObjectHideFlags: 0

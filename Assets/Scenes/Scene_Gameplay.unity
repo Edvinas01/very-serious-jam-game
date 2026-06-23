@@ -508,6 +508,37 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &504723597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 504723598}
+  m_Layer: 0
+  m_Name: Actor_Crank_Aside
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &504723598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504723597}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.36, y: 0.491, z: -1.09}
+  m_LocalScale: {x: 0.3, y: 0.039999995, z: 0.3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1575031536}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &620286151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -861,6 +892,37 @@ Transform:
   - {fileID: 2083311619}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1217667385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1217667386}
+  m_Layer: 0
+  m_Name: Palette_Aside
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1217667386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217667385}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.2767822, y: 0.77843934, z: -0.25816706, w: 0.5007731}
+  m_LocalPosition: {x: -0.556, y: 0.9345, z: -1.483}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1575031536}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1274663247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6106512254828134155, guid: 9a033ef1acd3aa7419ddc14503d848bf, type: 3}
@@ -876,6 +938,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1426500766}
   - component: {fileID: 1426500767}
+  - component: {fileID: 1426500769}
+  - component: {fileID: 1426500768}
+  - component: {fileID: 1426500770}
+  - component: {fileID: 1426500771}
   m_Layer: 0
   m_Name: Palette
   m_TagString: Untagged
@@ -921,6 +987,121 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1426500768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426500765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8da6b74584444e4a8efb2c545b42152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Utilities.TransformMover
+  moveTarget: {fileID: 1217667386}
+  moveSpeed: 5
+--- !u!114 &1426500769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426500765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 944edd8cb98943db9b55f85afb002410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PaletteActor
+  asideMover: {fileID: 1426500768}
+  showTween: {fileID: 1426500770}
+--- !u!114 &1426500770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426500765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d701a6b0d7d456b9167773bd727cb76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Animations.ScaleAnimation
+  target: {fileID: 1426500766}
+  startScaleMode: 0
+  startScale: {x: 0, y: 0, z: 0}
+  endScaleMode: 0
+  endScale: {x: 1, y: 1, z: 1}
+  ease: 9
+  duration: {x: 2, y: 2}
+  isPlayOnStart: 0
+  isPlayOnce: 0
+  isDestroyOnCompleted: 0
+  isIndependentUpdate: 0
+  isTriggerUnityEvents: 1
+  onPlayEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayExited:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1426500771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426500765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: cb71abdea709b0b4593619bb8449617a, type: 2}
+    - {fileID: 11400000, guid: fff04df0a5c91cc4693f5d049680127c, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 246230698}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1426500770}
+          m_TargetAssemblyTypeName: InSun.GameCore.Animations.ScaleAnimation, InSun.GameCore
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 246230698}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &1442120190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2852110260713559575, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
@@ -1012,8 +1193,10 @@ Transform:
   - {fileID: 1442120190}
   - {fileID: 1672154078}
   - {fileID: 1751340928}
+  - {fileID: 504723598}
   - {fileID: 1274663247}
   - {fileID: 1426500766}
+  - {fileID: 1217667386}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1642944507 stripped
@@ -1955,12 +2138,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
       propertyPath: m_SceneBindings.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
       propertyPath: m_SceneBindings.Array.data[2].key
       value: 
       objectReference: {fileID: 7973729309811023098, guid: 94c3645f069ec9144b21ece098ffc3df, type: 2}
+    - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
+      propertyPath: m_SceneBindings.Array.data[3].key
+      value: 
+      objectReference: {fileID: 8490696400577498684, guid: 94c3645f069ec9144b21ece098ffc3df, type: 2}
+    - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
+      propertyPath: m_SceneBindings.Array.data[4].key
+      value: 
+      objectReference: {fileID: 8490696400577498684, guid: 94c3645f069ec9144b21ece098ffc3df, type: 2}
     - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
       propertyPath: m_SceneBindings.Array.data[1].value
       value: 
@@ -1969,6 +2160,14 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[2].value
       value: 
       objectReference: {fileID: 2083311620}
+    - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
+      propertyPath: m_SceneBindings.Array.data[3].value
+      value: 
+      objectReference: {fileID: 1426500771}
+    - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
+      propertyPath: m_SceneBindings.Array.data[4].value
+      value: 
+      objectReference: {fileID: 1426500771}
     - target: {fileID: 2445969886325984365, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
       propertyPath: m_Name
       value: Actor_GameplayController
@@ -2070,6 +2269,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Actor_Crank
       objectReference: {fileID: 0}
+    - target: {fileID: 8701891946391489274, guid: 499382e9cafa61d43a64c807abd974b5, type: 3}
+      propertyPath: moveTarget
+      value: 
+      objectReference: {fileID: 504723598}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
