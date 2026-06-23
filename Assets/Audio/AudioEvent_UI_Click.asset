@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Audio.UnityAudioEventData
   mixerGroup: {fileID: 6566003639229602125, guid: 0c0ca4d171ba3654fa9b5b4373699839, type: 2}
   audioClips:
-  - {fileID: 8300000, guid: 55db08fea55926342958e2466ccbfbb5, type: 3}
-  volumeRange: {x: 1, y: 1}
+  - {fileID: 8300000, guid: 633faf6f2d5fc4f4aa73cb4023b417f6, type: 3}
+  - {fileID: 8300000, guid: 84dd79e63e78a6d4cab479e2a72f69c1, type: 3}
+  - {fileID: 8300000, guid: b0e05473805f2ce4fa164878507aee75, type: 3}
+  - {fileID: 8300000, guid: 1d5bc1e318d7313468a889eab0b61f20, type: 3}
+  volumeRange: {x: 0.7, y: 0.7}
   pitchRange: {x: 0.9, y: 1.2}
   playTimeRange: {x: 0, y: 0}
   panningRange: {x: 0, y: 0}
