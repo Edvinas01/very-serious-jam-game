@@ -174,11 +174,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // Spawn pedestal object
             gameplaySystem.State = GameplayState.SpawningObject;
 
-            var paintable = CreatePaintable(pedestal.ObjectParent);
+            var paintable = CreatePaintable(pedestal.ObjectParent.transform.position, null);
             paintable.gameObject.SetActive(false);
             paintable.OnPainted += OnObjectPainted;
 
-            await paintable.SlideInAsync(cancellationToken);
+            await paintable.SlideInAsync(
+                onTouchedDown: () => { paintable.transform.parent = pedestal.ObjectParent; },
+                cancellationToken: cancellationToken
+            );
 
             gameplaySystem.State = GameplayState.PaintingObject;
             gameplaySystem.CurrentPaintableData = paintable;
@@ -211,7 +214,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     paintable.OnPainted -= OnObjectPainted;
 
                     // Slide in new object
-                    paintable = CreatePaintable(pedestal.ObjectParent);
+                    paintable = CreatePaintable(pedestal.ObjectParent.transform.position, null);
                     paintable.gameObject.SetActive(false);
                     paintable.OnPainted += OnObjectPainted;
 
@@ -219,7 +222,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     currentPaintableScore = 0;
                     gameplaySystem.State = GameplayState.PaintingObject;
 
-                    await paintable.SlideInAsync(cancellationToken);
+                    await paintable.SlideInAsync(
+                        onTouchedDown: () => { paintable.transform.parent = pedestal.ObjectParent; },
+                        cancellationToken: cancellationToken
+                    );
 
                     gameplaySystem.CurrentPaintableData = paintable;
                 }
@@ -276,7 +282,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             gameplaySystem.Score += scoreThisTick;
         }
 
-        private PaintableActor CreatePaintable(Transform parent)
+        private PaintableActor CreatePaintable(Vector3 position, Transform parent)
         {
             if (paintableQueue.Count <= 0)
             {
@@ -288,7 +294,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             paintableQueue.RemoveAt(index);
 
             return pedestalObject.CreatePaintable(
-                pos: parent.position,
+                pos: position,
                 rot: Quaternion.identity,
                 parent: parent
             );

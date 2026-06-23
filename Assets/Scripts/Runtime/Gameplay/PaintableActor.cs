@@ -220,7 +220,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             speakCooldown = Data.SpeakCooldownRange.GetRandomFloat();
         }
 
-        public async UniTask SlideInAsync(CancellationToken cancellationToken)
+        public async UniTask SlideInAsync(CancellationToken cancellationToken, Action onTouchedDown)
         {
             var clip = Data.SlideInClip;
             clip.SampleAnimation(gameObject, 0f);
@@ -230,6 +230,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             appearAudioSource.PlayUsing(data.LiftDownAudio);
 
             await animancer.Play(clip).ToUniTask(cancellationToken: cancellationToken);
+            onTouchedDown?.Invoke();
             await UniTask.WaitForSeconds(0.5f, cancellationToken: cancellationToken);
             isShowing = true;
 
