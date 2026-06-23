@@ -52,7 +52,7 @@ MonoBehaviour:
   speakLiftDownAudio:
     clips:
     - {fileID: 8300000, guid: d9fd39ca6a5439541a0ea2c0654915f9, type: 3}
-    pitchRange: {x: 0.9, y: 1.2}
+    pitchRange: {x: 0.7, y: 0.8}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
     isFadeInOnPlay: 0

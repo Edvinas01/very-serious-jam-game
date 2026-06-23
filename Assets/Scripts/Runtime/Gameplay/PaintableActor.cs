@@ -64,6 +64,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private bool isPaintedThisFrame;
 
         private float speakCooldown;
+        private bool isShowing;
 
         public PaintableData Data => data;
 
@@ -88,6 +89,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void Update()
         {
+            if (isShowing == false)
+            {
+                return;
+            }
+
             speakCooldown -= Time.deltaTime;
 
             if (speakCooldown <= 0)
@@ -212,17 +218,22 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             await animancer.Play(clip).ToUniTask(cancellationToken: cancellationToken);
             await UniTask.WaitForSeconds(0.5f, cancellationToken: cancellationToken);
+            isShowing = true;
 
             Speak(data.SpeakLiftDownAudio);
         }
 
         public async UniTask SlideOutAsync(CancellationToken cancellationToken)
         {
+            isShowing = false;
+
             disappearAudioSource.PlayUsing(data.LiftUpAudio);
             Speak(data.SpeakLiftUpAudio);
 
             await animancer.Play(Data.SlideOutClip).ToUniTask(cancellationToken: cancellationToken);
             await UniTask.WaitForSeconds(1f, cancellationToken: cancellationToken);
+
+            gameObject.SetActive(false);
         }
 
         public bool TryPaint(Vector2 uv, PaintBrushActor brush, bool isSmoothEdges)
