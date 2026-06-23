@@ -32,7 +32,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private Rigidbody handTargetRigidbody;
         private float smoothedInput;
 
-        public float RotationDelta { get; private set; }
+        [Header("Runtime")]
+        [SerializeField]
+        private float delta;
+
+        public float RotationDelta
+        {
+            get => delta;
+            private set => delta = value;
+        }
 
         private void OnEnable()
         {

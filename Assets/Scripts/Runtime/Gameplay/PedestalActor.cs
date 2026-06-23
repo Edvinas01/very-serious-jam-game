@@ -18,6 +18,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private AudioSource spinAudioSource;
 
+        [Header("Runtime")]
+        [SerializeField]
         private float currentSpinSpeed;
 
         public float SpinSpeed => data.ConstantSpeed + currentSpinSpeed;
@@ -47,8 +49,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 return;
             }
 
+            var volumeValue = data.SpinVolumeCurve.Evaluate(absSpeed);
             var pitchValue = data.SpinPitchCurve.Evaluate(absSpeed);
-            if (pitchValue <= 0f)
+            if (volumeValue <= 0f)
             {
                 spinAudioSource.Stop();
                 return;
@@ -59,6 +62,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 spinAudioSource.PlayUsing(data.SpinAudio);
             }
 
+            spinAudioSource.volume = volumeValue;
             spinAudioSource.pitch = pitchValue;
         }
     }

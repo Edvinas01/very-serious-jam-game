@@ -17,3 +17,42 @@ MonoBehaviour:
   inputSmoothing: 10
   damping: 1.5
   rotationDeltaMultiplier: 0.25
+  spinAudio:
+    clips:
+    - {fileID: 8300000, guid: e2402647f9e10d546bbe227f0bbe7394, type: 3}
+    pitchRange: {x: 1, y: 1}
+    volumeRange: {x: 0.8, y: 0.8}
+    isLooping: 1
+  rotationDeltaPitchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.014175415
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 1
+      inSlope: -0.02273032
+      outSlope: -0.02273032
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.207226
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -28,6 +28,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private AnimationCurve spinPitchCurve = AnimationCurve.Linear(0f, 0.5f, 1f, 2f);
 
+        [SerializeField]
+        private AnimationCurve spinVolumeCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+
         public float ConstantSpeed => constantSpeed;
 
         public float SpinDecaySpeed => spinDecaySpeed;
@@ -37,5 +40,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public AudioData SpinAudio => spinAudio;
 
         public AnimationCurve SpinPitchCurve => spinPitchCurve;
+
+        public AnimationCurve SpinVolumeCurve => spinVolumeCurve;
     }
 }

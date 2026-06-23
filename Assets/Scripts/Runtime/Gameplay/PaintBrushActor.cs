@@ -52,9 +52,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private bool isSmoothEdges = true;
 
+        [Min(0f)]
+        [SerializeField]
+        private float paintSmoothing = 10f;
+
         [Header("Audio")]
         [SerializeField]
         private AudioSource paintAudioSource;
+
+        [SerializeField]
+        private AnimationCurve paintValueVolumeCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
         [SerializeField]
         private AudioData paintAudio;
@@ -68,6 +75,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private static readonly RaycastHit[] HitBuffer = new RaycastHit[10];
         private MaterialPropertyBlock paintTipPropertyBlock;
+
+        private float paintAmount;
 
         private Transform originalParent;
         private Vector3 originalLocalPosition;
@@ -155,8 +164,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 queryTriggerInteraction: QueryTriggerInteraction.Ignore
             );
 
-            IsPainting = false;
-
+            var isRaycastPainted = false;
             for (var index = 0; index < count; index++)
             {
                 var hit = HitBuffer[index];
@@ -179,11 +187,35 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     paintParticles.Emit(emitParams, 1);
                 }
 
-                IsPainting = true;
+                if (isPainted)
+                {
+                    isRaycastPainted = true;
+                }
             }
 
-            var isPaintingNext = IsPainting;
-            UpdatePaintingEvents(isPaintingPrev, isPaintingNext);
+            var paintTarget = isRaycastPainted ? 1f : 0f;
+            paintAmount = Mathf.Lerp(paintAmount, paintTarget, paintSmoothing * Time.fixedDeltaTime);
+            IsPainting = paintAmount >= 0.5f;
+
+            if (paintAudioSource)
+            {
+                var audioVolume = paintValueVolumeCurve.Evaluate(paintAmount);
+                if (audioVolume > 0f)
+                {
+                    paintAudioSource.volume = audioVolume;
+
+                    if (paintAudioSource.isPlaying == false)
+                    {
+                        paintAudioSource.PlayUsing(paintAudio);
+                    }
+                }
+                else
+                {
+                    paintAudioSource.Stop();
+                }
+            }
+
+            UpdatePaintingEvents(isPaintingPrev, IsPainting);
         }
 
         private void OnHoverEntered(InteractableHoverEnteredArgs args)
@@ -231,16 +263,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             if (isPaintingNext)
             {
-                if (!paintAudioSource.isPlaying)
-                {
-                    paintAudioSource.PlayUsing(paintAudio);
-                }
-
                 onPaintEntered.Invoke();
             }
             else
             {
-                paintAudioSource.Stop();
                 onPaintExited.Invoke();
             }
         }
