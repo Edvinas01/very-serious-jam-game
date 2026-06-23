@@ -1,3 +1,4 @@
+using DoubleD.VerySeriousJamGame.Runtime.Audio;
 using InSun.GameCore.SunnyInspector;
 using UnityEngine;
 
@@ -20,10 +21,21 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private float maxSpinSpeed = 360f;
 
+        [Header("Audio")]
+        [SerializeField]
+        private AudioData spinAudio;
+
+        [SerializeField]
+        private AnimationCurve spinPitchCurve = AnimationCurve.Linear(0f, 0.5f, 1f, 2f);
+
         public float ConstantSpeed => constantSpeed;
 
         public float SpinDecaySpeed => spinDecaySpeed;
 
         public float MaxSpinSpeed => maxSpinSpeed;
+
+        public AudioData SpinAudio => spinAudio;
+
+        public AnimationCurve SpinPitchCurve => spinPitchCurve;
     }
 }

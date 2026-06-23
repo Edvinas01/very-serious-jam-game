@@ -1,3 +1,4 @@
+using DoubleD.VerySeriousJamGame.Runtime.Audio;
 using InSun.GameCore.Interactables;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,6 +24,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [Header("Grabbing")]
         [SerializeField]
         private Transform anchorOffsetTransform;
+
+        [Header("Audio")]
+        [SerializeField]
+        private AudioSource spinAudioSource;
 
         private Rigidbody handTargetRigidbody;
         private float smoothedInput;
@@ -73,6 +78,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             {
                 crankRigidbody.AddTorque(Vector3.back * (smoothedInput * data.MaxTorque));
             }
+
+            UpdateSpinAudio(Mathf.Abs(RotationDelta));
         }
 
         private void OnInteractionEntered(InteractableInteractionEnteredArgs args)
@@ -102,6 +109,28 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private void OnHoverEntered(InteractableHoverEnteredArgs args)
         {
+        }
+
+        private void UpdateSpinAudio(float rotationDelta)
+        {
+            if (spinAudioSource == false || data.SpinAudio == null)
+            {
+                return;
+            }
+
+            var pitchValue = data.RotationDeltaPitchCurve.Evaluate(rotationDelta);
+            if (pitchValue <= 0f)
+            {
+                spinAudioSource.Stop();
+                return;
+            }
+
+            if (spinAudioSource.isPlaying == false)
+            {
+                spinAudioSource.PlayUsing(data.SpinAudio);
+            }
+
+            spinAudioSource.pitch = pitchValue;
         }
     }
 }

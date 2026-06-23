@@ -1,4 +1,5 @@
-﻿using InSun.GameCore.Interactables;
+﻿using DoubleD.VerySeriousJamGame.Runtime.Audio;
+using InSun.GameCore.Interactables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -67,6 +68,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [SerializeField]
         private PedestalActor pedestal;
+
+        [Header("Audio")]
+        [SerializeField]
+        private AudioSource handAudioSource;
+
+        [SerializeField]
+        private AudioData grabAudio;
+
+        [SerializeField]
+        private AudioData dropAudio;
 
         [Header("Input")]
         [SerializeField]
@@ -238,6 +249,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             propertyBlock.SetTexture("_BaseMap", closedHandTexture);
             quadRenderer.SetPropertyBlock(propertyBlock);
 
+            handAudioSource.PlayUsing(grabAudio);
             interactor.StartInteraction();
         }
 
@@ -247,6 +259,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             propertyBlock.SetTexture("_BaseMap", openHandTexture);
             quadRenderer.SetPropertyBlock(propertyBlock);
 
+            handAudioSource.PlayUsing(dropAudio);
             interactor.StopInteraction();
         }
 

@@ -1,4 +1,5 @@
 ﻿using Animancer;
+using DoubleD.VerySeriousJamGame.Runtime.Audio;
 using InSun.GameCore.Interactables;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -50,6 +51,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [SerializeField]
         private bool isSmoothEdges = true;
+
+        [Header("Audio")]
+        [SerializeField]
+        private AudioSource paintAudioSource;
+
+        [SerializeField]
+        private AudioData paintAudio;
 
         [Header("Events")]
         [SerializeField]
@@ -223,10 +231,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             if (isPaintingNext)
             {
+                if (!paintAudioSource.isPlaying)
+                {
+                    paintAudioSource.PlayUsing(paintAudio);
+                }
+
                 onPaintEntered.Invoke();
             }
             else
             {
+                paintAudioSource.Stop();
                 onPaintExited.Invoke();
             }
         }

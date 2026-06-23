@@ -1,3 +1,4 @@
+using DoubleD.VerySeriousJamGame.Runtime.Audio;
 using InSun.GameCore.SunnyInspector;
 using UnityEngine;
 
@@ -26,6 +27,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private float rotationDeltaMultiplier = 0.1f;
 
+        [Header("Audio")]
+        [SerializeField]
+        private AudioData spinAudio;
+
+        [SerializeField]
+        private AnimationCurve rotationDeltaPitchCurve = AnimationCurve.Linear(0f, 0.5f, 1f, 2f);
+
         public float MaxTorque => maxTorque;
 
         public float InputSmoothing => inputSmoothing;
@@ -35,5 +43,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public float Damping => damping;
 
         public float RotationDeltaMultiplier => rotationDeltaMultiplier;
+
+        public AudioData SpinAudio => spinAudio;
+
+        public AnimationCurve RotationDeltaPitchCurve => rotationDeltaPitchCurve;
     }
 }
