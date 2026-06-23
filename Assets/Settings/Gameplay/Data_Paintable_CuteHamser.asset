@@ -58,4 +58,4 @@ MonoBehaviour:
     fadeInDuration: 0.5
     isFadeOutOnStop: 0
     fadeOutDuration: 0.5
-  speakCooldownRange: {x: 1, y: 10}
+  speakCooldownRange: {x: 3, y: 10}

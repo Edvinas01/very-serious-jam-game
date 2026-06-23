@@ -37,8 +37,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private AnimancerComponent animancer;
 
+        [FormerlySerializedAs("slidedInTween")]
         [SerializeField]
-        private TweenAnimation slidedInTween;
+        private TweenAnimation speakTween;
 
         [Header("Audio")]
         [SerializeField]
@@ -91,8 +92,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             if (speakCooldown <= 0)
             {
-                speakAudioSource.PlayUsing(Data.SpeakAudio);
-                speakCooldown = Data.SpeakCooldownRange.GetRandomFloat();
+                Speak();
             }
         }
 
@@ -210,7 +210,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             appearAudioSource.PlayUsing(data.AppearedAudio);
             await animancer.Play(clip).ToUniTask(cancellationToken: cancellationToken);
-            slidedInTween.Play();
+            await UniTask.WaitForSeconds(0.3f, cancellationToken: cancellationToken);
+            Speak();
         }
 
         public async UniTask SlideOutAsync(CancellationToken cancellationToken)
@@ -287,6 +288,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             isPaintedThisFrame = true;
 
             return isPainted;
+        }
+
+        private void Speak()
+        {
+            speakCooldown = Data.SpeakCooldownRange.GetRandomFloat();
+
+            speakAudioSource.PlayUsing(Data.SpeakAudio);
+            speakTween.Play();
         }
     }
 }
