@@ -92,7 +92,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             if (speakCooldown <= 0)
             {
-                Speak();
+                Speak(data.SpeakAudio);
             }
         }
 
@@ -208,15 +208,19 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             gameObject.SetActive(true);
 
-            appearAudioSource.PlayUsing(data.AppearedAudio);
+            appearAudioSource.PlayUsing(data.LiftDownAudio);
+
             await animancer.Play(clip).ToUniTask(cancellationToken: cancellationToken);
-            await UniTask.WaitForSeconds(0.3f, cancellationToken: cancellationToken);
-            Speak();
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: cancellationToken);
+
+            Speak(data.SpeakLiftDownAudio);
         }
 
         public async UniTask SlideOutAsync(CancellationToken cancellationToken)
         {
-            disappearAudioSource.PlayUsing(data.DisappearAudio);
+            disappearAudioSource.PlayUsing(data.LiftUpAudio);
+            Speak(data.SpeakLiftUpAudio);
+
             await animancer.Play(Data.SlideOutClip).ToUniTask(cancellationToken: cancellationToken);
             await UniTask.WaitForSeconds(1f, cancellationToken: cancellationToken);
         }
@@ -290,11 +294,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             return isPainted;
         }
 
-        private void Speak()
+        private void Speak(AudioData audioData)
         {
             speakCooldown = Data.SpeakCooldownRange.GetRandomFloat();
 
-            speakAudioSource.PlayUsing(Data.SpeakAudio);
+            speakAudioSource.PlayUsing(audioData);
             speakTween.Play();
         }
     }

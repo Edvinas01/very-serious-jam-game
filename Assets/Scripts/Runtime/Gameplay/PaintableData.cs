@@ -79,13 +79,21 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private AnimationClip slideOutClip;
 
+        [FormerlySerializedAs("appearedAudio")]
         [Header("Audio")]
         [SerializeField]
-        private AudioData appearedAudio;
+        private AudioData liftDownAudio;
 
+        [FormerlySerializedAs("disappearAudio")]
         [FormerlySerializedAs("disappearedAudio")]
         [SerializeField]
-        private AudioData disappearAudio;
+        private AudioData liftUpAudio;
+
+        [SerializeField]
+        private AudioData speakLiftDownAudio;
+
+        [SerializeField]
+        private AudioData speakLiftUpAudio;
 
         [SerializeField]
         private AudioData speakAudio;
@@ -128,9 +136,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         public AnimationClip SlideOutClip => slideOutClip;
 
-        public AudioData AppearedAudio => appearedAudio;
 
-        public AudioData DisappearAudio => disappearAudio;
+        public AudioData LiftDownAudio => liftDownAudio;
+
+        public AudioData LiftUpAudio => liftUpAudio;
+
+        public AudioData SpeakLiftDownAudio => speakLiftDownAudio;
+
+        public AudioData SpeakLiftUpAudio => speakLiftUpAudio;
 
         public AudioData SpeakAudio => speakAudio;
 
