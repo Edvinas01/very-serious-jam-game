@@ -1,3 +1,4 @@
+using DoubleD.VerySeriousJamGame.Runtime.Audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         [SerializeField]
         private TMP_Text scoreText;
 
+        [SerializeField]
+        private AudioSource audioSource;
+
         public Sprite Icon
         {
             set => iconImage.sprite = value;
@@ -20,6 +24,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         public string ScoreText
         {
             set => scoreText.text = value;
+        }
+
+        public void PlaySfx(AudioData data)
+        {
+            audioSource.PlayUsing(data);
         }
     }
 }

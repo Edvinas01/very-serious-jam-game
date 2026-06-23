@@ -1,4 +1,5 @@
 using System;
+using DoubleD.VerySeriousJamGame.Runtime.Audio;
 using InSun.GameCore.Animations;
 using InSun.GameCore.UI;
 using TMPro;
@@ -57,11 +58,19 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             exitButton.OnClicked -= OnExitButtonClicked;
         }
 
-        public ScoreElement ShowScoreEntry(Sprite icon, int paintSessionScore, int baseScore, float multiplier, int totalScore)
+        public ScoreElement ShowScoreEntry(
+            Sprite icon,
+            int paintSessionScore,
+            int baseScore,
+            float multiplier,
+            int totalScore,
+            AudioData audioData
+        )
         {
             var entry = Instantiate(scoreElementPrefab, scoreElementParent);
             entry.Icon = icon;
             entry.ScoreText = $"{paintSessionScore} + {baseScore} x{multiplier:F1} = {totalScore}";
+            entry.PlaySfx(audioData);
 
             if (entry.TryGetComponent<TweenAnimation>(out var tween))
             {

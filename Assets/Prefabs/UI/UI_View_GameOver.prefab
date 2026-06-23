@@ -222,11 +222,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Animations.ScaleAnimation
   target: {fileID: 5574959387172414133}
   startScaleMode: 0
-  startScale: {x: 1.2, y: 1.2, z: 1.2}
+  startScale: {x: 1.5, y: 1.5, z: 1.5}
   endScaleMode: 0
   endScale: {x: 1, y: 1, z: 1}
   ease: 24
-  duration: {x: 0.5, y: 0.5}
+  duration: {x: 1, y: 1}
   isPlayOnStart: 0
   isPlayOnce: 0
   isDestroyOnCompleted: 0

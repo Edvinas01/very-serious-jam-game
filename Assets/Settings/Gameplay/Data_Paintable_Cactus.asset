@@ -29,7 +29,7 @@ MonoBehaviour:
   fullyPaintedRange: {x: 0, y: 0.7}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
   slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}
-  appearedAudio:
+  liftDownAudio:
     clips:
     - {fileID: 8300000, guid: 2a7b73a59eab74a4cacacec8cbcc7309, type: 3}
     pitchRange: {x: 1, y: 1.1}
@@ -39,10 +39,28 @@ MonoBehaviour:
     fadeInDuration: 0.5
     isFadeOutOnStop: 0
     fadeOutDuration: 0.5
-  disappearAudio:
+  liftUpAudio:
     clips:
     - {fileID: 8300000, guid: d9ee8c467f40adf439ec922ea814d9ba, type: 3}
     pitchRange: {x: 0.9, y: 1.1}
+    volumeRange: {x: 1, y: 1}
+    isLooping: 0
+    isFadeInOnPlay: 0
+    fadeInDuration: 0.5
+    isFadeOutOnStop: 0
+    fadeOutDuration: 0.5
+  speakLiftDownAudio:
+    clips: []
+    pitchRange: {x: 1, y: 1}
+    volumeRange: {x: 1, y: 1}
+    isLooping: 0
+    isFadeInOnPlay: 0
+    fadeInDuration: 0.5
+    isFadeOutOnStop: 0
+    fadeOutDuration: 0.5
+  speakLiftUpAudio:
+    clips: []
+    pitchRange: {x: 1, y: 1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
     isFadeInOnPlay: 0
@@ -53,6 +71,19 @@ MonoBehaviour:
     clips: []
     pitchRange: {x: 1, y: 1}
     volumeRange: {x: 1, y: 1}
+    isLooping: 0
+    isFadeInOnPlay: 0
+    fadeInDuration: 0.5
+    isFadeOutOnStop: 0
+    fadeOutDuration: 0.5
+  collisionAudio:
+    clips:
+    - {fileID: 8300000, guid: a1d49a523c42bf849b1f2d78b846f075, type: 3}
+    - {fileID: 8300000, guid: ab3d51458dee498499aa052045603fbe, type: 3}
+    - {fileID: 8300000, guid: c1c53ddf5c45c334181837c4fbe2efab, type: 3}
+    - {fileID: 8300000, guid: 32332426e978e3a4d89ee886557a4d5a, type: 3}
+    pitchRange: {x: 0.7, y: 1.1}
+    volumeRange: {x: 0.4, y: 0.6}
     isLooping: 0
     isFadeInOnPlay: 0
     fadeInDuration: 0.5

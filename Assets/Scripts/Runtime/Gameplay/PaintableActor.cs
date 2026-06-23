@@ -51,6 +51,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private AudioSource speakAudioSource;
 
+        [SerializeField]
+        private AudioSource collisionAudioSource;
+
         private int baseMapPropertyId;
         private int paintMaskPropertyId;
         private MaterialPropertyBlock propertyBlock;
@@ -123,6 +126,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             isPaintedThisFrame = false;
             lastBrush = null;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.relativeVelocity.magnitude <= 0.1f)
+            {
+                return;
+            }
+
+            collisionAudioSource.PlayUsing(Data.CollisionAudio);
         }
 
         [ContextMenu("Initialize")]

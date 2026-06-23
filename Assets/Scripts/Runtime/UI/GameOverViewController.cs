@@ -74,7 +74,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
                     paintSessionScore: entry.PaintableScore,
                     baseScore: entry.BaseScore,
                     multiplier: entry.ScoreMultiplier,
-                    totalScore: entry.ScoreResult
+                    totalScore: entry.ScoreResult,
+                    audioData: entry.Data.SpeakAudio
                 );
             }
 

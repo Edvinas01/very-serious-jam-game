@@ -98,6 +98,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private AudioData speakAudio;
 
+        [SerializeField]
+        private AudioData collisionAudio;
+
         [FormerlySerializedAs("speakDelayRange")]
         [SerializeField]
         private Vector2 speakCooldownRange = new(1f, 10f);
@@ -146,6 +149,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public AudioData SpeakLiftUpAudio => speakLiftUpAudio;
 
         public AudioData SpeakAudio => speakAudio;
+
+        public AudioData CollisionAudio => collisionAudio;
 
         public Vector2 SpeakCooldownRange => speakCooldownRange;
 
