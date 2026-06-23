@@ -22,7 +22,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Min(0)]
         [SerializeField]
-        private int tipMaterialIndex = 2;
+        private int tipMaterialIndex = 1;
 
         [SerializeField]
         private Color paintColor = Color.crimson;
@@ -30,7 +30,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [Header("Raycasts")]
         [Min(0f)]
         [SerializeField]
-        private float paintTriggerRadius = 0.1f;
+        private float paintTriggerRadius = 0.12f;
 
         [SerializeField]
         private LayerMask paintLayerMask;
@@ -46,10 +46,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Min(1)]
         [SerializeField]
-        private int paintTexelRadius = 20;
+        private int paintTexelRadius = 6;
 
         [SerializeField]
-        private bool isSmoothEdges;
+        private bool isSmoothEdges = true;
 
         [Header("Events")]
         [SerializeField]
