@@ -376,8 +376,8 @@ GameObject:
   - component: {fileID: 3941698061705835719}
   - component: {fileID: 3539125418011185795}
   - component: {fileID: 8473100094337238289}
-  - component: {fileID: 5850729295049693779}
-  - component: {fileID: 5343450848366321107}
+  - component: {fileID: 515924906577396177}
+  - component: {fileID: 5609340259581205857}
   m_Layer: 0
   m_Name: UI_View_LoadingScene
   m_TagString: Untagged
@@ -496,8 +496,8 @@ MonoBehaviour:
     canvas: {fileID: 8231532789353149864}
     canvasGroup: {fileID: 3539125418011185795}
     gameObjectToSelect: {fileID: 0}
-    showAnimation: {fileID: 5850729295049693779}
-    hideAnimation: {fileID: 5343450848366321107}
+    showAnimation: {fileID: 515924906577396177}
+    hideAnimation: {fileID: 5609340259581205857}
     onShowEntered:
       m_PersistentCalls:
         m_Calls:
@@ -550,7 +550,7 @@ MonoBehaviour:
   loadingText: {fileID: 8600150151354296422}
   zeroProgressLoadingTextFormat: Loading...
   loadingTextFormat: Loading {0:0%}
---- !u!114 &5850729295049693779
+--- !u!114 &515924906577396177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -559,27 +559,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1945466900096998739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99897a14a30d46fab88924a99dc57351, type: 3}
+  m_Script: {fileID: 11500000, guid: 78bb17fbb1d24a829cee8d373204e325, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Animations.ImageFillAnimation
-  target: {fileID: 7653193593368527646}
-  startFillMode: 0
-  startFill: 0
-  endFillMode: 0
-  endFill: 1
+  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Animations.CanvasAlphaAnimation
+  target: {fileID: 3539125418011185795}
+  startAlphaMode: 0
+  startAlpha: 0
+  endAlphaMode: 0
+  endAlpha: 1
   ease: 10
   duration: {x: 0.5, y: 0.5}
   isPlayOnStart: 0
   isPlayOnce: 0
   isDestroyOnCompleted: 0
-  isIndependentUpdate: 1
+  isIndependentUpdate: 0
   onPlayEntered:
     m_PersistentCalls:
       m_Calls: []
   onPlayExited:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5343450848366321107
+--- !u!114 &5609340259581205857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -588,20 +588,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1945466900096998739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99897a14a30d46fab88924a99dc57351, type: 3}
+  m_Script: {fileID: 11500000, guid: 78bb17fbb1d24a829cee8d373204e325, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Animations.ImageFillAnimation
-  target: {fileID: 7653193593368527646}
-  startFillMode: 0
-  startFill: 1
-  endFillMode: 0
-  endFill: 0
+  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Animations.CanvasAlphaAnimation
+  target: {fileID: 3539125418011185795}
+  startAlphaMode: 2
+  startAlpha: 1
+  endAlphaMode: 0
+  endAlpha: 0
   ease: 10
   duration: {x: 0.5, y: 0.5}
   isPlayOnStart: 0
   isPlayOnce: 0
   isDestroyOnCompleted: 0
-  isIndependentUpdate: 1
+  isIndependentUpdate: 0
   onPlayEntered:
     m_PersistentCalls:
       m_Calls: []
