@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
   m_Name: Data_Paintable_Toilet
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: Toilet
+  objectName: Sir Skiberton
   icon: {fileID: 21300000, guid: ad97ba99bebe7cd41a3e4407ccb00afc, type: 3}
   paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
   sharedMesh: {fileID: 509308304531610091, guid: 8cd016302eedd774dbf643f83eb2e141, type: 3}

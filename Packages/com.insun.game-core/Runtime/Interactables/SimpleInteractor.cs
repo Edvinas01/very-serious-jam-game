@@ -14,6 +14,14 @@ namespace InSun.GameCore.Interactables
         private IInteractable closestHoveredInteractable;
         private IInteractable selectedInteractable;
 
+        private void Update()
+        {
+            if (isSortHoveredByDistance && hoveredInteractables.Count > 0)
+            {
+                ReloadClosestHoveredInteractable();
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             var interactable = other.GetComponentInParent<IInteractable>();
