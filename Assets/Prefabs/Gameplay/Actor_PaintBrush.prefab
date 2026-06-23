@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 955590297651144722}
   - component: {fileID: 1817869150670352746}
   - component: {fileID: 6510100384265224043}
+  - component: {fileID: 7661670351310349224}
+  - component: {fileID: 6752327587482901711}
   m_Layer: 9
   m_Name: Actor_PaintBrush
   m_TagString: Untagged
@@ -196,10 +198,6 @@ MonoBehaviour:
     pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 0.7, y: 0.7}
     isLooping: 1
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.1
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.1
   onPaintEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -223,14 +221,122 @@ MonoBehaviour:
   interactionType: 1
   onHoverEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7661670351310349224}
+        m_TargetAssemblyTypeName: InSun.GameCore.Animations.ScaleAnimation, InSun.GameCore
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6752327587482901711}
+        m_TargetAssemblyTypeName: InSun.GameCore.Animations.ScaleAnimation, InSun.GameCore
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHoverExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7661670351310349224}
+        m_TargetAssemblyTypeName: InSun.GameCore.Animations.ScaleAnimation, InSun.GameCore
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6752327587482901711}
+        m_TargetAssemblyTypeName: InSun.GameCore.Animations.ScaleAnimation, InSun.GameCore
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onSelectEntered:
     m_PersistentCalls:
       m_Calls: []
   onSelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7661670351310349224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185940483046597163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d701a6b0d7d456b9167773bd727cb76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Animations.ScaleAnimation
+  target: {fileID: 614517216717275630}
+  startScaleMode: 2
+  startScale: {x: 1, y: 1, z: 1}
+  endScaleMode: 0
+  endScale: {x: 1.3, y: 1.3, z: 1.3}
+  ease: 9
+  duration: {x: 0.2, y: 0.2}
+  isPlayOnStart: 0
+  isPlayOnce: 0
+  isDestroyOnCompleted: 0
+  isIndependentUpdate: 0
+  isTriggerUnityEvents: 0
+  onPlayEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayExited:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6752327587482901711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185940483046597163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d701a6b0d7d456b9167773bd727cb76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Animations.ScaleAnimation
+  target: {fileID: 614517216717275630}
+  startScaleMode: 2
+  startScale: {x: 1, y: 1, z: 1}
+  endScaleMode: 0
+  endScale: {x: 1, y: 1, z: 1}
+  ease: 9
+  duration: {x: 0.1, y: 0.1}
+  isPlayOnStart: 0
+  isPlayOnce: 0
+  isDestroyOnCompleted: 0
+  isIndependentUpdate: 0
+  isTriggerUnityEvents: 0
+  onPlayEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayExited:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6158282523228582121
@@ -520,6 +626,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8356542475619270464}
   m_SourcePrefab: {fileID: 100100000, guid: d174c81e8ed348746b315aefb2088f96, type: 3}
+--- !u!4 &614517216717275630 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -9098792170540029979, guid: d174c81e8ed348746b315aefb2088f96, type: 3}
+  m_PrefabInstance: {fileID: 665878112093906443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &1009250312453661031 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 521361281313146732, guid: d174c81e8ed348746b315aefb2088f96, type: 3}
@@ -552,7 +663,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
