@@ -11,6 +11,7 @@ namespace InSun.GameCore.Interactables
         private bool isSortHoveredByDistance = true;
 
         private readonly List<IInteractable> hoveredInteractables = new();
+        private IInteractable closestHoveredInteractable;
         private IInteractable selectedInteractable;
 
         private void OnTriggerEnter(Collider other)
@@ -28,7 +29,15 @@ namespace InSun.GameCore.Interactables
 
             hoveredInteractables.Add(interactable);
             interactable.OnDestroyed += OnHoveredInteractableDestroyed;
-            interactable.Hover(this);
+
+            if (isSortHoveredByDistance)
+            {
+                ReloadClosestHoveredInteractable();
+            }
+            else
+            {
+                interactable.Hover(this);
+            }
         }
 
         private void OnTriggerExit(Collider other)
@@ -44,7 +53,22 @@ namespace InSun.GameCore.Interactables
                 return;
             }
 
-            interactable.Unhover();
+            interactable.OnDestroyed -= OnHoveredInteractableDestroyed;
+
+            if (isSortHoveredByDistance)
+            {
+                if (interactable == closestHoveredInteractable)
+                {
+                    closestHoveredInteractable = null;
+                    interactable.Unhover();
+                }
+
+                ReloadClosestHoveredInteractable();
+            }
+            else
+            {
+                interactable.Unhover();
+            }
         }
 
         public bool IsInteractableHovered => hoveredInteractables.Count > 0;
@@ -56,12 +80,10 @@ namespace InSun.GameCore.Interactables
 
         public void StartInteraction()
         {
-            if (isSortHoveredByDistance)
-            {
-                hoveredInteractables.Sort(CompareByDistanceToInteractor);
-            }
+            var hoveredInteractable = isSortHoveredByDistance
+                ? closestHoveredInteractable
+                : hoveredInteractables.FirstOrDefault();
 
-            var hoveredInteractable = hoveredInteractables.FirstOrDefault();
             if (hoveredInteractable == null)
             {
                 return;
@@ -136,7 +158,20 @@ namespace InSun.GameCore.Interactables
                 return;
             }
 
-            args.Interactable.Unhover();
+            if (isSortHoveredByDistance)
+            {
+                if (args.Interactable == closestHoveredInteractable)
+                {
+                    closestHoveredInteractable = null;
+                    args.Interactable.Unhover();
+                }
+
+                ReloadClosestHoveredInteractable();
+            }
+            else
+            {
+                args.Interactable.Unhover();
+            }
         }
 
         private void Select(IInteractable interactable)
@@ -160,6 +195,22 @@ namespace InSun.GameCore.Interactables
                 OnInteractionEntered?.Invoke(interactable);
                 OnInteractionExited?.Invoke(interactable);
             }
+        }
+
+        private void ReloadClosestHoveredInteractable()
+        {
+            hoveredInteractables.Sort(CompareByDistanceToInteractor);
+
+            var closest = hoveredInteractables.FirstOrDefault();
+
+            if (closest == closestHoveredInteractable)
+            {
+                return;
+            }
+
+            closestHoveredInteractable?.Unhover();
+            closestHoveredInteractable = closest;
+            closestHoveredInteractable?.Hover(this);
         }
 
         private int CompareByDistanceToInteractor(IInteractable a, IInteractable b)
