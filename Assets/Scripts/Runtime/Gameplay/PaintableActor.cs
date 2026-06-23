@@ -208,8 +208,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             gameObject.SetActive(true);
 
-            await animancer.Play(clip).ToUniTask(cancellationToken: cancellationToken);
             appearAudioSource.PlayUsing(data.AppearedAudio);
+            await animancer.Play(clip).ToUniTask(cancellationToken: cancellationToken);
             slidedInTween.Play();
         }
 
@@ -217,6 +217,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             disappearAudioSource.PlayUsing(data.DisappearAudio);
             await animancer.Play(Data.SlideOutClip).ToUniTask(cancellationToken: cancellationToken);
+            await UniTask.WaitForSeconds(1f, cancellationToken: cancellationToken);
         }
 
         public bool TryPaint(Vector2 uv, PaintBrushActor brush, bool isSmoothEdges)

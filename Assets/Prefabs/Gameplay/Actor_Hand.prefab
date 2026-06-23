@@ -1,5 +1,134 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3010725245591137343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6757532307491122171}
+  - component: {fileID: 4823000516551459420}
+  m_Layer: 9
+  m_Name: SFX_Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6757532307491122171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3010725245591137343}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 907271507499519247}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &4823000516551459420
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3010725245591137343}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1913468992245648594, guid: 0c0ca4d171ba3654fa9b5b4373699839, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0.2
+  MaxDistance: 1.3
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3182298068655866948
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +253,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5475973264131276011}
+  - {fileID: 6757532307491122171}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &903834376351855763
@@ -158,6 +288,33 @@ MonoBehaviour:
   tiltSmoothTime: 0.1
   paintTiltStep: 0.2
   pedestal: {fileID: 0}
+  handAudioSource: {fileID: 4823000516551459420}
+  grabAudio:
+    clips:
+    - {fileID: 8300000, guid: a1d49a523c42bf849b1f2d78b846f075, type: 3}
+    - {fileID: 8300000, guid: ab3d51458dee498499aa052045603fbe, type: 3}
+    - {fileID: 8300000, guid: c1c53ddf5c45c334181837c4fbe2efab, type: 3}
+    - {fileID: 8300000, guid: 32332426e978e3a4d89ee886557a4d5a, type: 3}
+    pitchRange: {x: 1, y: 1.1}
+    volumeRange: {x: 0.4, y: 0.4}
+    isLooping: 0
+    isFadeInOnPlay: 0
+    fadeInDuration: 0.5
+    isFadeOutOnStop: 0
+    fadeOutDuration: 0.5
+  dropAudio:
+    clips:
+    - {fileID: 8300000, guid: 40799ac38a8892748ab9fa0f495bd4e1, type: 3}
+    - {fileID: 8300000, guid: ea5e358f10120cd46a64bcc8bad12e9c, type: 3}
+    - {fileID: 8300000, guid: e34036286553d0c4698129991acdb32d, type: 3}
+    - {fileID: 8300000, guid: 7caaef65f32388c478559e018c1c90aa, type: 3}
+    pitchRange: {x: 1.1, y: 1.3}
+    volumeRange: {x: 0.2, y: 0.2}
+    isLooping: 0
+    isFadeInOnPlay: 0
+    fadeInDuration: 0.5
+    isFadeOutOnStop: 0
+    fadeOutDuration: 0.5
   pointerAction: {fileID: -6928707206791943402, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   handPickUpAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   handPushAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
