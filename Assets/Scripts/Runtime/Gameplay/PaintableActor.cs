@@ -2,7 +2,9 @@
 using System.Threading;
 using Animancer;
 using Cysharp.Threading.Tasks;
+using DoubleD.VerySeriousJamGame.Runtime.Audio;
 using InSun.GameCore.Animations;
+using InSun.GameCore.Utilities;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -38,6 +40,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private TweenAnimation slidedInTween;
 
+        [Header("Audio")]
+        [SerializeField]
+        private AudioSource appearAudioSource;
+
+        [SerializeField]
+        private AudioSource disappearAudioSource;
+
+        [SerializeField]
+        private AudioSource speakAudioSource;
+
         private int baseMapPropertyId;
         private int paintMaskPropertyId;
         private MaterialPropertyBlock propertyBlock;
@@ -49,6 +61,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private PaintBrushActor lastBrush;
         private float paintAmountLastTick;
         private bool isPaintedThisFrame;
+
+        private float speakCooldown;
 
         public PaintableData Data => data;
 
@@ -70,6 +84,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         }
 
         public event Action<PaintedArgs> OnPainted;
+
+        private void Update()
+        {
+            speakCooldown -= Time.deltaTime;
+
+            if (speakCooldown <= 0)
+            {
+                speakAudioSource.PlayUsing(Data.SpeakAudio);
+                speakCooldown = Data.SpeakCooldownRange.GetRandomFloat();
+            }
+        }
 
         private void LateUpdate()
         {
@@ -171,6 +196,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             propertyBlock.SetTexture(paintMaskPropertyId, paintMaskTexture);
             propertyBlock.SetTexture(baseMapPropertyId, Data.Texture);
             bodyRenderer.SetPropertyBlock(propertyBlock);
+
+            // Initialized cooldowns
+            speakCooldown = Data.SpeakCooldownRange.GetRandomFloat();
         }
 
         public async UniTask SlideInAsync(CancellationToken cancellationToken)
@@ -181,11 +209,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             gameObject.SetActive(true);
 
             await animancer.Play(clip).ToUniTask(cancellationToken: cancellationToken);
+            appearAudioSource.PlayUsing(data.AppearedAudio);
             slidedInTween.Play();
         }
 
         public async UniTask SlideOutAsync(CancellationToken cancellationToken)
         {
+            disappearAudioSource.PlayUsing(data.DisappearAudio);
             await animancer.Play(Data.SlideOutClip).ToUniTask(cancellationToken: cancellationToken);
         }
 

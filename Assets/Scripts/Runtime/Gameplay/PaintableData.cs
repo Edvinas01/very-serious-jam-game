@@ -1,4 +1,5 @@
-﻿using InSun.GameCore.SunnyInspector;
+﻿using DoubleD.VerySeriousJamGame.Runtime.Audio;
+using InSun.GameCore.SunnyInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -78,6 +79,21 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private AnimationClip slideOutClip;
 
+        [Header("Audio")]
+        [SerializeField]
+        private AudioData appearedAudio;
+
+        [FormerlySerializedAs("disappearedAudio")]
+        [SerializeField]
+        private AudioData disappearAudio;
+
+        [SerializeField]
+        private AudioData speakAudio;
+
+        [FormerlySerializedAs("speakDelayRange")]
+        [SerializeField]
+        private Vector2 speakCooldownRange = new(1f, 10f);
+
         public string Name => objectName;
 
         public GameObject Prefab => paintablePrefab ? paintablePrefab.gameObject : null;
@@ -111,6 +127,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public AnimationClip SlideInClip => slideInClip;
 
         public AnimationClip SlideOutClip => slideOutClip;
+
+        public AudioData AppearedAudio => appearedAudio;
+
+        public AudioData DisappearAudio => disappearAudio;
+
+        public AudioData SpeakAudio => speakAudio;
+
+        public Vector2 SpeakCooldownRange => speakCooldownRange;
 
         public PaintableActor CreatePaintable(
             Vector3 pos,
