@@ -7,12 +7,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Utilities
         [SerializeField]
         private Transform moveTarget;
 
+        [Min(0f)]
+        [SerializeField]
+        private float moveSpeed = 5f;
+
         private Vector3 initialWorldPosition;
         private Vector3 targetWorldPosition;
 
         private void Awake()
         {
             initialWorldPosition = transform.position;
+            targetWorldPosition = transform.position;
         }
 
         private void FixedUpdate()
@@ -20,7 +25,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Utilities
             var newPosition = Vector3.Lerp(
                 transform.position,
                 targetWorldPosition,
-                Time.deltaTime
+                Time.deltaTime * moveSpeed
             );
 
             transform.position = newPosition;
