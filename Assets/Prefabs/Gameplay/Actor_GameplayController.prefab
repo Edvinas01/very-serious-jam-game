@@ -125,7 +125,7 @@ MonoBehaviour:
   introCamera: {fileID: 6868056181506637406}
   introPlayable: {fileID: 893833677348635595}
   data: {fileID: 11400000, guid: bab5403b1cea3de4d938c3ab5acca76e, type: 2}
-  multiplierDecaySpeed: 1.5
+  multiplierDecaySpeed: 2
 --- !u!320 &893833677348635595
 PlayableDirector:
   m_ObjectHideFlags: 0
