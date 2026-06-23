@@ -131,6 +131,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             handPushAction.action.performed += OnHandPushedPreformed;
             handPushAction.action.canceled += OnHandPushedCancelled;
+
+            interactor.OnInteractionEntered += OnInteractionEntered;
+            interactor.OnInteractionExited += OnInteractionExited;
         }
 
         private void OnDisable()
@@ -140,6 +143,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             handPushAction.action.performed -= OnHandPushedPreformed;
             handPushAction.action.canceled -= OnHandPushedCancelled;
+
+            interactor.OnInteractionEntered -= OnInteractionEntered;
+            interactor.OnInteractionExited -= OnInteractionExited;
         }
 
         private void Update()
@@ -249,7 +255,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             propertyBlock.SetTexture("_BaseMap", closedHandTexture);
             quadRenderer.SetPropertyBlock(propertyBlock);
 
-            handAudioSource.PlayUsing(grabAudio);
             interactor.StartInteraction();
         }
 
@@ -259,7 +264,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             propertyBlock.SetTexture("_BaseMap", openHandTexture);
             quadRenderer.SetPropertyBlock(propertyBlock);
 
-            handAudioSource.PlayUsing(dropAudio);
             interactor.StopInteraction();
         }
 
@@ -271,6 +275,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private void OnHandPushedCancelled(InputAction.CallbackContext context)
         {
             isPushing = false;
+        }
+
+        private void OnInteractionEntered(IInteractable interactable)
+        {
+            handAudioSource.PlayUsing(grabAudio);
+        }
+
+        private void OnInteractionExited(IInteractable interactable)
+        {
+            handAudioSource.PlayUsing(dropAudio);
         }
 
         public void SetFollowTarget(Transform target)
