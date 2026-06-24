@@ -43,7 +43,7 @@ MonoBehaviour:
     isLooping: 0
   speakLiftDownAudio:
     clips:
-    - {fileID: 8300000, guid: 31ec77d58c7780b4fb0f20bd580cbf8a, type: 3}
+    - {fileID: 8300000, guid: 11c1dface8e1ff2489d68f16d186f126, type: 3}
     pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
