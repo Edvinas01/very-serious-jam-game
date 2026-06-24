@@ -139,6 +139,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private void Update()
         {
             pedestal.AddSpinSpeed(crank.RotationDelta);
+
+            var targetMultiplier = data.GetScoreMultiplier(pedestal.SpinSpeed);
+            gameplaySystem.CurrentMultiplier = Mathf.Lerp(
+                gameplaySystem.CurrentMultiplier,
+                targetMultiplier,
+                multiplierDecaySpeed * Time.deltaTime
+            );
         }
 
         private void OnDestroy()
@@ -242,13 +249,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                         cancellationToken: cancellationToken
                     );
                 }
-
-                var targetMultiplier = data.GetScoreMultiplier(pedestal.SpinSpeed);
-                gameplaySystem.CurrentMultiplier = Mathf.Lerp(
-                    gameplaySystem.CurrentMultiplier,
-                    targetMultiplier,
-                    multiplierDecaySpeed * Time.deltaTime
-                );
 
                 await UniTask.Yield(cancellationToken);
             } while (gameplaySystem.State != GameplayState.GameOver);
