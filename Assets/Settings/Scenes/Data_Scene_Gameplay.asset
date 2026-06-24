@@ -20,7 +20,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   isUnloadUnusedAssets: 0
   isFadingEnabled: 1
-  showFadeDuration: 0.1
+  showFadeDuration: 1
   hideFadeDuration: 0.1
   isPauseBeforeLoad: 0
   loadPauseDuration: 0.3
