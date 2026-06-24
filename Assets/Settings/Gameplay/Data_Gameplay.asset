@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919f3ab458012534e9fc58ebab65efec, type: 3}
   m_Name: Data_Gameplay
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.GameplayData
-  isPlayIntro: 1
+  isPlayIntro: 0
   gameplayDuration: 180
   startingScore: 0
   scoreMultiplierCurve:

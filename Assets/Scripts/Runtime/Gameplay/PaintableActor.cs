@@ -52,6 +52,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private AudioSource speakAudioSource;
 
         [SerializeField]
+        private AudioSourceLoudnessScaler speakAudioScaler;
+
+        [SerializeField]
         private AudioSource collisionAudioSource;
 
         private int baseMapPropertyId;
@@ -218,6 +221,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // Initialized cooldowns
             speakCooldown = Data.SpeakCooldownRange.GetRandomFloat();
+
+            // Init audio
+            if (speakTween)
+            {
+                speakAudioScaler.enabled = false;
+            }
         }
 
         public async UniTask SlideInAsync(CancellationToken cancellationToken, Action onTouchedDown)
@@ -324,7 +333,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             speakCooldown = Data.SpeakCooldownRange.GetRandomFloat();
 
             speakAudioSource.PlayUsing(audioData);
-            speakTween.Play();
+
+            if (speakTween)
+            {
+                speakTween.Play();
+            }
         }
     }
 }
