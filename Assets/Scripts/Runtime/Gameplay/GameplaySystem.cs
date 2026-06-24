@@ -107,7 +107,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     return;
                 }
 
-                Debug.Log($"Paintable changed {valuePrev?.name}->{valueNext?.name}", this);
+                var namePrev = valuePrev ? valuePrev.name : "N/A";
+                var nameNext = valueNext ? valueNext.name : "N/A";
+                Debug.Log($"Paintable changed {namePrev}->{nameNext}", this);
+
                 currentPaintable = valueNext;
 
                 Game.PublishMessage(new CurrentPaintableChangedMessage(valueNext));
