@@ -55,4 +55,4 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 
 ### Fonts
 
-- [ Marcellus SC by Astigmatic](https://fonts.google.com/selection?query=Marcellus&preview.script=Latn)
+- [Marcellus SC by Astigmatic](https://fonts.google.com/selection?query=Marcellus&preview.script=Latn)
