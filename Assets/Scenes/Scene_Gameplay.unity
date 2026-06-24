@@ -1088,6 +1088,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1191754939}
   - component: {fileID: 1191754940}
+  - component: {fileID: 1191754942}
   m_Layer: 0
   m_Name: SFX_Ambience
   m_TagString: Untagged
@@ -1204,6 +1205,68 @@ AudioSource:
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1191754942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191754938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2704b6dec817e1840bd25d1ebad559d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Audio.PedestalSpeedAudioModulator
+  pedestalActor: {fileID: 2001842465}
+  audioSource: {fileID: 1191754940}
+  pitchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.95
+      inSlope: -0.000006038077
+      outSlope: -0.000006038077
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1107907
+    - serializedVersion: 3
+      time: 600
+      value: 1.1
+      inSlope: 0.000100961544
+      outSlope: 0.000100961544
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.26343733
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  volumeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.08
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.08
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
