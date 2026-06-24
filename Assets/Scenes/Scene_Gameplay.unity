@@ -675,7 +675,7 @@ MonoBehaviour:
   controllerData:
     view: {fileID: -7893242629594490995, guid: 5464105f158f39542a47d8f7864fa0f8, type: 3}
     viewParent: {fileID: 522831133}
-    startMode: 1
+    startMode: 2
     isTrackedByStack: 0
     isClosable: 1
     isBlockingInput: 0
