@@ -71,6 +71,7 @@ Transform:
   - {fileID: 1560564938532536307}
   - {fileID: 1060340289382498784}
   - {fileID: 5542001760084608645}
+  - {fileID: 2400598015301152839}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1667963644878484693
@@ -237,6 +238,18 @@ MonoBehaviour:
       - m_Target: {fileID: 6752327587482901711}
         m_TargetAssemblyTypeName: InSun.GameCore.Animations.ScaleAnimation, InSun.GameCore
         m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7046481127543803269}
+        m_TargetAssemblyTypeName: InSun.GameCore.Audio.AudioEmitter, InSun.GameCore
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -534,6 +547,55 @@ MonoBehaviour:
   onFinished:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &7926376761884626594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2400598015301152839}
+  - component: {fileID: 7046481127543803269}
+  m_Layer: 9
+  m_Name: SFX_Hover
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2400598015301152839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926376761884626594}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2174572958076040443}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7046481127543803269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926376761884626594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99656d392e9b4479a0e831f81f04b133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Audio.AudioEmitter
+  audioEvent: {fileID: 11400000, guid: 3f7e1453174bcec4f81f84985fbd1404, type: 2}
+  rigidBody: {fileID: 0}
+  stopMode: 1
+  isFollowEmitter: 0
+  isPlayOnStart: 0
 --- !u!1001 &665878112093906443
 PrefabInstance:
   m_ObjectHideFlags: 0
