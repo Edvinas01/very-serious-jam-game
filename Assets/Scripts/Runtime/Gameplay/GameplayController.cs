@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DoubleD.VerySeriousJamGame.Runtime.UI;
 using DoubleD.VerySeriousJamGame.Runtime.Utilities;
 using InSun.GameCore;
 using InSun.GameCore.Interactables;
@@ -42,6 +43,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private CrankActor crank;
         private PaletteActor palette;
         private List<PaintBrushActor> brushes;
+
+        private GameplayPaintableViewController paintableViewController;
 
         private int currentPaintableScore;
         private readonly List<PaintableData> paintableQueue = new();
@@ -88,6 +91,14 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             if (palette == false)
             {
                 Debug.LogError("No Palette found in scene, gameplay will not start", this);
+                enabled = false;
+                return;
+            }
+
+            paintableViewController = FindAnyObjectByType<GameplayPaintableViewController>();
+            if (paintableViewController == false)
+            {
+                Debug.LogError("No Paintable UI found in scene, gameplay will not start", this);
                 enabled = false;
                 return;
             }
@@ -178,13 +189,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             paintable.gameObject.SetActive(false);
             paintable.OnPainted += OnObjectPainted;
 
+            gameplaySystem.CurrentPaintableData = paintable;
+
+            paintableViewController.ShowViewAsync(cancellationToken).Forget();
             await paintable.SlideInAsync(
                 onTouchedDown: () => { paintable.transform.parent = pedestal.ObjectParent; },
                 cancellationToken: cancellationToken
             );
 
             gameplaySystem.State = GameplayState.PaintingObject;
-            gameplaySystem.CurrentPaintableData = paintable;
 
             // Game loop
             do
@@ -208,8 +221,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
                     // Slide out old object
                     gameplaySystem.State = GameplayState.SpawningObject;
-                    gameplaySystem.CurrentPaintableData = null;
 
+                    paintableViewController.HideViewAsync(cancellationToken).Forget();
                     await paintable.SlideOutAsync(cancellationToken);
                     paintable.OnPainted -= OnObjectPainted;
 
@@ -218,16 +231,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     paintable.gameObject.SetActive(false);
                     paintable.OnPainted += OnObjectPainted;
 
+                    gameplaySystem.CurrentPaintableData = paintable;
                     gameplaySystem.PaintAmount = 0f;
                     currentPaintableScore = 0;
                     gameplaySystem.State = GameplayState.PaintingObject;
 
+                    paintableViewController.ShowViewAsync(cancellationToken).Forget();
                     await paintable.SlideInAsync(
                         onTouchedDown: () => { paintable.transform.parent = pedestal.ObjectParent; },
                         cancellationToken: cancellationToken
                     );
-
-                    gameplaySystem.CurrentPaintableData = paintable;
                 }
 
                 var targetMultiplier = data.GetScoreMultiplier(pedestal.SpinSpeed);
