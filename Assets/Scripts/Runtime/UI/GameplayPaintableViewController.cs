@@ -4,7 +4,7 @@ using InSun.GameCore.UI;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.UI
 {
-    internal sealed class GameplayViewController : ViewController<GameplayView>
+    internal sealed class GameplayPaintableViewController : ViewController<GameplayPaintableView>
     {
         private GameplaySystem gameplaySystem;
 
@@ -19,14 +19,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         {
             base.OnViewShowEntered();
 
-            Game.AddListener<ScoreChangedMessage>(OnScoreChanged);
             Game.AddListener<PaintAmountChangedMessage>(OnPaintAmountChanged);
             Game.AddListener<CurrentPaintableChangedMessage>(OnCurrentPaintableChanged);
 
-            View.RemainingTime = gameplaySystem.RemainingTime;
-            View.Score = gameplaySystem.Score;
             View.PaintAmount = gameplaySystem.PaintAmount;
-            View.SpeedMultiplier = gameplaySystem.CurrentMultiplier;
 
             if (gameplaySystem.TryGetPaintable(out var paintable))
             {
@@ -44,7 +40,6 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         {
             base.OnViewHideEntered();
 
-            Game.RemoveListener<ScoreChangedMessage>(OnScoreChanged);
             Game.RemoveListener<PaintAmountChangedMessage>(OnPaintAmountChanged);
             Game.RemoveListener<CurrentPaintableChangedMessage>(OnCurrentPaintableChanged);
         }
@@ -53,27 +48,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         {
             base.OnDestroy();
 
-            Game.RemoveListener<ScoreChangedMessage>(OnScoreChanged);
             Game.RemoveListener<PaintAmountChangedMessage>(OnPaintAmountChanged);
             Game.RemoveListener<CurrentPaintableChangedMessage>(OnCurrentPaintableChanged);
-        }
-
-        protected override void Update()
-        {
-            base.Update();
-
-            if (gameplaySystem.State is GameplayState.None or GameplayState.GameOver)
-            {
-                return;
-            }
-
-            View.RemainingTime = gameplaySystem.RemainingTime;
-            View.SpeedMultiplier = gameplaySystem.CurrentMultiplier;
-        }
-
-        private void OnScoreChanged(ScoreChangedMessage message)
-        {
-            View.Score = message.ScoreNext;
         }
 
         private void OnPaintAmountChanged(PaintAmountChangedMessage message)
