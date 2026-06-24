@@ -898,7 +898,7 @@ MonoBehaviour:
     sortingOrder: 0
   gameplayScene: {fileID: 11400000, guid: 927b88a37c74b9244a75b91e74fc00c9, type: 2}
   mainMenuScene: {fileID: 11400000, guid: 27eb7705de30c50459a2ebab173e0252, type: 2}
-  entrySpawnDelay: 0.5
+  entrySpawnDelay: 0.3
 --- !u!1 &1508311484
 GameObject:
   m_ObjectHideFlags: 0

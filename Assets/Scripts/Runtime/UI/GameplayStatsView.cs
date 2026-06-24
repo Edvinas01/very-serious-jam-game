@@ -41,7 +41,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
                 if (remainingTimeText)
                 {
-                    remainingTimeText.text = $"{span.Minutes}:{span.Seconds:00}";
+                    remainingTimeText.text = $"{span.Minutes:00}:{span.Seconds:00}";
                 }
 
                 remainingTimePrev = remainingTimeNext;

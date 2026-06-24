@@ -69,7 +69,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         {
             var entry = Instantiate(scoreElementPrefab, scoreElementParent);
             entry.Icon = icon;
-            entry.ScoreText = $"{paintSessionScore} + {baseScore} x{multiplier:F1} = {totalScore}";
+            // entry.ScoreText = $"{paintSessionScore} + {baseScore} x{multiplier:F1} = {totalScore}";
+            entry.ScoreText = $"{totalScore} pts";
             entry.PlaySfx(audioData);
 
             if (entry.TryGetComponent<TweenAnimation>(out var tween))
