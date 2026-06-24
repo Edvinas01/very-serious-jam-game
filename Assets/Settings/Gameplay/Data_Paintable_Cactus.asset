@@ -35,47 +35,33 @@ MonoBehaviour:
     pitchRange: {x: 1, y: 1.1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   liftUpAudio:
     clips:
     - {fileID: 8300000, guid: d9ee8c467f40adf439ec922ea814d9ba, type: 3}
     pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   speakLiftDownAudio:
-    clips: []
-    pitchRange: {x: 1, y: 1}
+    clips:
+    - {fileID: 8300000, guid: 0001841b336cb50498a7468ca49aef2b, type: 3}
+    pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   speakLiftUpAudio:
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 924f14f6d8d64f94dae8a27949c248fd, type: 3}
     pitchRange: {x: 1, y: 1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   speakAudio:
-    clips: []
-    pitchRange: {x: 1, y: 1}
+    clips:
+    - {fileID: 8300000, guid: c9ddc90e6854cc74caf4c93266b09086, type: 3}
+    - {fileID: 8300000, guid: ecf165816cca6624f828324ea9243165, type: 3}
+    - {fileID: 8300000, guid: 7271cdc322cf5ad4da533255102d0165, type: 3}
+    - {fileID: 8300000, guid: c9821c9efbb3800498c1ca8edee48e0f, type: 3}
+    pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   collisionAudio:
     clips:
     - {fileID: 8300000, guid: a1d49a523c42bf849b1f2d78b846f075, type: 3}
@@ -85,8 +71,4 @@ MonoBehaviour:
     pitchRange: {x: 0.7, y: 1.1}
     volumeRange: {x: 0.4, y: 0.6}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   speakCooldownRange: {x: 3, y: 10}
