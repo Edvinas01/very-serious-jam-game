@@ -23,6 +23,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         private TMP_Text scoreText;
 
         [SerializeField]
+        private Image paintPercentageImage;
+
+        [SerializeField]
         private TMP_Text paintPercentageText;
 
         [SerializeField]
@@ -84,7 +87,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
                     onPaintAmountChanged.Invoke();
                 }
 
-                paintPercentageText.text = $"{paintPercentageNext}%";
+                if (paintPercentageImage)
+                {
+                    paintPercentageImage.fillAmount = value;
+                }
+
+                if (paintPercentageText)
+                {
+                    paintPercentageText.text = $"{paintPercentageNext}%";
+                }
+
                 paintAmountPrev = paintPercentageNext;
             }
         }
