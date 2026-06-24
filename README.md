@@ -52,3 +52,7 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 ### Tools
 
 - [PixaTool by KronBits](https://kronbits.itch.io/pixatool) - used for pixalizing textures
+
+### Fonts
+
+- [ Marcellus SC by Astigmatic](https://fonts.google.com/selection?query=Marcellus&preview.script=Latn)
