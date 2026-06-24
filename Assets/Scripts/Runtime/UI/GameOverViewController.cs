@@ -20,7 +20,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         [Header("Timings")]
         [Min(0f)]
         [SerializeField]
-        private float entrySpawnDelay = 0.5f;
+        private float entrySpawnDelay = 0.3f;
+
+        [Min(0f)]
+        [SerializeField]
+        private float totalScoreDelay = 1.0f;
 
         private GameplaySystem gameplaySystem;
         private ISceneSystem sceneSystem;
@@ -79,7 +83,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
                 );
             }
 
-            await UniTask.WaitForSeconds(entrySpawnDelay, cancellationToken: cancellationToken);
+            await UniTask.WaitForSeconds(totalScoreDelay, cancellationToken: cancellationToken);
 
             View.IsButtonsInteractable = true;
             View.ShowTotalScore(gameplaySystem.Score);
