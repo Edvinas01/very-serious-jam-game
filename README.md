@@ -42,6 +42,7 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 - [Poison_Bottle by wolfmanos1](https://sketchfab.com/3d-models/poison-bottle-465306a1d7034416a02289a61f89a99b)
 - [Animated low poly toilet by Gamedirection](https://sketchfab.com/3d-models/animated-low-poly-toilet-c901dfa120a0487a9f5c9a2d241f70ab)
 - [Groovy Cactus 🌵 by TheoClarke](https://sketchfab.com/3d-models/groovy-cactus-ffabdcebe38e426ea6858602e90def39)
+- [Asclepius temple by Julius.Weissmann](https://sketchfab.com/3d-models/asclepius-temple-37701cc6414242cfb5f2ada6131a2e73)
 
 ### Audio
 
