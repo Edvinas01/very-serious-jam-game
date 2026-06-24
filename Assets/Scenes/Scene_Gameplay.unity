@@ -3203,7 +3203,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
       propertyPath: m_SceneBindings.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
       propertyPath: m_SceneBindings.Array.data[2].key
@@ -3229,6 +3229,10 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[7].key
       value: 
       objectReference: {fileID: 7026605533117471149, guid: 94c3645f069ec9144b21ece098ffc3df, type: 2}
+    - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
+      propertyPath: m_SceneBindings.Array.data[8].key
+      value: 
+      objectReference: {fileID: -8077605080349790090, guid: 94c3645f069ec9144b21ece098ffc3df, type: 2}
     - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
       propertyPath: m_SceneBindings.Array.data[1].value
       value: 
@@ -3257,6 +3261,22 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[7].value
       value: 
       objectReference: {fileID: 612461218}
+    - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
+      propertyPath: m_SceneBindings.Array.data[8].value
+      value: 
+      objectReference: {fileID: 1191754938}
+    - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
+      propertyPath: m_ExposedReferences.m_References.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
+      propertyPath: m_ExposedReferences.m_References.Array.data[0].first
+      value: de21def50466bab4f9ce2116a2f0c2b6
+      objectReference: {fileID: 0}
+    - target: {fileID: 893833677348635595, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
+      propertyPath: m_ExposedReferences.m_References.Array.data[0].second
+      value: 
+      objectReference: {fileID: 1191754938}
     - target: {fileID: 2445969886325984365, guid: 4f538def64cb2774491b3f6672b14b1b, type: 3}
       propertyPath: m_Name
       value: Actor_GameplayController
