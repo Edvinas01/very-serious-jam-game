@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974c52cdd8d141aeb0d07e2a57331a7a, type: 3}
+  m_Name: AudioEvent_UI_Show
+  m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Audio.UnityAudioEventData
+  mixerGroup: {fileID: 6566003639229602125, guid: 0c0ca4d171ba3654fa9b5b4373699839, type: 2}
+  audioClips:
+  - {fileID: 8300000, guid: 633faf6f2d5fc4f4aa73cb4023b417f6, type: 3}
+  - {fileID: 8300000, guid: 84dd79e63e78a6d4cab479e2a72f69c1, type: 3}
+  - {fileID: 8300000, guid: b0e05473805f2ce4fa164878507aee75, type: 3}
+  - {fileID: 8300000, guid: 1d5bc1e318d7313468a889eab0b61f20, type: 3}
+  volumeRange: {x: 0.3, y: 0.3}
+  pitchRange: {x: 0.7, y: 0.8}
+  playTimeRange: {x: 0, y: 0}
+  panningRange: {x: 0, y: 0}
+  maxInstanceCount: 5
+  isStealing: 0
+  playCooldown: 0
+  playChance: 1
+  isLoop: 0
+  isFadeInOnPlay: 0
+  fadeInDuration: 0.5
+  isFadeOutOnStop: 0
+  fadeOutDuration: 0.5
+  spatialBlend: 0
+  audioRolloffMode: 0
+  customRolloffCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  distanceRange: {x: 1, y: 30}
