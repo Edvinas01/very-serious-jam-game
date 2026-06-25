@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
-  m_Name: Data_Paintable_Kebab
+  m_Name: Data_Paintable_Hat
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: Kebab
-  icon: {fileID: 21300000, guid: c01dbfb0c9f524b4c9c7dcbc9db33b02, type: 3}
+  objectName: Very Serious Hat
+  icon: {fileID: 21300000, guid: 97843b80fe2ea63448831472982153ee, type: 3}
   paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
-  sharedMesh: {fileID: -5743244166044321267, guid: 20354f723b11211409347ef1a6fcef1c, type: 3}
-  texture: {fileID: 2800000, guid: 862b0aae98033564399b477913d5e418, type: 3}
+  sharedMesh: {fileID: 374156962240769929, guid: 43d5f89511095444cb72abf75aa48049, type: 3}
+  texture: {fileID: 2800000, guid: 458ad7cf0b5a234468101f9a2b11a4d3, type: 3}
   material: {fileID: 2100000, guid: 5a2b4ef330deb6f4393e20fbd7984b3f, type: 2}
-  scale: {x: 0.5, y: 0.5, z: 0.5}
+  scale: {x: 0.6, y: 0.6, z: 0.6}
   rotation: {x: 0, y: 180, z: 0}
-  offset: {x: 0, y: 0.07, z: 0}
+  offset: {x: 0, y: 0.1, z: 0}
   maskDefaultWidth: 256
   maskDefaultHeight: 256
-  maskResolutionScale: 0.4
+  maskResolutionScale: 0.15
   maskFilterMode: 1
   score: 150
-  fullyPaintedRange: {x: 0, y: 0.07}
+  fullyPaintedRange: {x: 0, y: 0.2}
   slideInClip: {fileID: 7400000, guid: c20b4ff16d7d737448dfeed35bc28e56, type: 2}
   slideOutClip: {fileID: 7400000, guid: 63dda3e7d087be64d865f9dcb9dd0b9d, type: 2}
   liftDownAudio:
@@ -43,22 +43,19 @@ MonoBehaviour:
     isLooping: 0
   speakLiftDownAudio:
     clips:
-    - {fileID: 8300000, guid: 11c1dface8e1ff2489d68f16d186f126, type: 3}
+    - {fileID: 8300000, guid: 55db08fea55926342958e2466ccbfbb5, type: 3}
     pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
   speakLiftUpAudio:
     clips:
-    - {fileID: 8300000, guid: 6040d41481abf14499eb50fd4e2c16f8, type: 3}
+    - {fileID: 8300000, guid: 55db08fea55926342958e2466ccbfbb5, type: 3}
     pitchRange: {x: 1, y: 1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
   speakAudio:
     clips:
-    - {fileID: 8300000, guid: 4502304d722eb214f81daa4d94feaf2f, type: 3}
-    - {fileID: 8300000, guid: b520d728c07d6ac48950d87bb2f11c5e, type: 3}
-    - {fileID: 8300000, guid: 8a59cc74f9018894ebda55881a10c17a, type: 3}
-    - {fileID: 8300000, guid: 11c1dface8e1ff2489d68f16d186f126, type: 3}
+    - {fileID: 8300000, guid: 55db08fea55926342958e2466ccbfbb5, type: 3}
     pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0

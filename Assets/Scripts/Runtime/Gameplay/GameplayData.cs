@@ -33,6 +33,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         [Header("Pedestal Objects")]
         [SerializeField]
+        private PaintableData firstPaintable;
+
+        [SerializeField]
         private List<PaintableData> paintables;
 
         public bool IsPlayIntro => isPlayIntro;
@@ -42,6 +45,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public int StartingScore => startingScore;
 
         public SceneData GameOverScene => gameOverScene;
+
+        public PaintableData FirstPaintable => firstPaintable;
 
         public IReadOnlyList<PaintableData> Paintables => paintables;
 

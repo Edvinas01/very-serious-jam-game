@@ -192,7 +192,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             // Spawn pedestal object
             gameplaySystem.State = GameplayState.SpawningObject;
 
-            var paintable = CreatePaintable(pedestal.ObjectParent.transform.position, null);
+            var paintable = CreateFirstPaintable(pedestal.ObjectParent.transform.position, null);
             paintable.gameObject.SetActive(false);
             paintable.OnPainted += OnObjectPainted;
 
@@ -234,7 +234,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     paintable.OnPainted -= OnObjectPainted;
 
                     // Slide in new object
-                    paintable = CreatePaintable(pedestal.ObjectParent.transform.position, null);
+                    paintable = CreateRandomPaintable(pedestal.ObjectParent.transform.position, null);
                     paintable.gameObject.SetActive(false);
                     paintable.OnPainted += OnObjectPainted;
 
@@ -295,7 +295,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             gameplaySystem.Score += scoreThisTick;
         }
 
-        private PaintableActor CreatePaintable(Vector3 position, Transform parent)
+        private PaintableActor CreateFirstPaintable(Vector3 position, Transform parent)
+        {
+            return data.FirstPaintable.CreatePaintable(
+                pos: position,
+                rot: Quaternion.identity,
+                parent: parent
+            );
+        }
+
+        private PaintableActor CreateRandomPaintable(Vector3 position, Transform parent)
         {
             if (paintableQueue.Count <= 0)
             {
@@ -303,10 +312,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
 
             var index = paintableQueue.Count - 1;
-            var pedestalObject = paintableQueue[index];
+            var paintableData = paintableQueue[index];
             paintableQueue.RemoveAt(index);
 
-            return pedestalObject.CreatePaintable(
+            return paintableData.CreatePaintable(
                 pos: position,
                 rot: Quaternion.identity,
                 parent: parent

@@ -14,9 +14,10 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 
 ## Links
 
-- TODO: itch.io page
+- [itch.io](https://eddas.itch.io/spaint)
 - [The Very Serious Juniper Dev Game Jam](https://itch.io/jam/theveryseriousjuniperdevgamejam)
-- [PixaTool Preset](PixaTool/Preset_Pixatool.preset)
+- [Model Blend File](AssetsRaw/Models.blend)
+- [PixaTool Preset](AssetsRaw/Pixatool.preset)
 
 ## Attribution
 
@@ -28,7 +29,7 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 - [PrimeTween by KyryloKuzyk](https://github.com/KyryloKuzyk/PrimeTween)
 - [Animancer Lite v8 by Kybernetik](https://assetstore.unity.com/packages/tools/animation/animancer-lite-v8-293524)
 
-### Models
+### 3D
 
 - [Color Palette by Natalie](https://sketchfab.com/3d-models/color-palette-a6d64e6b377c4946ab4b1b0bea056c0b)
 - [Funny Horse by Neoferi](https://sketchfab.com/3d-models/funny-horse-e87d0b20226941b5bfed10773268badc)
@@ -43,6 +44,12 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 - [Animated low poly toilet by Gamedirection](https://sketchfab.com/3d-models/animated-low-poly-toilet-c901dfa120a0487a9f5c9a2d241f70ab)
 - [Groovy Cactus 🌵 by TheoClarke](https://sketchfab.com/3d-models/groovy-cactus-ffabdcebe38e426ea6858602e90def39)
 - [Asclepius temple by Julius.Weissmann](https://sketchfab.com/3d-models/asclepius-temple-37701cc6414242cfb5f2ada6131a2e73)
+- [🧱Wooden Sign by carlossamuelariza](https://sketchfab.com/3d-models/wooden-sign-256975ecc4a947a79ffe2a0e963e8bbd)
+- [propeller cap by noitamina_](https://sketchfab.com/3d-models/propeller-cap-39bf95ca02654177bcb82d2c63e27f7e)
+
+### 2D
+
+- [Xelu Free Controller & Key Prompts](https://thoseawesomeguys.com/prompts/)
 
 ### Audio
 
