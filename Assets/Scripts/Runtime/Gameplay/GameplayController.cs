@@ -136,10 +136,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             StartGameAsync(gameplayCancellation.Token).Forget();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             pedestal.AddSpinSpeed(crank.RotationDelta);
+        }
 
+        private void Update()
+        {
             var targetMultiplier = data.GetScoreMultiplier(pedestal.SpinSpeed);
             gameplaySystem.CurrentMultiplier = Mathf.Lerp(
                 gameplaySystem.CurrentMultiplier,
