@@ -33,6 +33,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private AudioSource spinAudioSource;
 
+        [Header("Input")]
+        [SerializeField]
+        private InputActionReference pointerAction;
+
         private Rigidbody handTargetRigidbody;
         private float smoothedInput;
 
@@ -77,7 +81,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             var target = 0f;
             if (handTargetRigidbody != null)
             {
-                var mouseDelta = Mouse.current.delta.ReadValue();
+                var mouseDelta = pointerAction.action.ReadValue<Vector2>();
                 if (Mathf.Abs(mouseDelta.x) > 0.1f)
                 {
                     target = Mathf.Sign(mouseDelta.x);
