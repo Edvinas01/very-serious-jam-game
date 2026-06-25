@@ -60,7 +60,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: d0f54f2326585c444a7ed872925e37e9, type: 3}
     - {fileID: 8300000, guid: 5016015c2fe8ead48b1886ad69f64abe, type: 3}
     pitchRange: {x: 0.9, y: 1.1}
-    volumeRange: {x: 0.475, y: 0.475}
+    volumeRange: {x: 0.45, y: 0.45}
     isLooping: 0
   collisionAudio:
     clips:
@@ -71,4 +71,4 @@ MonoBehaviour:
     pitchRange: {x: 0.7, y: 1.1}
     volumeRange: {x: 0.4, y: 0.6}
     isLooping: 0
-  speakCooldownRange: {x: 3, y: 4}
+  speakCooldownRange: {x: 2.5, y: 4}
