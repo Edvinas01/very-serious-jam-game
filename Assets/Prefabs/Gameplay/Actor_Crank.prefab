@@ -395,6 +395,7 @@ MonoBehaviour:
   asideMover: {fileID: 8701891946391489274}
   anchorOffsetTransform: {fileID: 6196709523196291435}
   spinAudioSource: {fileID: 3601365189683162660}
+  pointerAction: {fileID: -2283334809518273153, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   delta: 0
 --- !u!114 &8707825538216795170
 MonoBehaviour:
