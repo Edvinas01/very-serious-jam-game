@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Data_Crank
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.CrankData
   maxTorque: 50
-  maxAngularSpeed: 30
-  inputSmoothing: 10
+  maxAngularSpeed: 15
+  inputSmoothing: 3.5
   damping: 1.5
-  rotationDeltaMultiplier: 0.03
+  rotationDeltaMultiplier: 0.23
   spinAudio:
     clips:
     - {fileID: 8300000, guid: e2402647f9e10d546bbe227f0bbe7394, type: 3}
@@ -29,20 +29,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 3.0572383
-      outSlope: 3.0572383
+      inSlope: 0.05167672
+      outSlope: 0.05167672
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.038632985
+      outWeight: 0.06983655
     - serializedVersion: 3
-      time: 1
+      time: 6
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.0054518646
+      outSlope: -0.0054518646
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.12035656
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
