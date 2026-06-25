@@ -16,6 +16,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         [SerializeField]
         private AudioSource audioSource;
 
+        [SerializeField]
+        private AudioSource showAudioSource;
+
+        [SerializeField]
+        private AudioData showAudioData;
+
         public Sprite Icon
         {
             set => iconImage.sprite = value;
@@ -24,6 +30,11 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         public string ScoreText
         {
             set => scoreText.text = value;
+        }
+
+        private void Start()
+        {
+            showAudioSource.PlayUsing(showAudioData);
         }
 
         public void PlaySfx(AudioData data)
