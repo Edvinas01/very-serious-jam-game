@@ -45,13 +45,13 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 802d076248d35314c8ab5bf3c97312e9, type: 3}
     pitchRange: {x: 0.9, y: 1.1}
-    volumeRange: {x: 1, y: 1}
+    volumeRange: {x: 0.6, y: 0.6}
     isLooping: 0
   speakLiftUpAudio:
     clips:
     - {fileID: 8300000, guid: fd6e1b66e40d32f4386c7dcb928f92c3, type: 3}
     pitchRange: {x: 1, y: 1}
-    volumeRange: {x: 1, y: 1}
+    volumeRange: {x: 0.9, y: 0.9}
     isLooping: 0
   speakAudio:
     clips:
@@ -60,7 +60,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 5d9945c8a10a97f4f82077a117e83bbd, type: 3}
     - {fileID: 8300000, guid: 0e3796d73c3634c4fb20e9c1bf00bc2e, type: 3}
     pitchRange: {x: 0.9, y: 1.1}
-    volumeRange: {x: 1, y: 1}
+    volumeRange: {x: 0.5, y: 0.5}
     isLooping: 0
   collisionAudio:
     clips:
@@ -71,4 +71,4 @@ MonoBehaviour:
     pitchRange: {x: 0.7, y: 1.1}
     volumeRange: {x: 0.4, y: 0.6}
     isLooping: 0
-  speakCooldownRange: {x: 3, y: 10}
+  speakCooldownRange: {x: 3, y: 5}
