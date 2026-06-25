@@ -35,40 +35,24 @@ MonoBehaviour:
     pitchRange: {x: 1, y: 1.1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   liftUpAudio:
     clips:
     - {fileID: 8300000, guid: d9ee8c467f40adf439ec922ea814d9ba, type: 3}
     pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   speakLiftDownAudio:
     clips:
     - {fileID: 8300000, guid: d9fd39ca6a5439541a0ea2c0654915f9, type: 3}
     pitchRange: {x: 0.7, y: 0.8}
     volumeRange: {x: 1, y: 1}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   speakLiftUpAudio:
     clips:
     - {fileID: 8300000, guid: 825d21ea026d9164583bdcbf8c4d4173, type: 3}
     pitchRange: {x: 1, y: 1}
-    volumeRange: {x: 1, y: 1}
+    volumeRange: {x: 0.5, y: 0.5}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   speakAudio:
     clips:
     - {fileID: 8300000, guid: d581aec1e4373114a9bf52e5ab63af13, type: 3}
@@ -76,12 +60,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 54f8c7b1b604e4146bfb9fc96adbbc7c, type: 3}
     - {fileID: 8300000, guid: c6c81772585e34e4590f3b76a37501ca, type: 3}
     pitchRange: {x: 0.9, y: 1.1}
-    volumeRange: {x: 1, y: 1}
+    volumeRange: {x: 0.6, y: 0.6}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   collisionAudio:
     clips:
     - {fileID: 8300000, guid: a1d49a523c42bf849b1f2d78b846f075, type: 3}
@@ -91,8 +71,4 @@ MonoBehaviour:
     pitchRange: {x: 0.7, y: 1.1}
     volumeRange: {x: 0.4, y: 0.6}
     isLooping: 0
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
-  speakCooldownRange: {x: 3, y: 10}
+  speakCooldownRange: {x: 3, y: 5}
