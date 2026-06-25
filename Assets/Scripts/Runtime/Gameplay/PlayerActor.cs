@@ -15,14 +15,31 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private Transform forwardTransform;
 
+        private ICursor cursor;
+
         private CursorSystem cursorSystem;
 
         private bool isInteractionEnabled;
-        private ICursor cursor;
 
         private void Awake()
         {
             cursorSystem = Game.GetObject<CursorSystem>();
+        }
+
+        private void Start()
+        {
+            cursor = cursorSystem.PushCursor((Sprite)null);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        private void Update()
+        {
+            if (isInteractionEnabled == false)
+            {
+                return;
+            }
+
+            forwardTransform.rotation = playerCamera.transform.rotation;
         }
 
         private void OnEnable()
@@ -35,28 +52,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             Game.RemoveListener<PauseStateChangedMessage>(OnPauseStateChanged);
         }
 
-        private void Start()
-        {
-            cursor = cursorSystem.PushCursor((Sprite)null);
-            Cursor.lockState = CursorLockMode.Confined;
-        }
-
         private void OnDestroy()
         {
             cursor?.Dispose();
             cursor = null;
 
             Cursor.lockState = CursorLockMode.None;
-        }
-
-        private void Update()
-        {
-            if (isInteractionEnabled == false)
-            {
-                return;
-            }
-
-            forwardTransform.rotation = playerCamera.transform.rotation;
         }
 
         public void EnableCamera()
@@ -90,7 +91,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             else
             {
                 cursor = cursorSystem.PushCursor((Sprite)null);
-                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
     }

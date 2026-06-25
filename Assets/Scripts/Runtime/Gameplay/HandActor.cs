@@ -89,23 +89,24 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private InputActionReference handPushAction;
 
-        private MaterialPropertyBlock propertyBlock;
-        private Rigidbody targetRigidbody;
-
-        private float originalDistance;
-        private bool isPushing;
-        private Transform followTarget;
-        private Transform originalParent;
-        private Quaternion followRotation;
-        private Vector3 smoothVelocity;
-        private bool skipMoveTarget;
-
-        private Vector2 previousMousePosition;
         private float currentTiltX;
         private float currentTiltY;
+        private Quaternion followRotation;
+        private Transform followTarget;
+        private PaintBrushActor heldBrush;
+        private bool isPushing;
+
+        private float originalDistance;
+        private Transform originalParent;
+
+        private MaterialPropertyBlock propertyBlock;
+        private bool skipMoveTarget;
+        private Vector3 smoothVelocity;
+        private Rigidbody targetRigidbody;
         private float tiltVelocityX;
         private float tiltVelocityY;
-        private PaintBrushActor heldBrush;
+
+        private Vector2 virtualMousePosition;
 
         private void Awake()
         {
@@ -121,7 +122,24 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             propertyBlock.SetTexture("_BaseMap", openHandTexture);
             quadRenderer.SetPropertyBlock(propertyBlock);
 
-            previousMousePosition = pointerAction.action.ReadValue<Vector2>();
+            virtualMousePosition = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        }
+
+        private void Update()
+        {
+            MoveTarget();
+            UpdateTilt();
+
+            if (followTarget == null)
+            {
+                transform.position = Vector3.SmoothDamp(transform.position, targetRigidbody.position, ref smoothVelocity, smoothTime);
+                transform.rotation = Quaternion.Euler(currentTiltX, currentTiltY, 0f);
+            }
+            else
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime / smoothTime);
+                transform.rotation = followRotation;
+            }
         }
 
         private void OnEnable()
@@ -148,28 +166,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             interactor.OnInteractionExited -= OnInteractionExited;
         }
 
-        private void Update()
-        {
-            MoveTarget();
-            UpdateTilt();
-
-            if (followTarget == null)
-            {
-                transform.position = Vector3.SmoothDamp(transform.position, targetRigidbody.position, ref smoothVelocity, smoothTime);
-                transform.rotation = Quaternion.Euler(currentTiltX, currentTiltY, 0f);
-            }
-            else
-            {
-                transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime / smoothTime);
-                transform.rotation = followRotation;
-            }
-        }
-
         private void UpdateTilt()
         {
-            var mousePosition = pointerAction.action.ReadValue<Vector2>();
-            var delta = mousePosition - previousMousePosition;
-            previousMousePosition = mousePosition;
+            var delta = pointerAction.action.ReadValue<Vector2>();
 
             if (interactor.IsInteracting)
             {
@@ -207,9 +206,13 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 return;
             }
 
-            var pointerPosition = pointerAction.action.ReadValue<Vector2>();
+            var delta = pointerAction.action.ReadValue<Vector2>();
+            virtualMousePosition += delta;
+            virtualMousePosition.x = Mathf.Clamp(virtualMousePosition.x, 0f, Screen.width);
+            virtualMousePosition.y = Mathf.Clamp(virtualMousePosition.y, 0f, Screen.height);
+
             var distanceToPlane = originalDistance - targetCamera.transform.position.z;
-            var worldPosition = targetCamera.ScreenToWorldPoint(new Vector3(pointerPosition.x, pointerPosition.y, distanceToPlane));
+            var worldPosition = targetCamera.ScreenToWorldPoint(new Vector3(virtualMousePosition.x, virtualMousePosition.y, distanceToPlane));
 
             var activeToolLength = heldBrush != null ? toolLength : noToolLength;
             var castOrigin = new Vector3(worldPosition.x, worldPosition.y, originalDistance - pullBackDistance);
@@ -312,8 +315,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             skipMoveTarget = true;
 
             var screenPos = targetCamera.WorldToScreenPoint(handWorldPos);
-            Mouse.current.WarpCursorPosition(new Vector2(screenPos.x, screenPos.y));
-            previousMousePosition = new Vector2(screenPos.x, screenPos.y);
+            virtualMousePosition = new Vector2(screenPos.x, screenPos.y);
         }
 
         public Rigidbody GetArmJointRigidbody()
