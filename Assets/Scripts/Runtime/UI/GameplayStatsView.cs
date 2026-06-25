@@ -1,4 +1,5 @@
 using System;
+using DoubleD.VerySeriousJamGame.Runtime.Audio;
 using InSun.GameCore.UI;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 {
     internal sealed class GameplayStatsView : View
     {
+        [Header("Text")]
         [SerializeField]
         private TMP_Text remainingTimeText;
 
@@ -17,6 +19,17 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         [SerializeField]
         private TMP_Text speedMultiplierText;
 
+        [Header("Colors")]
+        [SerializeField]
+        private Color timeRunningOutColor = Color.red;
+
+        [Header("Audio")]
+        [SerializeField]
+        private AudioSource timeRunningOutSource;
+
+        [SerializeField]
+        private AudioData timeRunningOutAudio;
+
         [Header("Events")]
         [SerializeField]
         private UnityEvent onRemainingTimeChanged;
@@ -24,6 +37,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         [SerializeField]
         private UnityEvent onScoreChanged;
 
+        private Color initialRemainingTimeColor;
         private int remainingTimePrev;
         private int scorePrev;
 
@@ -37,6 +51,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
                 if (remainingTimeNext != remainingTimePrev)
                 {
                     onRemainingTimeChanged.Invoke();
+
+                    if (IsTimeRunningOut)
+                    {
+                        PlayTimeRunningOutSfx();
+                        remainingTimeText.color = timeRunningOutColor;
+                    }
+                    else
+                    {
+                        remainingTimeText.color = initialRemainingTimeColor;
+                    }
                 }
 
                 if (remainingTimeText)
@@ -75,6 +99,20 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
                     speedMultiplierText.text = $"x{value:F1}";
                 }
             }
+        }
+
+        public bool IsTimeRunningOut { get; set; }
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            initialRemainingTimeColor = remainingTimeText.color;
+        }
+
+        private void PlayTimeRunningOutSfx()
+        {
+            timeRunningOutSource.PlayUsing(timeRunningOutAudio);
         }
     }
 }

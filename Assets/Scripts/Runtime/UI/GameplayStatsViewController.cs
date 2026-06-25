@@ -1,11 +1,16 @@
 using DoubleD.VerySeriousJamGame.Runtime.Gameplay;
 using InSun.GameCore;
 using InSun.GameCore.UI;
+using UnityEngine;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.UI
 {
     internal sealed class GameplayStatsViewController : ViewController<GameplayStatsView>
     {
+        [Header("Timings")]
+        [SerializeField]
+        private int timeRunningOutSeconds = 5;
+
         private GameplaySystem gameplaySystem;
 
         protected override void Awake()
@@ -21,6 +26,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
             Game.AddListener<ScoreChangedMessage>(OnScoreChanged);
 
+            View.IsTimeRunningOut = gameplaySystem.RemainingTime <= timeRunningOutSeconds;
             View.RemainingTime = gameplaySystem.RemainingTime;
             View.Score = gameplaySystem.Score;
             View.SpeedMultiplier = gameplaySystem.CurrentMultiplier;
@@ -49,6 +55,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
                 return;
             }
 
+            View.IsTimeRunningOut = gameplaySystem.RemainingTime <= timeRunningOutSeconds;
             View.RemainingTime = gameplaySystem.RemainingTime;
             View.SpeedMultiplier = gameplaySystem.CurrentMultiplier;
         }
