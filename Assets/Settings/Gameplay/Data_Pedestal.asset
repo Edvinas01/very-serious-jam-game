@@ -14,17 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalData
   constantSpeed: 0
   spinDecaySpeed: 0.225
-  maxSpinSpeed: 800
+  maxSpinSpeed: 700
   spinAudio:
     clips:
     - {fileID: 8300000, guid: b99cbeabc74286f449f945236141d67d, type: 3}
     pitchRange: {x: 1, y: 1}
     volumeRange: {x: 1, y: 1}
     isLooping: 1
-    isFadeInOnPlay: 0
-    fadeInDuration: 0.5
-    isFadeOutOnStop: 0
-    fadeOutDuration: 0.5
   spinPitchCurve:
     serializedVersion: 2
     m_Curve:
