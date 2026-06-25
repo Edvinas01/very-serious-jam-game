@@ -71,4 +71,4 @@ MonoBehaviour:
     pitchRange: {x: 0.7, y: 1.1}
     volumeRange: {x: 0.4, y: 0.6}
     isLooping: 0
-  speakCooldownRange: {x: 3, y: 5}
+  speakCooldownRange: {x: 2.5, y: 4}
