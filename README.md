@@ -6,7 +6,15 @@
 
 ## About
 
-TODO
+Imagine having an entire art department on single workstation
+
+Introducing SPaint™ - the revolutionary graphics system designed to multiply and speedup the creativity output of your business
+
+Plan... Experiment... Explore... CREATE!
+
+SPaint™ combines advanced rendering technology with state-of-the-art creative tools that help transform ideas into fine art in record time
+
+Why create one masterpiece... when you can create dozens?
 
 ## Very Serious Juniper Dev Game Jam
 
