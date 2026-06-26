@@ -180,6 +180,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             gameplaySystem.ResetCreativityMultiplier();
             currentPaintableScore = 0;
             gameplaySystem.RemainingTime = data.GameplayDuration;
+            gameplaySystem.PaintAmount = 0f;
             gameplaySystem.Score = data.StartingScore;
 
             // Disable player so no movement during intro
