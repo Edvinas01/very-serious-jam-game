@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Animancer;
 using Cysharp.Threading.Tasks;
@@ -65,6 +66,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private bool[] paintedMask;
         private int paintedPixelCount;
 
+        private readonly Dictionary<Color, int> colorCounts = new();
+
         private PaintBrushActor lastBrush;
         private float paintAmountLastTick;
         private bool isPaintedThisFrame;
@@ -77,6 +80,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public Texture2D MaskTexture => paintMaskTexture;
 
         public float PaintAmount { get; private set; }
+
+        public IReadOnlyDictionary<Color, int> ColorCounts => colorCounts;
 
         public bool IsKinematic
         {
@@ -324,6 +329,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             lastBrush = brush;
             isPaintedThisFrame = true;
+
+            var colorCount = colorCounts.GetValueOrDefault(brush.Color, 0);
+            colorCounts[brush.Color] = colorCount + 1;
 
             return isPainted;
         }

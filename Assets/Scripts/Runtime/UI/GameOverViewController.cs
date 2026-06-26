@@ -86,7 +86,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             await UniTask.WaitForSeconds(totalScoreDelay, cancellationToken: cancellationToken);
 
             View.IsButtonsInteractable = true;
-            View.ShowTotalScore(gameplaySystem.Score);
+            View.ShowTotalScore(
+                score: gameplaySystem.Score,
+                creativity: gameplaySystem.CreativityMultiplier
+            );
         }
     }
 }

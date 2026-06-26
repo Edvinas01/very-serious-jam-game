@@ -18,6 +18,7 @@ MonoBehaviour:
   outroPlayable: {fileID: 11400000, guid: 5ccca12b49061e541805537040ad842a, type: 2}
   gameplayDuration: 180
   startingScore: 0
+  creativityMultiplierRange: {x: 1, y: 16.7}
   scoreMultiplierCurve:
     serializedVersion: 2
     m_Curve:

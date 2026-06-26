@@ -8,6 +8,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
     internal sealed class GameplaySystem : MonoBehaviour, IUpdateListener
     {
         private readonly List<PaintableScoreEntry> scoreEntries = new();
+        private readonly List<float> paintableColorScores = new();
 
         private GameplayState currentState = GameplayState.None;
         private PaintableActor currentPaintable;
@@ -16,6 +17,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private int currentScore;
 
         public float CurrentMultiplier { get; set; } = 1f;
+
+        public float CreativityMultiplier { get; private set; } = 1f;
 
         public IReadOnlyList<PaintableScoreEntry> ScoreEntries => scoreEntries;
 
@@ -131,9 +134,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             }
         }
 
-        public void ResetMultiplier()
+        public void ResetScoreMultiplier()
         {
             CurrentMultiplier = 1f;
+        }
+
+        public void ResetCreativityMultiplier()
+        {
+            paintableColorScores.Clear();
+            CreativityMultiplier = 1f;
         }
 
         public void ResetScoreEntries()
@@ -159,6 +168,51 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         {
             paintable = currentPaintable;
             return paintable;
+        }
+
+
+        public void RecordColors(IReadOnlyDictionary<Color, int> counts)
+        {
+            if (counts.Count == 0)
+            {
+                return;
+            }
+
+            var min = int.MaxValue;
+            var max = int.MinValue;
+            foreach (var count in counts.Values)
+            {
+                if (count < min)
+                {
+                    min = count;
+                }
+
+                if (count > max)
+                {
+                    max = count;
+                }
+            }
+
+            var balance = counts.Count > 1 ? (float)min / max : 0f;
+            paintableColorScores.Add(balance);
+        }
+
+        public void UpdateCreativity(Vector2 range)
+        {
+            if (paintableColorScores.Count == 0)
+            {
+                CreativityMultiplier = range.x;
+                return;
+            }
+
+            var avg = 0f;
+            foreach (var score in paintableColorScores)
+            {
+                avg += score;
+            }
+
+            var average = avg / paintableColorScores.Count;
+            CreativityMultiplier = Mathf.Lerp(range.x, range.y, average);
         }
     }
 }

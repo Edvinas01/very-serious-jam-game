@@ -22,12 +22,15 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         [SerializeField]
         private Transform scoreElementParent;
 
-        [Header("Score: Total")]
+        [Header("Score: Total & Creativity")]
         [SerializeField]
         private GameObject scorePanel;
 
         [SerializeField]
         private TMP_Text totalScoreText;
+
+        [SerializeField]
+        private TMP_Text creativityText;
 
         public bool IsButtonsInteractable
         {
@@ -81,9 +84,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
             return entry;
         }
 
-        public void ShowTotalScore(int score)
+        public void ShowTotalScore(int score, float creativity)
         {
             totalScoreText.text = score.ToString();
+            creativityText.text = $"{creativity:F2}x";
             scorePanel.SetActive(true);
 
             if (scorePanel.TryGetComponent<TweenAnimation>(out var tween))

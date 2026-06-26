@@ -28,13 +28,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         [SerializeField]
         private PlayableAsset outroPlayable;
 
-        [Header("Gameplay: Actual Play")]
+        [Header("Gameplay: Time & Score")]
         [SerializeField]
         private float gameplayDuration = 60f;
 
         [Min(0)]
         [SerializeField]
         private int startingScore;
+
+        [SerializeField]
+        private Vector2 creativityMultiplierRange = new(1f, 10f);
 
         [Tooltip("x - spin speed, y - score multiplier")]
         [SerializeField]
@@ -62,6 +65,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         public float GameplayDuration => gameplayDuration;
 
         public int StartingScore => startingScore;
+
+        public Vector2 CreativityMultiplierRange => creativityMultiplierRange;
 
         public SceneData GameOverScene => gameOverScene;
 

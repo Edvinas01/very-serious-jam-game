@@ -176,7 +176,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // Init game
             gameplaySystem.ResetScoreEntries();
-            gameplaySystem.ResetMultiplier();
+            gameplaySystem.ResetScoreMultiplier();
+            gameplaySystem.ResetCreativityMultiplier();
             currentPaintableScore = 0;
             gameplaySystem.RemainingTime = data.GameplayDuration;
             gameplaySystem.Score = data.StartingScore;
@@ -218,6 +219,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                     var scoreMultiplier = gameplaySystem.CurrentMultiplier;
                     var scoreResult = currentPaintableScore + (int)(paintable.Data.Score * scoreMultiplier);
 
+                    gameplaySystem.RecordColors(paintable.ColorCounts);
+                    gameplaySystem.UpdateCreativity(data.CreativityMultiplierRange);
                     gameplaySystem.RecordScore(
                         new PaintableScoreEntry(
                             data: paintable.Data,
@@ -258,6 +261,10 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
             // Record last object sample
             {
+                gameplaySystem.RecordColors(paintable.ColorCounts);
+                gameplaySystem.UpdateCreativity(
+                    range: data.CreativityMultiplierRange
+                );
                 gameplaySystem.RecordScore(
                     new PaintableScoreEntry(
                         data: paintable.Data,
@@ -268,6 +275,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                         scoreResult: currentPaintableScore
                     )
                 );
+                gameplaySystem.Score = Mathf
+                    .RoundToInt(gameplaySystem.Score * gameplaySystem.CreativityMultiplier);
             }
 
             await PlayOutroAsync(cancellationToken);
