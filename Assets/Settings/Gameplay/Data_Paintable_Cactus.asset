@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
   m_Name: Data_Paintable_Cactus
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: Cactus
+  objectName: Smooth Spikey Long
   icon: {fileID: 21300000, guid: 0fc88dde44281ff48b4ded747246d68f, type: 3}
   paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
   sharedMesh: {fileID: -8550477340139252063, guid: 931ca8c6054a2c9498ee25e21afdc027, type: 3}
