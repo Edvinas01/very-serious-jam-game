@@ -1,4 +1,8 @@
-# Very Serious Jam Game [![Unity 6000.3.10f1](https://img.shields.io/badge/unity-6000.3.10f1%2B-blue.svg)](https://unity.com/releases/editor/whats-new/6000.3.10f1)
+<p align="center">
+  <img width="100%" src="AssetsRaw/Itch_Banner.png" />
+</p>
+
+# SPaint [![Unity 6000.3.10f1](https://img.shields.io/badge/unity-6000.3.10f1%2B-blue.svg)](https://unity.com/releases/editor/whats-new/6000.3.10f1)
 
 Gamejam game for [The Very Serious Juniper Dev Game Jam](https://itch.io/jam/theveryseriousjuniperdevgamejam)!
 
@@ -14,20 +18,21 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 
 ## Links
 
-- [itch.io](https://eddas.itch.io/spaint)
-- [The Very Serious Juniper Dev Game Jam](https://itch.io/jam/theveryseriousjuniperdevgamejam)
+- [SPaint itch.io page](https://eddas.itch.io/spaint)
+- [The Very Serious Juniper Dev Game Jam itch.io page](https://itch.io/jam/theveryseriousjuniperdevgamejam)
 - [Model Blend File](AssetsRaw/Models.blend)
 - [PixaTool Preset](AssetsRaw/Pixatool.preset)
 
 ## Attribution
 
-### Code
+### Tools
 
 - [Game Core by Indoor Sunglasses](https://github.com/indoor-sunglasses) (custom WIP version)
 - [Build Tools by CHARK](https://github.com/chark/build-tools) (custom WIP version)
 - [UniTask by Cysharp](https://github.com/Cysharp/UniTask)
 - [PrimeTween by KyryloKuzyk](https://github.com/KyryloKuzyk/PrimeTween)
 - [Animancer Lite v8 by Kybernetik](https://assetstore.unity.com/packages/tools/animation/animancer-lite-v8-293524)
+- [PixaTool by KronBits](https://kronbits.itch.io/pixatool) - used for pixalizing textures
 
 ### 3D
 
@@ -51,6 +56,7 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 
 - [Xelu Free Controller & Key Prompts](https://thoseawesomeguys.com/prompts/)
 - [Tiles 012 on anbientCG](https://ambientcg.com/view?id=Tiles012)
+- [Marcellus SC by Astigmatic](https://fonts.google.com/selection?query=Marcellus&preview.script=Latn)
 
 ### Audio
 
@@ -118,11 +124,3 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 - [Pop SFX by runirasmussen](https://freesound.org/people/runirasmussen/sounds/178446/)
 - [Clock ticking loop by Jagadamba](https://freesound.org/people/Jagadamba/sounds/254322/)
 - [Concerto No. 1 in E major, Op. 8, RV 269, "La primavera" (Spring) — Movement 1: Allegro from The Four Seasons by Antonio Vivaldi (played by John Harrison — Violin / Robert Turizziani — Conductor / Wichita State University Chamber Players)](https://commons.wikimedia.org/wiki/File:Vivaldi_-_Four_Seasons_1_Spring_mvt_1_Allegro_-_John_Harrison_violin.oga)
-
-### Tools
-
-- [PixaTool by KronBits](https://kronbits.itch.io/pixatool) - used for pixalizing textures
-
-### Fonts
-
-- [Marcellus SC by Astigmatic](https://fonts.google.com/selection?query=Marcellus&preview.script=Latn)
