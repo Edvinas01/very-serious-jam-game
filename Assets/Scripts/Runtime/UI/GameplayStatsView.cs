@@ -45,9 +45,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         {
             set
             {
-                var span = TimeSpan.FromSeconds(value);
-
-                var remainingTimeNext = (int)span.TotalSeconds;
+                var remainingTimeNext = Mathf.CeilToInt(value);
                 if (remainingTimeNext != remainingTimePrev)
                 {
                     onRemainingTimeChanged.Invoke();
@@ -65,7 +63,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
 
                 if (remainingTimeText)
                 {
-                    remainingTimeText.text = $"{span.Minutes:00}:{span.Seconds:00}";
+                    var displaySpan = TimeSpan.FromSeconds(remainingTimeNext);
+                    remainingTimeText.text = $"{displaySpan.Minutes:00}:{displaySpan.Seconds:00}";
                 }
 
                 remainingTimePrev = remainingTimeNext;

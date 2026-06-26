@@ -17,16 +17,16 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
     [SelectionBase]
     internal sealed class GameplayController : MonoBehaviour
     {
-        [Header("Intro")]
+        [Header("Data")]
+        [SerializeField]
+        private GameplayData data;
+
+        [Header("Intro / Outro")]
         [SerializeField]
         private CinemachineCamera introCamera;
 
         [SerializeField]
-        private PlayableDirector introPlayable;
-
-        [Header("Data")]
-        [SerializeField]
-        private GameplayData data;
+        private PlayableDirector playableDirector;
 
         [Header("Multiplier")]
         [Min(0f)]
@@ -270,6 +270,8 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
                 );
             }
 
+            await PlayOutroAsync(cancellationToken);
+
             LoadGameOverScene();
         }
 
@@ -339,11 +341,21 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 
         private async UniTask PlayIntroAsync(CancellationToken cancellationToken)
         {
-            if (data.IsPlayIntro && introPlayable)
+            if (data.IsPlayIntro && data.IntroPlayable)
             {
                 introCamera.enabled = true;
-                await introPlayable.PlayAsync(cancellationToken);
+                playableDirector.playableAsset = data.IntroPlayable;
+                await playableDirector.PlayAsync(cancellationToken);
                 introCamera.enabled = false;
+            }
+        }
+
+        private async UniTask PlayOutroAsync(CancellationToken cancellationToken)
+        {
+            if (data.IsPlayOutro && data.OutroPlayable)
+            {
+                playableDirector.playableAsset = data.OutroPlayable;
+                await playableDirector.PlayAsync(cancellationToken);
             }
         }
     }

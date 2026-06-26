@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using InSun.GameCore.Scenes;
 using InSun.GameCore.SunnyInspector;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
 {
@@ -12,10 +13,22 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
     )]
     internal sealed class GameplayData : ScriptableObject
     {
-        [Header("Gameplay")]
+        [Header("Gameplay: Intro / Outro")]
         [SerializeField]
         private bool isPlayIntro = true;
 
+        [ShowIf(nameof(isPlayIntro))]
+        [SerializeField]
+        private PlayableAsset introPlayable;
+
+        [SerializeField]
+        private bool isPlayOutro = true;
+
+        [ShowIf(nameof(isPlayOutro))]
+        [SerializeField]
+        private PlayableAsset outroPlayable;
+
+        [Header("Gameplay: Actual Play")]
         [SerializeField]
         private float gameplayDuration = 60f;
 
@@ -39,6 +52,12 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
         private List<PaintableData> paintables;
 
         public bool IsPlayIntro => isPlayIntro;
+
+        public PlayableAsset IntroPlayable => introPlayable;
+
+        public bool IsPlayOutro => isPlayOutro;
+
+        public PlayableAsset OutroPlayable => outroPlayable;
 
         public float GameplayDuration => gameplayDuration;
 

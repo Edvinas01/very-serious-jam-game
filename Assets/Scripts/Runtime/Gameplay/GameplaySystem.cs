@@ -43,10 +43,9 @@ namespace DoubleD.VerySeriousJamGame.Runtime.Gameplay
             get => currentRemainingTime;
             set
             {
-                currentRemainingTime = Mathf.Max(0f, value);
-
                 var remainingSecondsPrev = Mathf.CeilToInt(currentRemainingTime);
-                var remainingSecondsNext = Mathf.CeilToInt(value);
+                currentRemainingTime = Mathf.Max(0f, value);
+                var remainingSecondsNext = Mathf.CeilToInt(currentRemainingTime);
 
                 if (remainingSecondsPrev != remainingSecondsNext)
                 {

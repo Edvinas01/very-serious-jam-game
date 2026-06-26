@@ -50,7 +50,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         {
             base.Update();
 
-            if (gameplaySystem.State is GameplayState.None or GameplayState.GameOver)
+            if (gameplaySystem.State is GameplayState.None)
             {
                 return;
             }

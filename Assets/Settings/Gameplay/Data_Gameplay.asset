@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Data_Gameplay
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.GameplayData
   isPlayIntro: 1
+  introPlayable: {fileID: 11400000, guid: 94c3645f069ec9144b21ece098ffc3df, type: 2}
+  isPlayOutro: 1
+  outroPlayable: {fileID: 11400000, guid: 5ccca12b49061e541805537040ad842a, type: 2}
   gameplayDuration: 180
   startingScore: 0
   scoreMultiplierCurve:
