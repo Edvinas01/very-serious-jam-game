@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: InSun.GameCore::InSun.GameCore.Cursors.CursorSystem
   cursorViewController: {fileID: 219023259434854798}
-  defaultCursor: {fileID: 21300000, guid: ed0f268d29a65944ebb536f6d1fd0d9a, type: 3}
+  defaultCursor: {fileID: 21300000, guid: 18e8538301b9d934284f37ea2a5c743c, type: 3}
   isHideSystemCursor: 1
 --- !u!114 &219023259434854798
 MonoBehaviour:
