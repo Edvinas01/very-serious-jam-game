@@ -631,7 +631,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Total Score
+  m_text: Art Output
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 45e389551870f554fbf14144e5c8213f, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: dce3c23b4f09f8249b5dca769c1ca66b, type: 2}

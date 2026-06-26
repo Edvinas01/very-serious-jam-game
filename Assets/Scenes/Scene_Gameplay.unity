@@ -2534,6 +2534,7 @@ GameObject:
   - component: {fileID: 1958529501}
   - component: {fileID: 1958529503}
   - component: {fileID: 1958529502}
+  - component: {fileID: 1958529504}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2612,10 +2613,10 @@ MonoBehaviour:
   m_fontSize: 120
   m_fontSizeBase: 120
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontSizeMax: 120
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2662,6 +2663,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958529500}
   m_CullTransparentMesh: 1
+--- !u!114 &1958529504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958529500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b3ddbdc62d4918b0cabc6ea78f869c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Utilities.RandomizeText
+  entries:
+  - ART DEMANDS SACRIFICES
+  - Good artists copy, great artists steal
+  - Every act of creation begins with destruction
+  - Every canvas is a crime scene
+  - A masterpiece is just a canvas that survived you
+  - A masterpiece is just a canvas that survived you
+  - He who fights with monsters might take care lest he thereby become a monster
+  - ' when you gaze long into an abyss the abyss also gazes into you'
+  - Talent hits a target no one else can hit; genius hits a target no one else can
+    see...
+  - Creativity takes courage
 --- !u!114 &2001842465 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4204252150508545987, guid: 7507c168b583a074db927065ea812812, type: 3}
