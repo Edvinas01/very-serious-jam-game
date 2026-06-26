@@ -117,6 +117,7 @@ The latest release build can be downloaded from [GitHub](https://github.com/Edvi
 - [Mass (with organs) in the Karlskirche (Karl's Church), Vienna by TomaszBuga](https://freesound.org/people/TomaszBuga/sounds/742825/)
 - [Pop SFX by runirasmussen](https://freesound.org/people/runirasmussen/sounds/178446/)
 - [Clock ticking loop by Jagadamba](https://freesound.org/people/Jagadamba/sounds/254322/)
+- [Concerto No. 1 in E major, Op. 8, RV 269, "La primavera" (Spring) — Movement 1: Allegro from The Four Seasons by Antonio Vivaldi (played by John Harrison — Violin / Robert Turizziani — Conductor / Wichita State University Chamber Players)](https://commons.wikimedia.org/wiki/File:Vivaldi_-_Four_Seasons_1_Spring_mvt_1_Allegro_-_John_Harrison_violin.oga)
 
 ### Tools
 
