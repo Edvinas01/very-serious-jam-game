@@ -87,7 +87,7 @@ namespace DoubleD.VerySeriousJamGame.Runtime.UI
         public void ShowTotalScore(int score, float creativity)
         {
             totalScoreText.text = score.ToString();
-            creativityText.text = $"{creativity:F2}x";
+            creativityText.text = $"x{creativity:F2}";
             scorePanel.SetActive(true);
 
             if (scorePanel.TryGetComponent<TweenAnimation>(out var tween))
