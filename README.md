@@ -25,7 +25,7 @@ This game was developed in a week during [The Very Serious Juniper Dev Game Jam]
 
 ## Links
 
-- [SPaint itch.io page](https://eddas.itch.io/spaint)
+- [SPAIN itch.io page](https://eddas.itch.io/spaint)
 - [Latest GitHub build](https://github.com/Edvinas01/very-serious-jam-game/releases/latest)
 - [The Very Serious Juniper Dev Game Jam itch.io page](https://itch.io/jam/theveryseriousjuniperdevgamejam)
 - [Model Blend File](AssetsRaw/Models.blend)
