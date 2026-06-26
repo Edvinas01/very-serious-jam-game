@@ -2,7 +2,7 @@
   <img width="100%" src="AssetsRaw/Itch_Banner.png" />
 </p>
 
-# SPaint [![Unity 6000.3.10f1](https://img.shields.io/badge/unity-6000.3.10f1%2B-blue.svg)](https://unity.com/releases/editor/whats-new/6000.3.10f1)
+# SPAINT [![Unity 6000.3.10f1](https://img.shields.io/badge/unity-6000.3.10f1%2B-blue.svg)](https://unity.com/releases/editor/whats-new/6000.3.10f1)
 
 ## About
 
