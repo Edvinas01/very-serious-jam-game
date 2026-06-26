@@ -6,13 +6,17 @@
 
 ## About
 
-Imagine having an entire art department on single workstation
+<img width="150px" src="AssetsRaw/Itch_Inline_Brushes.png" /> Imagine having an entire art department on single workstation
 
 Introducing SPAINT™ - the revolutionary graphics system designed to multiply and speedup the creativity output of your business
 
 Plan... Experiment... Explore... CREATE!
 
 SPAINT™ combines advanced rendering technology with state-of-the-art creative tools that help transform ideas into fine art in record time
+
+<p align="center">
+  <img width="80%" src="AssetsRaw/Itch_Inline_Art.png" />
+</p>
 
 Why create one masterpiece... when you can create dozens?
 
