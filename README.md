@@ -4,24 +4,32 @@
 
 # SPaint [![Unity 6000.3.10f1](https://img.shields.io/badge/unity-6000.3.10f1%2B-blue.svg)](https://unity.com/releases/editor/whats-new/6000.3.10f1)
 
-Gamejam game for [The Very Serious Juniper Dev Game Jam](https://itch.io/jam/theveryseriousjuniperdevgamejam)!
+## About
 
-The latest release build can be downloaded from [GitHub](https://github.com/Edvinas01/very-serious-jam-game/releases/latest).
+TODO
 
-## Requirements
+## Very Serious Juniper Dev Game Jam
+
+This game was developed in a week during [The Very Serious Juniper Dev Game Jam](https://itch.io/jam/theveryseriousjuniperdevgamejam). The team behind this game:
+
+- [Rokas Danevičius](https://rokasdanevicius.com/)
+- [Edvinas Danevičius](https://edvinas.dev)
+
+## Links
+
+- [SPaint itch.io page](https://eddas.itch.io/spaint)
+- [Latest GitHub build](https://github.com/Edvinas01/very-serious-jam-game/releases/latest)
+- [The Very Serious Juniper Dev Game Jam itch.io page](https://itch.io/jam/theveryseriousjuniperdevgamejam)
+- [Model Blend File](AssetsRaw/Models.blend)
+- [PixaTool Preset](AssetsRaw/Pixatool.preset)
+
+## Development
 
 - [GitHub Desktop](https://desktop.github.com/download/), [Git Bash](https://git-scm.com/downloads) or an equivalent Git client
 - [Rider](https://www.jetbrains.com/rider), [Visual Studio Code](https://code.visualstudio.com/) or [Visual Studio](https://visualstudio.microsoft.com)
 - [Build Tools for Visual Studio 2026 (needed for IL2CPP builds)](https://aka.ms/vs/stable/vs_BuildTools.exe), select:
   - MSVC Build Tools for x64/x86 (latest)
   - Windows 11 SDK (latest)
-
-## Links
-
-- [SPaint itch.io page](https://eddas.itch.io/spaint)
-- [The Very Serious Juniper Dev Game Jam itch.io page](https://itch.io/jam/theveryseriousjuniperdevgamejam)
-- [Model Blend File](AssetsRaw/Models.blend)
-- [PixaTool Preset](AssetsRaw/Pixatool.preset)
 
 ## Attribution
 
