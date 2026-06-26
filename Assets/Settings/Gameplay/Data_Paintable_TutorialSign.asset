@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
   m_Name: Data_Paintable_TutorialSign
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: TUTY
+  objectName: Sergeant Drill
   icon: {fileID: 21300000, guid: bad05f1f8566e074ea01843b9fef5235, type: 3}
   paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
   sharedMesh: {fileID: 5268318225068172711, guid: c28e63dc79e7b5e4eace91e8d4eadc98, type: 3}

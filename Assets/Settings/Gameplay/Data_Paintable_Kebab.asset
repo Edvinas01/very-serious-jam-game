@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
   m_Name: Data_Paintable_Kebab
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: Kebab
+  objectName: Lord Lust-a-bite
   icon: {fileID: 21300000, guid: c01dbfb0c9f524b4c9c7dcbc9db33b02, type: 3}
   paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
   sharedMesh: {fileID: -5743244166044321267, guid: 20354f723b11211409347ef1a6fcef1c, type: 3}

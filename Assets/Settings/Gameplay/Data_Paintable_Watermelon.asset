@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779a1b4a5c0e4d7db0767988499b9ca3, type: 3}
   m_Name: Data_Paintable_Watermelon
   m_EditorClassIdentifier: DoubleD.VerySeriousJamGame.Runtime::DoubleD.VerySeriousJamGame.Runtime.Gameplay.PedestalObjectData
-  objectName: Watermelon
+  objectName: Melon Husk
   icon: {fileID: 21300000, guid: 34cbb2a544d69414d8f8c299c4b04ce9, type: 3}
   paintablePrefab: {fileID: 4419037573582373499, guid: b79437dec9bc0c44192a114e94a8b199, type: 3}
   sharedMesh: {fileID: -5859308341976906217, guid: 4b6c1b802898a744ba2a516c2915ad3e, type: 3}
